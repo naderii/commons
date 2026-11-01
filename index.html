@@ -550,7 +550,7 @@
                           <a href="#اصول-ایمنی-قبل-از-هر-تغییر" class="md-nav__link">
                             <span class="md-ellipsis">
 
-                              اصول ایمنی قبل از هر تغییر
+                              اصول ایمنی از هر تغییر
 
                             </span>
                           </a>
@@ -1608,8 +1608,9 @@
                     </svg></span> مشکوک به نفوذ</a>
               </p>
             </div>
-            <p>اصل اول: <strong>قبل از هر اقدام، شواهد را ذخیره کنید</strong> <a href="https://github.com/naderii/commons/blob/main/scripts/incident-snapshot.sh">(<code>scripts/incident-snapshot.sh</code>)</a></p>
-              را اجرا کنید) و سپس کم‌خطرترین اقدام را انجام دهید.</p>
+            <p>اصل اول: <strong>قبل از هر اقدام، شواهد را ذخیره کنید</strong> (<a
+                href="scripts/incident-snapshot.sh"><code>scripts/incident-snapshot.sh</code></a>)
+            </p>
             <h2 id="چطور-از-این-کتابچه-استفاده-کنیم">چطور از این کتابچه استفاده کنیم<a class="headerlink"
                 href="#چطور-از-این-کتابچه-استفاده-کنیم" title="Permanent link">&para;</a></h2>
             <p>این کتابچه فقط لیست فرمان نیست. هدف این است که:</p>
@@ -1820,14 +1821,16 @@
                 بررسی کنید.<br />
                 فرمان‌هایی مانند <code>rm -rf</code>، <code>mkfs</code>، <code>dd</code>، <code>lvremove</code>،
                 <code>iptables -F</code>، <code>nft flush ruleset</code> و <code>docker system prune --volumes</code>
-                می‌توانند داده را حذف یا سرویس را قطع کنند.</p>
+                می‌توانند داده را حذف یا سرویس را قطع کنند.
+              </p>
             </div>
             <p>چک‌لیست حداقلی (به همین ترتیب):</p>
             <ol>
               <li><strong>هویت محیط</strong>: <code>hostnamectl</code> + <code>cat /etc/os-release</code> — روی کدام
                 سرور هستم؟ (اسم میزبان را در prompt ببینید.)</li>
               <li><strong>وضعیت فعلی</strong>: خروجی فقط‌خواندنی را ذخیره کنید (<code>systemctl status</code>،
-                <code>df -h</code>، <code>ss -lntup</code>)</li>
+                <code>df -h</code>، <code>ss -lntup</code>)
+              </li>
               <li><strong>پشتیبان / Snapshot</strong>: قبل از تغییر فایل‌سیستم یا تنظیمات حساس</li>
               <li><strong>مسیر بازگشت</strong>: بدانید چگونه تنظیم را برمی‌گردانید — و <strong>تست‌شده</strong> باشد
               </li>
@@ -1846,7 +1849,8 @@
               <li>در production قبل از تغییر، فایل پیکربندی و وضعیت فعلی را ثبت کنید.</li>
             </ol>
             <p>هر قطعه کد دکمهٔ <strong>کپی</strong> دارد. بلوک‌های کدی که فقط «نمونه» هستند با کامنت
-              <code># نمونه</code> مشخص شده‌اند.</p>
+              <code># نمونه</code> مشخص شده‌اند.
+            </p>
             <h2 id="ساختار-موضوعی-کتابچه">ساختار موضوعی کتابچه<a class="headerlink" href="#ساختار-موضوعی-کتابچه"
                 title="Permanent link">&para;</a></h2>
             <table>
