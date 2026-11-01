@@ -1,1844 +1,1989 @@
-
 <!doctype html>
 <html lang="fa" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-        <meta name="description" content="راهنمای عملیاتی مدیریت، نگهداری، امنیت و عیب‌یابی سیستم‌های لینوکس به زبان فارسی.">
-      
-      
-        <meta name="author" content="Linux Sysadmin Handbook">
-      
-      
-      
-      
-        <link rel="next" href="22-community-culture/">
-      
-      
-        
-      
-      
-      <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
-    
-    
-      
-        <title>کتابچه راهنمای مدیر سیستم لینوکس</title>
-      
-    
-    
-      <link rel="stylesheet" href="assets/stylesheets/main.57a0d79d.min.css">
-      
-        
-        <link rel="stylesheet" href="assets/stylesheets/palette.fb2fffe2.min.css">
-      
-      
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <meta name="description" content="راهنمای عملیاتی مدیریت، نگهداری، امنیت و عیب‌یابی سیستم‌های لینوکس به زبان فارسی.">
 
 
-    
-    
-      
-    
-    
-      
-    
-    
-      <link rel="stylesheet" href="assets/css/extra.css">
-    
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
+  <meta name="author" content="Linux Sysadmin Handbook">
 
-    
-    
-  </head>
-  
-  
-    
-    
-      
-    
-    
-    
-    
-    <body dir="rtl" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#کتابچه-راهنمای-مدیر-سیستم-لینوکس" class="md-skip">
-          پرش به محتویات
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
 
-<header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="سرتیتر">
-    <a href="." title="کتابچه راهنمای مدیر سیستم لینوکس" class="md-header__button md-logo" aria-label="کتابچه راهنمای مدیر سیستم لینوکس" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19-.39.31-.75.29-1.14-.01-.2-.16-1.53-.92-1.95-1.19-.48-.31-.45-.7.08-.92 1.64-.69 3.28-.64 4.91.03.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.3 4.3 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01-.2-.88-.29-1.78-.7-2.61-.73-1.58-2-2.4-3.84-2.47-1.81.05-3.16.81-3.95 2.4-.21.43-.36.88-.46 1.34-.17.76-.32 1.55-.5 2.32-.15.65-.45 1.21-.96 1.71-1.61 1.57-2.9 3.37-3.88 5.35-.14.29-.28.58-.37.88-.19.66.29 1.12.99.96.44-.09.88-.18 1.3-.31.41-.15.57-.05.67.35.65 2.15 2.07 3.66 4.24 4.5 4.12 1.56 8.93-.66 9.97-4.58.07-.27.17-.37.47-.27.46.14.93.24 1.4.35.49.09.85-.16.92-.64.03-.26-.06-.49-.16-.73"/></svg>
 
+
+  <link rel="next" href="22-community-culture/">
+
+
+
+
+
+  <link rel="icon" href="assets/images/favicon.png">
+  <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+
+
+
+  <title>کتابچه راهنمای مدیر سیستم لینوکس</title>
+
+
+
+  <link rel="stylesheet" href="assets/stylesheets/main.57a0d79d.min.css">
+
+
+  <link rel="stylesheet" href="assets/stylesheets/palette.fb2fffe2.min.css">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="assets/css/extra.css">
+
+  <script>__md_scope = new URL(".", location), __md_hash = e => [...e].reduce(((e, _) => (e << 5) - e + _.charCodeAt(0)), 0), __md_get = (e, _ = localStorage, t = __md_scope) => JSON.parse(_.getItem(t.pathname + "." + e)), __md_set = (e, _, t = localStorage, a = __md_scope) => { try { t.setItem(a.pathname + "." + e, JSON.stringify(_)) } catch (e) { } }</script>
+
+
+
+
+
+</head>
+
+
+
+
+
+
+
+
+
+<body dir="rtl" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+
+
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+  <label class="md-overlay" for="__drawer"></label>
+  <div data-md-component="skip">
+
+
+    <a href="#کتابچه-راهنمای-مدیر-سیستم-لینوکس" class="md-skip">
+      پرش به محتویات
     </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
-            کتابچه راهنمای مدیر سیستم لینوکس
-          </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
-            
-              خانه
-            
-          </span>
-        </div>
-      </div>
-    </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="فعال‌سازی حالت تاریک"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="فعال‌سازی حالت تاریک" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+
+  </div>
+  <div data-md-component="announce">
+
+  </div>
+
+
+
+
+  <header class="md-header" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="سرتیتر">
+      <a href="." title="کتابچه راهنمای مدیر سیستم لینوکس" class="md-header__button md-logo"
+        aria-label="کتابچه راهنمای مدیر سیستم لینوکس" data-md-component="logo">
+
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19-.39.31-.75.29-1.14-.01-.2-.16-1.53-.92-1.95-1.19-.48-.31-.45-.7.08-.92 1.64-.69 3.28-.64 4.91.03.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.3 4.3 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01-.2-.88-.29-1.78-.7-2.61-.73-1.58-2-2.4-3.84-2.47-1.81.05-3.16.81-3.95 2.4-.21.43-.36.88-.46 1.34-.17.76-.32 1.55-.5 2.32-.15.65-.45 1.21-.96 1.71-1.61 1.57-2.9 3.37-3.88 5.35-.14.29-.28.58-.37.88-.19.66.29 1.12.99.96.44-.09.88-.18 1.3-.31.41-.15.57-.05.67.35.65 2.15 2.07 3.66 4.24 4.5 4.12 1.56 8.93-.66 9.97-4.58.07-.27.17-.37.47-.27.46.14.93.24 1.4.35.49.09.85-.16.92-.64.03-.26-.06-.49-.16-.73" />
+        </svg>
+
+      </a>
+      <label class="md-header__button md-icon" for="__drawer">
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" />
+        </svg>
       </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="فعال‌سازی حالت روشن"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="فعال‌سازی حالت روشن" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-</form>
-      
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-    
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="جستجو" placeholder="جستجو" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="جستجو">
-        
-          <a href="javascript:void(0)" class="md-search__icon md-icon" title="هم‌رسانی" aria-label="هم‌رسانی" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
-            
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
-          </a>
-        
-        <button type="reset" class="md-search__icon md-icon" title="بازنشانی" aria-label="بازنشانی" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            راه‌اندازی جستجو
+      <div class="md-header__title" data-md-component="header-title">
+        <div class="md-header__ellipsis">
+          <div class="md-header__topic">
+            <span class="md-ellipsis">
+              کتابچه راهنمای مدیر سیستم لینوکس
+            </span>
           </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
+          <div class="md-header__topic" data-md-component="header-topic">
+            <span class="md-ellipsis">
+
+              خانه
+
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-      
-    
-    
-  </nav>
-  
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-            
-<nav class="md-tabs" aria-label="زبانه‌ها" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-    
-  
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
-        
-  
-  
-    
-  
-  خانه
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="22-community-culture/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  فرهنگ دانش مشترک
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="01-basics/" class="md-tabs__link">
-          
-  
-  
-  مبانی لینوکس
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="06-storage-filesystems/" class="md-tabs__link">
-          
-  
-  
-  ذخیره‌سازی و منابع
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="07-networking/" class="md-tabs__link">
-          
-  
-  
-  شبکه و دسترسی راه دور
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="10-security-firewall/" class="md-tabs__link">
-          
-  
-  
-  امنیت و عیب‌یابی
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="15-docker/" class="md-tabs__link">
-          
-  
-  
-  زیرساخت و ابزارها
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
 
 
-  
+      <form class="md-header__option" data-md-component="palette">
 
 
-  
 
-<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="هدایت" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="." title="کتابچه راهنمای مدیر سیستم لینوکس" class="md-nav__button md-logo" aria-label="کتابچه راهنمای مدیر سیستم لینوکس" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19-.39.31-.75.29-1.14-.01-.2-.16-1.53-.92-1.95-1.19-.48-.31-.45-.7.08-.92 1.64-.69 3.28-.64 4.91.03.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.3 4.3 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01-.2-.88-.29-1.78-.7-2.61-.73-1.58-2-2.4-3.84-2.47-1.81.05-3.16.81-3.95 2.4-.21.43-.36.88-.46 1.34-.17.76-.32 1.55-.5 2.32-.15.65-.45 1.21-.96 1.71-1.61 1.57-2.9 3.37-3.88 5.35-.14.29-.28.58-.37.88-.19.66.29 1.12.99.96.44-.09.88-.18 1.3-.31.41-.15.57-.05.67.35.65 2.15 2.07 3.66 4.24 4.5 4.12 1.56 8.93-.66 9.97-4.58.07-.27.17-.37.47-.27.46.14.93.24 1.4.35.49.09.85-.16.92-.64.03-.26-.06-.49-.16-.73"/></svg>
 
-    </a>
-    کتابچه راهنمای مدیر سیستم لینوکس
-  </label>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    خانه
-  
+        <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default"
+          data-md-color-primary="teal" data-md-color-accent="cyan" aria-label="فعال‌سازی حالت تاریک" type="radio"
+          name="__palette" id="__palette_0">
 
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
+        <label class="md-header__button md-icon" title="فعال‌سازی حالت تاریک" for="__palette_1" hidden>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path
+              d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z" />
+          </svg>
         </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    خانه
-  
 
-    
-  </span>
-  
-  
 
-      </a>
-      
-        
 
-<nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      فهرست موضوعات
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#الان-رخداد-دارید" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        الان رخداد دارید؟
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#چطور-از-این-کتابچه-استفاده-کنیم" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        چطور از این کتابچه استفاده کنیم
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="چطور از این کتابچه استفاده کنیم">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#راهنمای-نمادها" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        راهنمای نمادها
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
+
+
+        <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate"
+          data-md-color-primary="teal" data-md-color-accent="cyan" aria-label="فعال‌سازی حالت روشن" type="radio"
+          name="__palette" id="__palette_1">
+
+        <label class="md-header__button md-icon" title="فعال‌سازی حالت روشن" for="__palette_0" hidden>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path
+              d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z" />
+          </svg>
+        </label>
+
+
+      </form>
+
+
+
+      <script>var palette = __md_get("__palette"); if (palette && palette.color) { if ("(prefers-color-scheme)" === palette.color.media) { var media = matchMedia("(prefers-color-scheme: light)"), input = document.querySelector(media.matches ? "[data-md-color-media='(prefers-color-scheme: light)']" : "[data-md-color-media='(prefers-color-scheme: dark)']"); palette.color.media = input.getAttribute("data-md-color-media"), palette.color.scheme = input.getAttribute("data-md-color-scheme"), palette.color.primary = input.getAttribute("data-md-color-primary"), palette.color.accent = input.getAttribute("data-md-color-accent") } for (var [key, value] of Object.entries(palette.color)) document.body.setAttribute("data-md-color-" + key, value) }</script>
+
+
+
+
+
+      <label class="md-header__button md-icon" for="__search">
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5" />
+        </svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+        <label class="md-search__overlay" for="__search"></label>
+        <div class="md-search__inner" role="search">
+          <form class="md-search__form" name="search">
+            <input type="text" class="md-search__input" name="query" aria-label="جستجو" placeholder="جستجو"
+              autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false"
+              data-md-component="search-query" required>
+            <label class="md-search__icon md-icon" for="__search">
+
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5" />
+              </svg>
+
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z" />
+              </svg>
+            </label>
+            <nav class="md-search__options" aria-label="جستجو">
+
+              <a href="javascript:void(0)" class="md-search__icon md-icon" title="هم‌رسانی" aria-label="هم‌رسانی"
+                data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08" />
+                </svg>
+              </a>
+
+              <button type="reset" class="md-search__icon md-icon" title="بازنشانی" aria-label="بازنشانی" tabindex="-1">
+
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                </svg>
+              </button>
+            </nav>
+
+            <div class="md-search__suggest" data-md-component="search-suggest"></div>
+
+          </form>
+          <div class="md-search__output">
+            <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+              <div class="md-search-result" data-md-component="search-result">
+                <div class="md-search-result__meta">
+                  راه‌اندازی جستجو
+                </div>
+                <ol class="md-search-result__list" role="presentation"></ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#دسترسی-سریع-موضوعی" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        دسترسی سریع موضوعی
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#کارهای-پرتکرار--نقطه-شروع-بررسی" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        کارهای پرتکرار — نقطهٔ شروع بررسی
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#اصول-ایمنی-قبل-از-هر-تغییر" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        اصول ایمنی قبل از هر تغییر
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#روش-استفاده-از-کتابچه" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        روش استفاده از کتابچه
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ساختار-موضوعی-کتابچه" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ساختار موضوعی کتابچه
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#درباره-این-پروژه" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        دربارهٔ این پروژه
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="22-community-culture/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    فرهنگ دانش مشترک
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    مبانی لینوکس
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    مبانی لینوکس
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="01-basics/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    مفاهیم پایه
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="02-files-directories/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    فایل‌ها و دایرکتوری‌ها
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="03-users-permissions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    کاربران و مجوزها
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="04-processes-services/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    پردازش‌ها و سرویس‌ها
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="05-packages-repositories/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    بسته‌ها و مخازن
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ذخیره‌سازی و منابع
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    ذخیره‌سازی و منابع
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="06-storage-filesystems/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    دیسک و فایل‌سیستم
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="12-performance/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    کارایی سیستم
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="13-scheduling/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    زمان‌بندی
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="11-backup-archive/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    پشتیبان‌گیری و آرشیو
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    شبکه و دسترسی راه دور
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    شبکه و دسترسی راه دور
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="07-networking/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    شبکه
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="08-ssh-remote/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    SSH و مدیریت راه دور
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="16-web-dns-tls/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    وب، DNS و TLS
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    امنیت و عیب‌یابی
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    امنیت و عیب‌یابی
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="10-security-firewall/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    امنیت و فایروال
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="09-logs-troubleshooting/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    لاگ و عیب‌یابی
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="18-emergency-runbook/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    راهنمای رخداد
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="20-infrastructure-runbooks/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    راهنماهای عملیاتی زیرساخت
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="21-services-for-noc/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    چک‌لیست روزانه NOC
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    زیرساخت و ابزارها
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    زیرساخت و ابزارها
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="15-docker/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Docker
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="17-virtualization/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    مجازی‌سازی
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="14-bash-text/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    متون و Bash
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="19-cheat-sheet/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    برگه تقلب دستورات
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-  </ul>
-</nav>
-                  </div>
+
+  </header>
+
+  <div class="md-container" data-md-component="container">
+
+
+
+
+
+    <nav class="md-tabs" aria-label="زبانه‌ها" data-md-component="tabs">
+      <div class="md-grid">
+        <ul class="md-tabs__list">
+
+
+
+
+
+
+
+
+          <li class="md-tabs__item md-tabs__item--active">
+            <a href="." class="md-tabs__link">
+
+
+
+
+
+              خانه
+
+            </a>
+          </li>
+
+
+
+
+
+
+
+
+          <li class="md-tabs__item">
+            <a href="22-community-culture/" class="md-tabs__link">
+
+
+
+
+
+              فرهنگ دانش مشترک
+
+            </a>
+          </li>
+
+
+
+
+
+
+
+
+
+
+          <li class="md-tabs__item">
+            <a href="01-basics/" class="md-tabs__link">
+
+
+
+              مبانی لینوکس
+
+            </a>
+          </li>
+
+
+
+
+
+
+
+
+
+
+
+          <li class="md-tabs__item">
+            <a href="06-storage-filesystems/" class="md-tabs__link">
+
+
+
+              ذخیره‌سازی و منابع
+
+            </a>
+          </li>
+
+
+
+
+
+
+
+
+
+
+
+          <li class="md-tabs__item">
+            <a href="07-networking/" class="md-tabs__link">
+
+
+
+              شبکه و دسترسی راه دور
+
+            </a>
+          </li>
+
+
+
+
+
+
+
+
+
+
+
+          <li class="md-tabs__item">
+            <a href="10-security-firewall/" class="md-tabs__link">
+
+
+
+              امنیت و عیب‌یابی
+
+            </a>
+          </li>
+
+
+
+
+
+
+
+
+
+
+
+          <li class="md-tabs__item">
+            <a href="15-docker/" class="md-tabs__link">
+
+
+
+              زیرساخت و ابزارها
+
+            </a>
+          </li>
+
+
+
+
+        </ul>
+      </div>
+    </nav>
+
+
+
+    <main class="md-main" data-md-component="main">
+      <div class="md-main__inner md-grid">
+
+
+
+        <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+          <div class="md-sidebar__scrollwrap">
+            <div class="md-sidebar__inner">
+
+
+
+
+
+
+
+
+              <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="هدایت"
+                data-md-level="0">
+                <label class="md-nav__title" for="__drawer">
+                  <a href="." title="کتابچه راهنمای مدیر سیستم لینوکس" class="md-nav__button md-logo"
+                    aria-label="کتابچه راهنمای مدیر سیستم لینوکس" data-md-component="logo">
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path
+                        d="M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19-.39.31-.75.29-1.14-.01-.2-.16-1.53-.92-1.95-1.19-.48-.31-.45-.7.08-.92 1.64-.69 3.28-.64 4.91.03.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.3 4.3 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01-.2-.88-.29-1.78-.7-2.61-.73-1.58-2-2.4-3.84-2.47-1.81.05-3.16.81-3.95 2.4-.21.43-.36.88-.46 1.34-.17.76-.32 1.55-.5 2.32-.15.65-.45 1.21-.96 1.71-1.61 1.57-2.9 3.37-3.88 5.35-.14.29-.28.58-.37.88-.19.66.29 1.12.99.96.44-.09.88-.18 1.3-.31.41-.15.57-.05.67.35.65 2.15 2.07 3.66 4.24 4.5 4.12 1.56 8.93-.66 9.97-4.58.07-.27.17-.37.47-.27.46.14.93.24 1.4.35.49.09.85-.16.92-.64.03-.26-.06-.49-.16-.73" />
+                    </svg>
+
+                  </a>
+                  کتابچه راهنمای مدیر سیستم لینوکس
+                </label>
+
+                <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+
+
+                  <li class="md-nav__item md-nav__item--active">
+
+                    <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+
+
+
+
+
+                    <label class="md-nav__link md-nav__link--active" for="__toc">
+
+
+
+                      <span class="md-ellipsis">
+
+
+                        خانه
+
+
+
+                      </span>
+
+
+
+                      <span class="md-nav__icon md-icon"></span>
+                    </label>
+
+                    <a href="." class="md-nav__link md-nav__link--active">
+
+
+
+                      <span class="md-ellipsis">
+
+
+                        خانه
+
+
+
+                      </span>
+
+
+
+                    </a>
+
+
+
+                    <nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
+
+
+
+
+
+
+                      <label class="md-nav__title" for="__toc">
+                        <span class="md-nav__icon md-icon"></span>
+                        فهرست موضوعات
+                      </label>
+                      <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+
+                        <li class="md-nav__item">
+                          <a href="#الان-رخداد-دارید" class="md-nav__link">
+                            <span class="md-ellipsis">
+
+                              الان رخداد دارید؟
+
+                            </span>
+                          </a>
+
+                        </li>
+
+                        <li class="md-nav__item">
+                          <a href="#چطور-از-این-کتابچه-استفاده-کنیم" class="md-nav__link">
+                            <span class="md-ellipsis">
+
+                              چطور از این کتابچه استفاده کنیم
+
+                            </span>
+                          </a>
+
+                          <nav class="md-nav" aria-label="چطور از این کتابچه استفاده کنیم">
+                            <ul class="md-nav__list">
+
+                              <li class="md-nav__item">
+                                <a href="#راهنمای-نمادها" class="md-nav__link">
+                                  <span class="md-ellipsis">
+
+                                    راهنمای نمادها
+
+                                  </span>
+                                </a>
+
+                              </li>
+
+                            </ul>
+                          </nav>
+
+                        </li>
+
+                        <li class="md-nav__item">
+                          <a href="#دسترسی-سریع-موضوعی" class="md-nav__link">
+                            <span class="md-ellipsis">
+
+                              دسترسی سریع موضوعی
+
+                            </span>
+                          </a>
+
+                        </li>
+
+                        <li class="md-nav__item">
+                          <a href="#کارهای-پرتکرار--نقطه-شروع-بررسی" class="md-nav__link">
+                            <span class="md-ellipsis">
+
+                              کارهای پرتکرار — نقطهٔ شروع بررسی
+
+                            </span>
+                          </a>
+
+                        </li>
+
+                        <li class="md-nav__item">
+                          <a href="#اصول-ایمنی-قبل-از-هر-تغییر" class="md-nav__link">
+                            <span class="md-ellipsis">
+
+                              اصول ایمنی قبل از هر تغییر
+
+                            </span>
+                          </a>
+
+                        </li>
+
+                        <li class="md-nav__item">
+                          <a href="#روش-استفاده-از-کتابچه" class="md-nav__link">
+                            <span class="md-ellipsis">
+
+                              روش استفاده از کتابچه
+
+                            </span>
+                          </a>
+
+                        </li>
+
+                        <li class="md-nav__item">
+                          <a href="#ساختار-موضوعی-کتابچه" class="md-nav__link">
+                            <span class="md-ellipsis">
+
+                              ساختار موضوعی کتابچه
+
+                            </span>
+                          </a>
+
+                        </li>
+
+                        <li class="md-nav__item">
+                          <a href="#درباره-این-پروژه" class="md-nav__link">
+                            <span class="md-ellipsis">
+
+                              دربارهٔ این پروژه
+
+                            </span>
+                          </a>
+
+                        </li>
+
+                      </ul>
+
+                    </nav>
+
+                  </li>
+
+
+
+
+
+
+
+
+
+                  <li class="md-nav__item">
+                    <a href="22-community-culture/" class="md-nav__link">
+
+
+
+                      <span class="md-ellipsis">
+
+
+                        فرهنگ دانش مشترک
+
+
+
+                      </span>
+
+
+
+                    </a>
+                  </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <li class="md-nav__item md-nav__item--nested">
+
+
+
+
+
+                    <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3">
+
+
+                    <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+
+
+
+                      <span class="md-ellipsis">
+
+
+                        مبانی لینوکس
+
+
+
+                      </span>
+
+
+
+                      <span class="md-nav__icon md-icon"></span>
+                    </label>
+
+                    <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+                      <label class="md-nav__title" for="__nav_3">
+                        <span class="md-nav__icon md-icon"></span>
+
+
+                        مبانی لینوکس
+
+
+                      </label>
+                      <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="01-basics/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              مفاهیم پایه
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="02-files-directories/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              فایل‌ها و دایرکتوری‌ها
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="03-users-permissions/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              کاربران و مجوزها
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="04-processes-services/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              پردازش‌ها و سرویس‌ها
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="05-packages-repositories/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              بسته‌ها و مخازن
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+                      </ul>
+                    </nav>
+
+                  </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <li class="md-nav__item md-nav__item--nested">
+
+
+
+
+
+                    <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4">
+
+
+                    <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+
+
+
+                      <span class="md-ellipsis">
+
+
+                        ذخیره‌سازی و منابع
+
+
+
+                      </span>
+
+
+
+                      <span class="md-nav__icon md-icon"></span>
+                    </label>
+
+                    <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+                      <label class="md-nav__title" for="__nav_4">
+                        <span class="md-nav__icon md-icon"></span>
+
+
+                        ذخیره‌سازی و منابع
+
+
+                      </label>
+                      <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="06-storage-filesystems/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              دیسک و فایل‌سیستم
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="12-performance/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              کارایی سیستم
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="13-scheduling/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              زمان‌بندی
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="11-backup-archive/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              پشتیبان‌گیری و آرشیو
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+                      </ul>
+                    </nav>
+
+                  </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <li class="md-nav__item md-nav__item--nested">
+
+
+
+
+
+                    <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5">
+
+
+                    <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+
+
+
+                      <span class="md-ellipsis">
+
+
+                        شبکه و دسترسی راه دور
+
+
+
+                      </span>
+
+
+
+                      <span class="md-nav__icon md-icon"></span>
+                    </label>
+
+                    <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+                      <label class="md-nav__title" for="__nav_5">
+                        <span class="md-nav__icon md-icon"></span>
+
+
+                        شبکه و دسترسی راه دور
+
+
+                      </label>
+                      <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="07-networking/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              شبکه
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="08-ssh-remote/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              SSH و مدیریت راه دور
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="16-web-dns-tls/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              وب، DNS و TLS
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+                      </ul>
+                    </nav>
+
+                  </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <li class="md-nav__item md-nav__item--nested">
+
+
+
+
+
+                    <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6">
+
+
+                    <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+
+
+
+                      <span class="md-ellipsis">
+
+
+                        امنیت و عیب‌یابی
+
+
+
+                      </span>
+
+
+
+                      <span class="md-nav__icon md-icon"></span>
+                    </label>
+
+                    <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+                      <label class="md-nav__title" for="__nav_6">
+                        <span class="md-nav__icon md-icon"></span>
+
+
+                        امنیت و عیب‌یابی
+
+
+                      </label>
+                      <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="10-security-firewall/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              امنیت و فایروال
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="09-logs-troubleshooting/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              لاگ و عیب‌یابی
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="18-emergency-runbook/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              راهنمای رخداد
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="20-infrastructure-runbooks/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              راهنماهای عملیاتی زیرساخت
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="21-services-for-noc/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              چک‌لیست روزانه NOC
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+                      </ul>
+                    </nav>
+
+                  </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <li class="md-nav__item md-nav__item--nested">
+
+
+
+
+
+                    <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7">
+
+
+                    <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+
+
+
+                      <span class="md-ellipsis">
+
+
+                        زیرساخت و ابزارها
+
+
+
+                      </span>
+
+
+
+                      <span class="md-nav__icon md-icon"></span>
+                    </label>
+
+                    <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+                      <label class="md-nav__title" for="__nav_7">
+                        <span class="md-nav__icon md-icon"></span>
+
+
+                        زیرساخت و ابزارها
+
+
+                      </label>
+                      <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="15-docker/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              Docker
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="17-virtualization/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              مجازی‌سازی
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="14-bash-text/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              متون و Bash
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="md-nav__item">
+                          <a href="19-cheat-sheet/" class="md-nav__link">
+
+
+
+                            <span class="md-ellipsis">
+
+
+                              برگه تقلب دستورات
+
+
+
+                            </span>
+
+
+
+                          </a>
+                        </li>
+
+
+
+
+                      </ul>
+                    </nav>
+
+                  </li>
+
+
+
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="md-content" data-md-component="content">
+
+
+
+
+
+
+
+
+
+          <article class="md-content__inner md-typeset">
+
+
+
+
+
+            <div class="hb-hero">
+              <div class="hb-hero__text">
+                <h1 id="کتابچه-راهنمای-مدیر-سیستم-لینوکس">کتابچه راهنمای مدیر سیستم لینوکس<a class="headerlink"
+                    href="#کتابچه-راهنمای-مدیر-سیستم-لینوکس" title="Permanent link">&para;</a></h1>
+                <p><strong>راهنمای عملیاتی برای مدیریت، نگهداری، امنیت و عیب‌یابی سرورهای لینوکس</strong></p>
+                <p>مرجع موضوعی برای مدیران سیستم، کارشناسان شبکه و تیم‌های عملیات — هر دستور با کاربرد، روش بررسی، خطرات
+                  و مسیر بازگشت.</p>
+                <p><a class="md-button md-button--primary" href="01-basics/">شروع از مبانی</a>
+                  <a class="md-button" href="19-cheat-sheet/">برگه تقلب</a>
+                </p>
+              </div>
+              <div aria-hidden="true" class="hb-term">
+                <div class="hb-term__bar">bash · نمونه خروجی</div>
+                <div class="hb-term__body"><span class="p">$</span> uptime
+                  up 41 days, load 0.42
+                  <span class="p">$</span> systemctl --failed
+                  <span class="ok">0 loaded units listed.</span>
+                  <span class="p">$</span> df -hT /
+                  /dev/sda2 ext4 58G 21G 35G 38% /
+                  <span class="p">$</span> <span class="c"># همه‌چیز سالم است</span> <span class="cur"></span>
                 </div>
               </div>
-            
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              
-                
-
-
-
-  
-
-
-              
-              <article class="md-content__inner md-typeset">
-                
-                  
-
-
-
-<div class="hb-hero">
-<div class="hb-hero__text">
-<h1 id="کتابچه-راهنمای-مدیر-سیستم-لینوکس">کتابچه راهنمای مدیر سیستم لینوکس<a class="headerlink" href="#کتابچه-راهنمای-مدیر-سیستم-لینوکس" title="Permanent link">&para;</a></h1>
-<p><strong>راهنمای عملیاتی برای مدیریت، نگهداری، امنیت و عیب‌یابی سرورهای لینوکس</strong></p>
-<p>مرجع موضوعی برای مدیران سیستم، کارشناسان شبکه و تیم‌های عملیات — هر دستور با کاربرد، روش بررسی، خطرات و مسیر بازگشت.</p>
-<p><a class="md-button md-button--primary" href="01-basics/">شروع از مبانی</a>
-<a class="md-button" href="19-cheat-sheet/">برگه تقلب</a></p>
-</div>
-<div aria-hidden="true" class="hb-term">
-<div class="hb-term__bar">bash · نمونه خروجی</div>
-<div class="hb-term__body"><span class="p">$</span> uptime
- up 41 days, load 0.42
-<span class="p">$</span> systemctl --failed
-<span class="ok">0 loaded units listed.</span>
-<span class="p">$</span> df -hT /
-/dev/sda2  ext4  58G  21G  35G  38% /
-<span class="p">$</span> <span class="c"># همه‌چیز سالم است</span> <span class="cur"></span></div>
-</div>
-</div>
-<h2 id="الان-رخداد-دارید"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 13h-2V7h2m-2 8h2v2h-2m4.73-14H8.27L3 8.27v7.46L8.27 21h7.46L21 15.73V8.27z"/></svg></span> الان رخداد دارید؟<a class="headerlink" href="#الان-رخداد-دارید" title="Permanent link">&para;</a></h2>
-<div class="hb-sos">
-<p><a href="18-emergency-runbook/#دیسک-پر-شده-است"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2m6 2a6 6 0 0 0-6 6c0 3.31 2.69 6 6.1 6l-.88-2.23a1.01 1.01 0 0 1 .37-1.37l.86-.5a1.01 1.01 0 0 1 1.37.37l1.92 2.42A5.98 5.98 0 0 0 18 10a6 6 0 0 0-6-6m0 5a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-5 9a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m5.09-4.73 2.49 6.31 2.59-1.5-4.22-5.31z"/></svg></span> دیسک پر شده</a>
-<a href="18-emergency-runbook/#سرویس-بالا-نمیآید"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20.84 22.73-5.53-5.53-.81.8v3h-5v-3L6 14.5V9c0-.3.1-.59.25-.86L1.11 3l1.28-1.27 19.72 19.73zM18 14.5V9c0-1-1-2-2-2V3h-2v4h-3.8l7.65 7.65zM10 3H8v1.8l2 2z"/></svg></span> سرویس بالا نمی‌آید</a>
-<a href="18-emergency-runbook/#سرور-کند-است"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 16c1.66 0 3-1.34 3-3 0-1.12-.61-2.1-1.5-2.61L3.79 4.77l5.53 9.58c.5.98 1.51 1.65 2.68 1.65m0-13c-1.81 0-3.5.5-4.97 1.32l2.1 1.21C10 5.19 11 5 12 5c4.42 0 8 3.58 8 8 0 2.21-.89 4.21-2.34 5.65h-.01a.996.996 0 0 0 0 1.41c.39.39 1.03.39 1.42.01A9.97 9.97 0 0 0 22 13c0-5.5-4.5-10-10-10M2 13c0 2.76 1.12 5.26 2.93 7.07.39.38 1.02.38 1.41-.01a.996.996 0 0 0 0-1.41A7.95 7.95 0 0 1 4 13c0-1 .19-2 .54-2.9L3.33 8C2.5 9.5 2 11.18 2 13"/></svg></span> سرور کند است</a>
-<a href="18-emergency-runbook/#اتصال-شبکه-قطع-است"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 1c-1.11 0-2 .89-2 2v4c0 1.11.89 2 2 2H1v2h12V9h-3c1.11 0 2-.89 2-2V3c0-1.11-.89-2-2-2zm0 2h6v4H4zm10 10c-1.11 0-2 .89-2 2v4c0 1.11.89 2 2 2h-3v2h12v-2h-3c1.11 0 2-.89 2-2v-4c0-1.11-.89-2-2-2zm-10.12.46-1.42 1.42L4.59 17l-2.13 2.12 1.42 1.42L6 18.41l2.12 2.13 1.42-1.42L7.41 17l2.13-2.12-1.42-1.42L6 15.59zM14 15h6v4h-6z"/></svg></span> شبکه قطع است</a>
-<a href="18-emergency-runbook/#کشته-شدن-پردازش-توسط-oom-killer"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 17H7V7h10m4 4V9h-2V7a2 2 0 0 0-2-2h-2V3h-2v2h-2V3H9v2H7c-1.11 0-2 .89-2 2v2H3v2h2v2H3v2h2v2a2 2 0 0 0 2 2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2m-6 2h-2v-2h2m2-2H9v6h6z"/></svg></span> OOM / کمبود حافظه</a>
-<a href="20-infrastructure-runbooks/#۵-ssh-یا-دسترسی-راه-دور-قطع-شده-است"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2m6-9c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V10c0-1.1.9-2 2-2h1V6c0-2.8 2.2-5 5-5s5 2.2 5 5v2zm-6-5C8.3 3 7 4.3 7 6v2h6V6c0-1.7-1.3-3-3-3m12 10h-2V7h2zm0 4h-2v-2h2z"/></svg></span> SSH قفل شده</a>
-<a href="10-security-firewall/#۹-سناریوی-مشکوک-به-نفوذ-triage"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 13h2v1h-2zm10-8v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V5l9-4zm-4 5h-2.2c-.2-.6-.6-1.1-1.1-1.5l1.2-1.2-.7-.7L12.8 8H12c-.2 0-.5 0-.7.1L9.9 6.6l-.8.8 1.2 1.2c-.5.3-.9.8-1.1 1.4H7v1h2v1H7v1h2v1H7v1h2.2c.4 1.2 1.5 2 2.8 2s2.4-.8 2.8-2H17v-1h-2v-1h2v-1h-2v-1h2zm-6 2h2v-1h-2z"/></svg></span> مشکوک به نفوذ</a></p>
-</div>
-<p>اصل اول: <strong>قبل از هر اقدام، شواهد را ذخیره کنید</strong> (<code>scripts/incident-snapshot.sh</code> را اجرا کنید) و سپس کم‌خطرترین اقدام را انجام دهید.</p>
-<h2 id="چطور-از-این-کتابچه-استفاده-کنیم">چطور از این کتابچه استفاده کنیم<a class="headerlink" href="#چطور-از-این-کتابچه-استفاده-کنیم" title="Permanent link">&para;</a></h2>
-<p>این کتابچه فقط لیست فرمان نیست. هدف این است که:</p>
-<ul>
-<li>قبل از اجرا بدانید <strong>چه چیزی</strong> و <strong>چرا</strong> تغییر می‌کند</li>
-<li>بعد از اجرا بتوانید <strong>نتیجه را تأیید</strong> کنید</li>
-<li>در صورت مشکل، <strong>مسیر بازگشت (Rollback)</strong> داشته باشید</li>
-<li>تفاوت توزیع‌ها (Debian/Ubuntu، RHEL/Rocky، Alpine و …) را در نظر بگیرید</li>
-</ul>
-<h3 id="راهنمای-نمادها">راهنمای نمادها<a class="headerlink" href="#راهنمای-نمادها" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>نماد</th>
-<th>معنی</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><em class="ro">بدون تغییر</em></td>
-<td>فقط می‌خواند؛ اجرایش روی سرور زنده بی‌خطر است</td>
-</tr>
-<tr>
-<td><em class="rw">تغییر</em></td>
-<td>وضعیت سیستم را عوض می‌کند؛ پنجرهٔ تغییر، بکاپ و راه برگشت لازم است</td>
-</tr>
-<tr>
-<td><em class="rd">مخرب</em></td>
-<td>می‌تواند داده یا دسترسی را از بین ببرد؛ دوبار بررسی و تأیید لازم است</td>
-</tr>
-<tr>
-<td><code>SERVER_IP</code>، <code>SERVICE</code>، <code>USER</code></td>
-<td>نام با حروف بزرگ <strong>جایگزین‌شدنی</strong> است؛ هرگز عیناً کپی نکنید</td>
-</tr>
-<tr>
-<td><code>192.0.2.x</code>، <code>198.51.100.x</code>، <code>example.com</code></td>
-<td>آدرس‌های مستند (RFC 5737 / RFC 2606)؛ نمونه‌اند، نه آدرس واقعی</td>
-</tr>
-<tr>
-<td><code>sudo</code></td>
-<td>یعنی فرمان نیاز به دسترسی بالا دارد؛ قبل از آن بدون <code>sudo</code> (فقط‌خواندنی) تست کنید</td>
-</tr>
-</tbody>
-</table>
-<h2 id="دسترسی-سریع-موضوعی">دسترسی سریع موضوعی<a class="headerlink" href="#دسترسی-سریع-موضوعی" title="Permanent link">&para;</a></h2>
-<div class="grid cards">
-<ul>
-<li>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"/></svg></span> <strong>مبانی و فرمان‌های روزمره</strong></p>
-<hr />
-<p>ترمینال، فایل‌ها، کاربران، مجوزها و مدیریت سرویس‌ها.</p>
-<p><a href="01-basics/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.78 19.03a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06l6.25-6.25a.749.749 0 0 1 1.275.326.75.75 0 0 1-.215.734L5.81 11.5h14.44a.75.75 0 0 1 0 1.5H5.81l4.97 4.97a.75.75 0 0 1 0 1.06"/></svg></span> شروع از مبانی</a></p>
-</li>
-<li>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 2c-1.11 0-2 .89-2 2v3c0 1.11.89 2 2 2h1v2H2v2h4v2H5c-1.11 0-2 .89-2 2v3c0 1.11.89 2 2 2h4c1.11 0 2-.89 2-2v-3c0-1.11-.89-2-2-2H8v-2h8v2h-1c-1.11 0-2 .89-2 2v3c0 1.11.89 2 2 2h4c1.11 0 2-.89 2-2v-3c0-1.11-.89-2-2-2h-1v-2h4v-2h-9V9h1c1.11 0 2-.89 2-2V4c0-1.11-.89-2-2-2zm0 2h4v3h-4zM5 17h4v3H5zm10 0h4v3h-4z"/></svg></span> <strong>شبکه و دسترسی راه دور</strong></p>
-<hr />
-<p>IP، Route، پورت‌ها، SSH، DNS و TLS.</p>
-<p><a href="07-networking/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.78 19.03a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06l6.25-6.25a.749.749 0 0 1 1.275.326.75.75 0 0 1-.215.734L5.81 11.5h14.44a.75.75 0 0 1 0 1.5H5.81l4.97 4.97a.75.75 0 0 1 0 1.06"/></svg></span> راهنمای شبکه</a></p>
-</li>
-<li>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 6c1.4 0 2.8 1.1 2.8 2.5V11c.6 0 1.2.6 1.2 1.3v3.5c0 .6-.6 1.2-1.3 1.2H9.2c-.6 0-1.2-.6-1.2-1.3v-3.5c0-.6.6-1.2 1.2-1.2V9.5C9.2 8.1 10.6 7 12 7m0 1.2c-.8 0-1.5.5-1.5 1.3V11h3V9.5c0-.8-.7-1.3-1.5-1.3"/></svg></span> <strong>امنیت و کنترل دسترسی</strong></p>
-<hr />
-<p>مجوزها، فایروال، SSH سخت‌گیرانه، SELinux/AppArmor و بررسی نفوذ.</p>
-<p><a href="10-security-firewall/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.78 19.03a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06l6.25-6.25a.749.749 0 0 1 1.275.326.75.75 0 0 1-.215.734L5.81 11.5h14.44a.75.75 0 0 1 0 1.5H5.81l4.97 4.97a.75.75 0 0 1 0 1.06"/></svg></span> امنیت و فایروال</a></p>
-</li>
-<li>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.81 10.25c-.06-.04-.56-.43-1.64-.43-.28 0-.56.03-.84.08-.21-1.4-1.38-2.11-1.43-2.14l-.29-.17-.18.27c-.24.36-.43.77-.51 1.19-.2.8-.08 1.56.33 2.21-.49.28-1.29.35-1.46.35H2.62c-.34 0-.62.28-.62.63 0 1.15.18 2.3.58 3.38.45 1.19 1.13 2.07 2 2.61.98.6 2.59.94 4.42.94.79 0 1.61-.07 2.42-.22 1.12-.2 2.2-.59 3.19-1.16A8.3 8.3 0 0 0 16.78 16c1.05-1.17 1.67-2.5 2.12-3.65h.19c1.14 0 1.85-.46 2.24-.85.26-.24.45-.53.59-.87l.08-.24zm-17.96.99h1.76c.08 0 .16-.07.16-.16V9.5c0-.08-.07-.16-.16-.16H3.85c-.09 0-.16.07-.16.16v1.58c.01.09.07.16.16.16m2.43 0h1.76c.08 0 .16-.07.16-.16V9.5c0-.08-.07-.16-.16-.16H6.28c-.09 0-.16.07-.16.16v1.58c.01.09.07.16.16.16m2.47 0h1.75c.1 0 .17-.07.17-.16V9.5c0-.08-.06-.16-.17-.16H8.75c-.08 0-.15.07-.15.16v1.58c0 .09.06.16.15.16m2.44 0h1.77c.08 0 .15-.07.15-.16V9.5c0-.08-.06-.16-.15-.16h-1.77c-.08 0-.15.07-.15.16v1.58c0 .09.07.16.15.16M6.28 9h1.76c.08 0 .16-.09.16-.18V7.25c0-.09-.07-.16-.16-.16H6.28c-.09 0-.16.06-.16.16v1.57c.01.09.07.18.16.18m2.47 0h1.75c.1 0 .17-.09.17-.18V7.25c0-.09-.06-.16-.17-.16H8.75c-.08 0-.15.06-.15.16v1.57c0 .09.06.18.15.18m2.44 0h1.77c.08 0 .15-.09.15-.18V7.25c0-.09-.07-.16-.15-.16h-1.77c-.08 0-.15.06-.15.16v1.57c0 .09.07.18.15.18m0-2.28h1.77c.08 0 .15-.07.15-.16V5c0-.1-.07-.17-.15-.17h-1.77c-.08 0-.15.06-.15.17v1.56c0 .08.07.16.15.16m2.46 4.52h1.76c.09 0 .16-.07.16-.16V9.5c0-.08-.07-.16-.16-.16h-1.76c-.08 0-.15.07-.15.16v1.58c0 .09.07.16.15.16"/></svg></span> <strong>Docker و سرویس‌های وب</strong></p>
-<hr />
-<p>کانتینرها، لاگ، وب‌سرور، گواهی TLS و دام‌های امنیتی Docker.</p>
-<p><a href="15-docker/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.78 19.03a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06l6.25-6.25a.749.749 0 0 1 1.275.326.75.75 0 0 1-.215.734L5.81 11.5h14.44a.75.75 0 0 1 0 1.5H5.81l4.97 4.97a.75.75 0 0 1 0 1.06"/></svg></span> راهنمای Docker</a></p>
-</li>
-<li>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2m6 2a6 6 0 0 0-6 6c0 3.31 2.69 6 6.1 6l-.88-2.23a1.01 1.01 0 0 1 .37-1.37l.86-.5a1.01 1.01 0 0 1 1.37.37l1.92 2.42A5.98 5.98 0 0 0 18 10a6 6 0 0 0-6-6m0 5a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-5 9a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m5.09-4.73 2.49 6.31 2.59-1.5-4.22-5.31z"/></svg></span> <strong>ذخیره‌سازی و پشتیبان‌گیری</strong></p>
-<hr />
-<p>دیسک، LVM، inode، بکاپ قابل‌اعتماد و تست بازیابی.</p>
-<p><a href="06-storage-filesystems/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.78 19.03a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06l6.25-6.25a.749.749 0 0 1 1.275.326.75.75 0 0 1-.215.734L5.81 11.5h14.44a.75.75 0 0 1 0 1.5H5.81l4.97 4.97a.75.75 0 0 1 0 1.06"/></svg></span> ذخیره‌سازی</a></p>
-</li>
-<li>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 17-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9m-6-6a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m7 0h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2"/></svg></span> <strong>چک‌لیست روزانه NOC</strong></p>
-<hr />
-<p>چک‌لیست تعاملی با ذخیرهٔ تیک و گزارش تحویل شیفت.</p>
-<p><a href="21-services-for-noc/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.78 19.03a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06l6.25-6.25a.749.749 0 0 1 1.275.326.75.75 0 0 1-.215.734L5.81 11.5h14.44a.75.75 0 0 1 0 1.5H5.81l4.97 4.97a.75.75 0 0 1 0 1.06"/></svg></span> چک‌لیست NOC</a></p>
-</li>
-</ul>
-</div>
-<h2 id="کارهای-پرتکرار--نقطه-شروع-بررسی">کارهای پرتکرار — نقطهٔ شروع بررسی<a class="headerlink" href="#کارهای-پرتکرار--نقطه-شروع-بررسی" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>نیاز</th>
-<th>فرمان‌های شروع</th>
-<th>راهنمای مرتبط</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>سلامت کلی سرور</td>
-<td><code>uptime</code> · <code>free -h</code> · <code>df -hT</code> · <code>nproc</code></td>
-<td><a href="12-performance/">کارایی سیستم</a></td>
-</tr>
-<tr>
-<td>سرویس‌های ناموفق</td>
-<td><code>systemctl --failed</code> · <code>systemctl status SERVICE</code></td>
-<td><a href="04-processes-services/">پردازش‌ها و سرویس‌ها</a></td>
-</tr>
-<tr>
-<td>پورت‌های در حال شنود</td>
-<td><code>sudo ss -lntup</code></td>
-<td><a href="07-networking/">شبکه</a></td>
-</tr>
-<tr>
-<td>خطاهای اخیر یک سرویس</td>
-<td><code>journalctl -u SERVICE -b -n 200 --no-pager</code></td>
-<td><a href="09-logs-troubleshooting/">لاگ و عیب‌یابی</a></td>
-</tr>
-<tr>
-<td>فضای دیسک و inode</td>
-<td><code>df -hT</code> · <code>df -ih</code> · <code>du -xh /path \| sort -h</code></td>
-<td><a href="06-storage-filesystems/">دیسک و فایل‌سیستم</a></td>
-</tr>
-<tr>
-<td>وضعیت کانتینرها</td>
-<td><code>docker ps -a</code> · <code>docker compose ps</code></td>
-<td><a href="15-docker/">Docker</a></td>
-</tr>
-<tr>
-<td>رزولوشن DNS</td>
-<td><code>getent hosts example.com</code> · <code>dig +short example.com</code></td>
-<td><a href="16-web-dns-tls/">وب، DNS و TLS</a></td>
-</tr>
-<tr>
-<td>اتصال SSH</td>
-<td><code>ssh -v USER@HOST</code></td>
-<td><a href="08-ssh-remote/">SSH</a></td>
-</tr>
-<tr>
-<td>فایروال</td>
-<td><code>sudo ufw status verbose</code> یا <code>sudo nft list ruleset</code></td>
-<td><a href="10-security-firewall/">امنیت و فایروال</a></td>
-</tr>
-<tr>
-<td>بار پردازشی</td>
-<td><code>top -o %CPU</code> · <code>ps aux --sort=-%cpu \| head</code></td>
-<td><a href="12-performance/">کارایی سیستم</a></td>
-</tr>
-<tr>
-<td>ورودهای مشکوک</td>
-<td><code>last -a \| head</code> · <code>sudo lastb \| head</code></td>
-<td><a href="10-security-firewall/">امنیت و فایروال</a></td>
-</tr>
-<tr>
-<td>بکاپ سالم است؟</td>
-<td><code>restic snapshots</code> · <code>sha256sum -c SHA256SUMS</code></td>
-<td><a href="11-backup-archive/">پشتیبان‌گیری</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="اصول-ایمنی-قبل-از-هر-تغییر">اصول ایمنی قبل از هر تغییر<a class="headerlink" href="#اصول-ایمنی-قبل-از-هر-تغییر" title="Permanent link">&para;</a></h2>
-<div class="admonition danger">
-<p class="admonition-title">قبل از اجرای فرمان‌های مخرب</p>
-<p>ابتدا <strong>میزبان</strong>، <strong>محیط</strong> (prod / staging) و <strong>اثر دستور</strong> را بررسی کنید.<br />
-فرمان‌هایی مانند <code>rm -rf</code>، <code>mkfs</code>، <code>dd</code>، <code>lvremove</code>، <code>iptables -F</code>، <code>nft flush ruleset</code> و <code>docker system prune --volumes</code> می‌توانند داده را حذف یا سرویس را قطع کنند.</p>
-</div>
-<p>چک‌لیست حداقلی (به همین ترتیب):</p>
-<ol>
-<li><strong>هویت محیط</strong>: <code>hostnamectl</code> + <code>cat /etc/os-release</code> — روی کدام سرور هستم؟ (اسم میزبان را در prompt ببینید.)</li>
-<li><strong>وضعیت فعلی</strong>: خروجی فقط‌خواندنی را ذخیره کنید (<code>systemctl status</code>، <code>df -h</code>، <code>ss -lntup</code>)</li>
-<li><strong>پشتیبان / Snapshot</strong>: قبل از تغییر فایل‌سیستم یا تنظیمات حساس</li>
-<li><strong>مسیر بازگشت</strong>: بدانید چگونه تنظیم را برمی‌گردانید — و <strong>تست‌شده</strong> باشد</li>
-<li><strong>پنجرهٔ تغییر</strong>: در production بدون هماهنگی تغییر ندهید</li>
-<li><strong>دسترسی جایگزین</strong>: کنسول / IPMI / نشست دوم SSH باز باشد (به‌ویژه برای فایروال، SSH و شبکه)</li>
-</ol>
-<h2 id="روش-استفاده-از-کتابچه">روش استفاده از کتابچه<a class="headerlink" href="#روش-استفاده-از-کتابچه" title="Permanent link">&para;</a></h2>
-<ol>
-<li>موضوع را از منوی بالا، کارت‌های صفحهٔ اصلی یا جست‌وجو انتخاب کنید (جست‌وجو فارسی و انگلیسی را می‌فهمد).</li>
-<li>جدول «راهنمای سریع» اول هر فصل را بخوانید؛ ستون ریسک را جدی بگیرید.</li>
-<li>فرمان را در محیط آزمایشی یا با دسترسی محدود اجرا کنید.</li>
-<li>خروجی و وضعیت سرویس را بررسی کنید — «بدون خطا» همیشه به معنی «سرویس سالم» نیست.</li>
-<li>در production قبل از تغییر، فایل پیکربندی و وضعیت فعلی را ثبت کنید.</li>
-</ol>
-<p>هر قطعه کد دکمهٔ <strong>کپی</strong> دارد. بلوک‌های کدی که فقط «نمونه» هستند با کامنت <code># نمونه</code> مشخص شده‌اند.</p>
-<h2 id="ساختار-موضوعی-کتابچه">ساختار موضوعی کتابچه<a class="headerlink" href="#ساختار-موضوعی-کتابچه" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>بخش</th>
-<th>موضوعات</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>مبانی لینوکس</td>
-<td>ترمینال، فایل‌ها، کاربران، سرویس‌ها، بسته‌ها</td>
-</tr>
-<tr>
-<td>ذخیره‌سازی و منابع</td>
-<td>دیسک، کارایی، زمان‌بندی، پشتیبان</td>
-</tr>
-<tr>
-<td>شبکه و دسترسی</td>
-<td>شبکه، SSH، وب/DNS/TLS</td>
-</tr>
-<tr>
-<td>امنیت و عیب‌یابی</td>
-<td>فایروال، لاگ، رخداد، runbook زیرساخت، چک‌لیست NOC</td>
-</tr>
-<tr>
-<td>زیرساخت و ابزار</td>
-<td>Docker، مجازی‌سازی، Bash، cheat-sheet</td>
-</tr>
-</tbody>
-</table>
-<h2 id="درباره-این-پروژه">دربارهٔ این پروژه<a class="headerlink" href="#درباره-این-پروژه" title="Permanent link">&para;</a></h2>
-<p>این کتابچه بر این باور بنا شده که <strong>دانش وقتی ارزشمندتر می‌شود که به اشتراک گذاشته شود و تجربهٔ امروز، راهنمای فردای دیگران باشد.</strong> <a href="22-community-culture/">با فلسفه و فرهنگ دانش مشترک این مجموعه آشنا شوید</a>.</p>
-<div class="admonition tip">
-<p class="admonition-title">پیشنهاد مطالعهٔ اولیه</p>
-<p>اگر تازه‌وارد هستید: <a href="01-basics/">مفاهیم پایه</a> → <a href="02-files-directories/">فایل‌ها و دایرکتوری‌ها</a> → <a href="03-users-permissions/">کاربران و مجوزها</a> → <a href="04-processes-services/">پردازش‌ها و سرویس‌ها</a>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-                
-              </article>
             </div>
-          
-          
-  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+            <h2 id="الان-رخداد-دارید"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M13 13h-2V7h2m-2 8h2v2h-2m4.73-14H8.27L3 8.27v7.46L8.27 21h7.46L21 15.73V8.27z" />
+                </svg></span> الان رخداد دارید؟<a class="headerlink" href="#الان-رخداد-دارید"
+                title="Permanent link">&para;</a></h2>
+            <div class="hb-sos">
+              <p><a href="18-emergency-runbook/#دیسک-پر-شده-است"><span class="twemoji"><svg
+                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path
+                        d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2m6 2a6 6 0 0 0-6 6c0 3.31 2.69 6 6.1 6l-.88-2.23a1.01 1.01 0 0 1 .37-1.37l.86-.5a1.01 1.01 0 0 1 1.37.37l1.92 2.42A5.98 5.98 0 0 0 18 10a6 6 0 0 0-6-6m0 5a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-5 9a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m5.09-4.73 2.49 6.31 2.59-1.5-4.22-5.31z" />
+                    </svg></span> دیسک پر شده</a>
+                <a href="18-emergency-runbook/#سرویس-بالا-نمیآید"><span class="twemoji"><svg
+                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path
+                        d="m20.84 22.73-5.53-5.53-.81.8v3h-5v-3L6 14.5V9c0-.3.1-.59.25-.86L1.11 3l1.28-1.27 19.72 19.73zM18 14.5V9c0-1-1-2-2-2V3h-2v4h-3.8l7.65 7.65zM10 3H8v1.8l2 2z" />
+                    </svg></span> سرویس بالا نمی‌آید</a>
+                <a href="18-emergency-runbook/#سرور-کند-است"><span class="twemoji"><svg
+                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path
+                        d="M12 16c1.66 0 3-1.34 3-3 0-1.12-.61-2.1-1.5-2.61L3.79 4.77l5.53 9.58c.5.98 1.51 1.65 2.68 1.65m0-13c-1.81 0-3.5.5-4.97 1.32l2.1 1.21C10 5.19 11 5 12 5c4.42 0 8 3.58 8 8 0 2.21-.89 4.21-2.34 5.65h-.01a.996.996 0 0 0 0 1.41c.39.39 1.03.39 1.42.01A9.97 9.97 0 0 0 22 13c0-5.5-4.5-10-10-10M2 13c0 2.76 1.12 5.26 2.93 7.07.39.38 1.02.38 1.41-.01a.996.996 0 0 0 0-1.41A7.95 7.95 0 0 1 4 13c0-1 .19-2 .54-2.9L3.33 8C2.5 9.5 2 11.18 2 13" />
+                    </svg></span> سرور کند است</a>
+                <a href="18-emergency-runbook/#اتصال-شبکه-قطع-است"><span class="twemoji"><svg
+                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path
+                        d="M4 1c-1.11 0-2 .89-2 2v4c0 1.11.89 2 2 2H1v2h12V9h-3c1.11 0 2-.89 2-2V3c0-1.11-.89-2-2-2zm0 2h6v4H4zm10 10c-1.11 0-2 .89-2 2v4c0 1.11.89 2 2 2h-3v2h12v-2h-3c1.11 0 2-.89 2-2v-4c0-1.11-.89-2-2-2zm-10.12.46-1.42 1.42L4.59 17l-2.13 2.12 1.42 1.42L6 18.41l2.12 2.13 1.42-1.42L7.41 17l2.13-2.12-1.42-1.42L6 15.59zM14 15h6v4h-6z" />
+                    </svg></span> شبکه قطع است</a>
+                <a href="18-emergency-runbook/#کشته-شدن-پردازش-توسط-oom-killer"><span class="twemoji"><svg
+                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path
+                        d="M17 17H7V7h10m4 4V9h-2V7a2 2 0 0 0-2-2h-2V3h-2v2h-2V3H9v2H7c-1.11 0-2 .89-2 2v2H3v2h2v2H3v2h2v2a2 2 0 0 0 2 2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2m-6 2h-2v-2h2m2-2H9v6h6z" />
+                    </svg></span> OOM / کمبود حافظه</a>
+                <a href="20-infrastructure-runbooks/#۵-ssh-یا-دسترسی-راه-دور-قطع-شده-است"><span class="twemoji"><svg
+                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path
+                        d="M10 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2m6-9c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V10c0-1.1.9-2 2-2h1V6c0-2.8 2.2-5 5-5s5 2.2 5 5v2zm-6-5C8.3 3 7 4.3 7 6v2h6V6c0-1.7-1.3-3-3-3m12 10h-2V7h2zm0 4h-2v-2h2z" />
+                    </svg></span> SSH قفل شده</a>
+                <a href="10-security-firewall/#۹-سناریوی-مشکوک-به-نفوذ-triage"><span class="twemoji"><svg
+                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path
+                        d="M11 13h2v1h-2zm10-8v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V5l9-4zm-4 5h-2.2c-.2-.6-.6-1.1-1.1-1.5l1.2-1.2-.7-.7L12.8 8H12c-.2 0-.5 0-.7.1L9.9 6.6l-.8.8 1.2 1.2c-.5.3-.9.8-1.1 1.4H7v1h2v1H7v1h2v1H7v1h2.2c.4 1.2 1.5 2 2.8 2s2.4-.8 2.8-2H17v-1h-2v-1h2v-1h-2v-1h2zm-6 2h2v-1h-2z" />
+                    </svg></span> مشکوک به نفوذ</a>
+              </p>
+            </div>
+            <p>اصل اول: <strong>قبل از هر اقدام، شواهد را ذخیره کنید</strong> <a href="https://github.com/naderii/commons/blob/main/scripts/incident-snapshot.sh">(<code>scripts/incident-snapshot.sh</code>)</a></p>
+              را اجرا کنید) و سپس کم‌خطرترین اقدام را انجام دهید.</p>
+            <h2 id="چطور-از-این-کتابچه-استفاده-کنیم">چطور از این کتابچه استفاده کنیم<a class="headerlink"
+                href="#چطور-از-این-کتابچه-استفاده-کنیم" title="Permanent link">&para;</a></h2>
+            <p>این کتابچه فقط لیست فرمان نیست. هدف این است که:</p>
+            <ul>
+              <li>قبل از اجرا بدانید <strong>چه چیزی</strong> و <strong>چرا</strong> تغییر می‌کند</li>
+              <li>بعد از اجرا بتوانید <strong>نتیجه را تأیید</strong> کنید</li>
+              <li>در صورت مشکل، <strong>مسیر بازگشت (Rollback)</strong> داشته باشید</li>
+              <li>تفاوت توزیع‌ها (Debian/Ubuntu، RHEL/Rocky، Alpine و …) را در نظر بگیرید</li>
+            </ul>
+            <h3 id="راهنمای-نمادها">راهنمای نمادها<a class="headerlink" href="#راهنمای-نمادها"
+                title="Permanent link">&para;</a></h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>نماد</th>
+                  <th>معنی</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><em class="ro">بدون تغییر</em></td>
+                  <td>فقط می‌خواند؛ اجرایش روی سرور زنده بی‌خطر است</td>
+                </tr>
+                <tr>
+                  <td><em class="rw">تغییر</em></td>
+                  <td>وضعیت سیستم را عوض می‌کند؛ پنجرهٔ تغییر، بکاپ و راه برگشت لازم است</td>
+                </tr>
+                <tr>
+                  <td><em class="rd">مخرب</em></td>
+                  <td>می‌تواند داده یا دسترسی را از بین ببرد؛ دوبار بررسی و تأیید لازم است</td>
+                </tr>
+                <tr>
+                  <td><code>SERVER_IP</code>، <code>SERVICE</code>، <code>USER</code></td>
+                  <td>نام با حروف بزرگ <strong>جایگزین‌شدنی</strong> است؛ هرگز عیناً کپی نکنید</td>
+                </tr>
+                <tr>
+                  <td><code>192.0.2.x</code>، <code>198.51.100.x</code>، <code>example.com</code></td>
+                  <td>آدرس‌های مستند (RFC 5737 / RFC 2606)؛ نمونه‌اند، نه آدرس واقعی</td>
+                </tr>
+                <tr>
+                  <td><code>sudo</code></td>
+                  <td>یعنی فرمان نیاز به دسترسی بالا دارد؛ قبل از آن بدون <code>sudo</code> (فقط‌خواندنی) تست کنید</td>
+                </tr>
+              </tbody>
+            </table>
+            <h2 id="دسترسی-سریع-موضوعی">دسترسی سریع موضوعی<a class="headerlink" href="#دسترسی-سریع-موضوعی"
+                title="Permanent link">&para;</a></h2>
+            <div class="grid cards">
+              <ul>
+                <li>
+                  <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                          d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z" />
+                      </svg></span> <strong>مبانی و فرمان‌های روزمره</strong></p>
+                  <hr />
+                  <p>ترمینال، فایل‌ها، کاربران، مجوزها و مدیریت سرویس‌ها.</p>
+                  <p><a href="01-basics/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24">
+                          <path
+                            d="M10.78 19.03a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06l6.25-6.25a.749.749 0 0 1 1.275.326.75.75 0 0 1-.215.734L5.81 11.5h14.44a.75.75 0 0 1 0 1.5H5.81l4.97 4.97a.75.75 0 0 1 0 1.06" />
+                        </svg></span> شروع از مبانی</a></p>
+                </li>
+                <li>
+                  <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                          d="M10 2c-1.11 0-2 .89-2 2v3c0 1.11.89 2 2 2h1v2H2v2h4v2H5c-1.11 0-2 .89-2 2v3c0 1.11.89 2 2 2h4c1.11 0 2-.89 2-2v-3c0-1.11-.89-2-2-2H8v-2h8v2h-1c-1.11 0-2 .89-2 2v3c0 1.11.89 2 2 2h4c1.11 0 2-.89 2-2v-3c0-1.11-.89-2-2-2h-1v-2h4v-2h-9V9h1c1.11 0 2-.89 2-2V4c0-1.11-.89-2-2-2zm0 2h4v3h-4zM5 17h4v3H5zm10 0h4v3h-4z" />
+                      </svg></span> <strong>شبکه و دسترسی راه دور</strong></p>
+                  <hr />
+                  <p>IP، Route، پورت‌ها، SSH، DNS و TLS.</p>
+                  <p><a href="07-networking/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24">
+                          <path
+                            d="M10.78 19.03a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06l6.25-6.25a.749.749 0 0 1 1.275.326.75.75 0 0 1-.215.734L5.81 11.5h14.44a.75.75 0 0 1 0 1.5H5.81l4.97 4.97a.75.75 0 0 1 0 1.06" />
+                        </svg></span> راهنمای شبکه</a></p>
+                </li>
+                <li>
+                  <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                          d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 6c1.4 0 2.8 1.1 2.8 2.5V11c.6 0 1.2.6 1.2 1.3v3.5c0 .6-.6 1.2-1.3 1.2H9.2c-.6 0-1.2-.6-1.2-1.3v-3.5c0-.6.6-1.2 1.2-1.2V9.5C9.2 8.1 10.6 7 12 7m0 1.2c-.8 0-1.5.5-1.5 1.3V11h3V9.5c0-.8-.7-1.3-1.5-1.3" />
+                      </svg></span> <strong>امنیت و کنترل دسترسی</strong></p>
+                  <hr />
+                  <p>مجوزها، فایروال، SSH سخت‌گیرانه، SELinux/AppArmor و بررسی نفوذ.</p>
+                  <p><a href="10-security-firewall/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24">
+                          <path
+                            d="M10.78 19.03a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06l6.25-6.25a.749.749 0 0 1 1.275.326.75.75 0 0 1-.215.734L5.81 11.5h14.44a.75.75 0 0 1 0 1.5H5.81l4.97 4.97a.75.75 0 0 1 0 1.06" />
+                        </svg></span> امنیت و فایروال</a></p>
+                </li>
+                <li>
+                  <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                          d="M21.81 10.25c-.06-.04-.56-.43-1.64-.43-.28 0-.56.03-.84.08-.21-1.4-1.38-2.11-1.43-2.14l-.29-.17-.18.27c-.24.36-.43.77-.51 1.19-.2.8-.08 1.56.33 2.21-.49.28-1.29.35-1.46.35H2.62c-.34 0-.62.28-.62.63 0 1.15.18 2.3.58 3.38.45 1.19 1.13 2.07 2 2.61.98.6 2.59.94 4.42.94.79 0 1.61-.07 2.42-.22 1.12-.2 2.2-.59 3.19-1.16A8.3 8.3 0 0 0 16.78 16c1.05-1.17 1.67-2.5 2.12-3.65h.19c1.14 0 1.85-.46 2.24-.85.26-.24.45-.53.59-.87l.08-.24zm-17.96.99h1.76c.08 0 .16-.07.16-.16V9.5c0-.08-.07-.16-.16-.16H3.85c-.09 0-.16.07-.16.16v1.58c.01.09.07.16.16.16m2.43 0h1.76c.08 0 .16-.07.16-.16V9.5c0-.08-.07-.16-.16-.16H6.28c-.09 0-.16.07-.16.16v1.58c.01.09.07.16.16.16m2.47 0h1.75c.1 0 .17-.07.17-.16V9.5c0-.08-.06-.16-.17-.16H8.75c-.08 0-.15.07-.15.16v1.58c0 .09.06.16.15.16m2.44 0h1.77c.08 0 .15-.07.15-.16V9.5c0-.08-.06-.16-.15-.16h-1.77c-.08 0-.15.07-.15.16v1.58c0 .09.07.16.15.16M6.28 9h1.76c.08 0 .16-.09.16-.18V7.25c0-.09-.07-.16-.16-.16H6.28c-.09 0-.16.06-.16.16v1.57c.01.09.07.18.16.18m2.47 0h1.75c.1 0 .17-.09.17-.18V7.25c0-.09-.06-.16-.17-.16H8.75c-.08 0-.15.06-.15.16v1.57c0 .09.06.18.15.18m2.44 0h1.77c.08 0 .15-.09.15-.18V7.25c0-.09-.07-.16-.15-.16h-1.77c-.08 0-.15.06-.15.16v1.57c0 .09.07.18.15.18m0-2.28h1.77c.08 0 .15-.07.15-.16V5c0-.1-.07-.17-.15-.17h-1.77c-.08 0-.15.06-.15.17v1.56c0 .08.07.16.15.16m2.46 4.52h1.76c.09 0 .16-.07.16-.16V9.5c0-.08-.07-.16-.16-.16h-1.76c-.08 0-.15.07-.15.16v1.58c0 .09.07.16.15.16" />
+                      </svg></span> <strong>Docker و سرویس‌های وب</strong></p>
+                  <hr />
+                  <p>کانتینرها، لاگ، وب‌سرور، گواهی TLS و دام‌های امنیتی Docker.</p>
+                  <p><a href="15-docker/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24">
+                          <path
+                            d="M10.78 19.03a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06l6.25-6.25a.749.749 0 0 1 1.275.326.75.75 0 0 1-.215.734L5.81 11.5h14.44a.75.75 0 0 1 0 1.5H5.81l4.97 4.97a.75.75 0 0 1 0 1.06" />
+                        </svg></span> راهنمای Docker</a></p>
+                </li>
+                <li>
+                  <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                          d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2m6 2a6 6 0 0 0-6 6c0 3.31 2.69 6 6.1 6l-.88-2.23a1.01 1.01 0 0 1 .37-1.37l.86-.5a1.01 1.01 0 0 1 1.37.37l1.92 2.42A5.98 5.98 0 0 0 18 10a6 6 0 0 0-6-6m0 5a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-5 9a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m5.09-4.73 2.49 6.31 2.59-1.5-4.22-5.31z" />
+                      </svg></span> <strong>ذخیره‌سازی و پشتیبان‌گیری</strong></p>
+                  <hr />
+                  <p>دیسک، LVM، inode، بکاپ قابل‌اعتماد و تست بازیابی.</p>
+                  <p><a href="06-storage-filesystems/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24">
+                          <path
+                            d="M10.78 19.03a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06l6.25-6.25a.749.749 0 0 1 1.275.326.75.75 0 0 1-.215.734L5.81 11.5h14.44a.75.75 0 0 1 0 1.5H5.81l4.97 4.97a.75.75 0 0 1 0 1.06" />
+                        </svg></span> ذخیره‌سازی</a></p>
+                </li>
+                <li>
+                  <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                          d="m10 17-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9m-6-6a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m7 0h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2" />
+                      </svg></span> <strong>چک‌لیست روزانه NOC</strong></p>
+                  <hr />
+                  <p>چک‌لیست تعاملی با ذخیرهٔ تیک و گزارش تحویل شیفت.</p>
+                  <p><a href="21-services-for-noc/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24">
+                          <path
+                            d="M10.78 19.03a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06l6.25-6.25a.749.749 0 0 1 1.275.326.75.75 0 0 1-.215.734L5.81 11.5h14.44a.75.75 0 0 1 0 1.5H5.81l4.97 4.97a.75.75 0 0 1 0 1.06" />
+                        </svg></span> چک‌لیست NOC</a></p>
+                </li>
+              </ul>
+            </div>
+            <h2 id="کارهای-پرتکرار--نقطه-شروع-بررسی">کارهای پرتکرار — نقطهٔ شروع بررسی<a class="headerlink"
+                href="#کارهای-پرتکرار--نقطه-شروع-بررسی" title="Permanent link">&para;</a></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>نیاز</th>
+                  <th>فرمان‌های شروع</th>
+                  <th>راهنمای مرتبط</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>سلامت کلی سرور</td>
+                  <td><code>uptime</code> · <code>free -h</code> · <code>df -hT</code> · <code>nproc</code></td>
+                  <td><a href="12-performance/">کارایی سیستم</a></td>
+                </tr>
+                <tr>
+                  <td>سرویس‌های ناموفق</td>
+                  <td><code>systemctl --failed</code> · <code>systemctl status SERVICE</code></td>
+                  <td><a href="04-processes-services/">پردازش‌ها و سرویس‌ها</a></td>
+                </tr>
+                <tr>
+                  <td>پورت‌های در حال شنود</td>
+                  <td><code>sudo ss -lntup</code></td>
+                  <td><a href="07-networking/">شبکه</a></td>
+                </tr>
+                <tr>
+                  <td>خطاهای اخیر یک سرویس</td>
+                  <td><code>journalctl -u SERVICE -b -n 200 --no-pager</code></td>
+                  <td><a href="09-logs-troubleshooting/">لاگ و عیب‌یابی</a></td>
+                </tr>
+                <tr>
+                  <td>فضای دیسک و inode</td>
+                  <td><code>df -hT</code> · <code>df -ih</code> · <code>du -xh /path \| sort -h</code></td>
+                  <td><a href="06-storage-filesystems/">دیسک و فایل‌سیستم</a></td>
+                </tr>
+                <tr>
+                  <td>وضعیت کانتینرها</td>
+                  <td><code>docker ps -a</code> · <code>docker compose ps</code></td>
+                  <td><a href="15-docker/">Docker</a></td>
+                </tr>
+                <tr>
+                  <td>رزولوشن DNS</td>
+                  <td><code>getent hosts example.com</code> · <code>dig +short example.com</code></td>
+                  <td><a href="16-web-dns-tls/">وب، DNS و TLS</a></td>
+                </tr>
+                <tr>
+                  <td>اتصال SSH</td>
+                  <td><code>ssh -v USER@HOST</code></td>
+                  <td><a href="08-ssh-remote/">SSH</a></td>
+                </tr>
+                <tr>
+                  <td>فایروال</td>
+                  <td><code>sudo ufw status verbose</code> یا <code>sudo nft list ruleset</code></td>
+                  <td><a href="10-security-firewall/">امنیت و فایروال</a></td>
+                </tr>
+                <tr>
+                  <td>بار پردازشی</td>
+                  <td><code>top -o %CPU</code> · <code>ps aux --sort=-%cpu \| head</code></td>
+                  <td><a href="12-performance/">کارایی سیستم</a></td>
+                </tr>
+                <tr>
+                  <td>ورودهای مشکوک</td>
+                  <td><code>last -a \| head</code> · <code>sudo lastb \| head</code></td>
+                  <td><a href="10-security-firewall/">امنیت و فایروال</a></td>
+                </tr>
+                <tr>
+                  <td>بکاپ سالم است؟</td>
+                  <td><code>restic snapshots</code> · <code>sha256sum -c SHA256SUMS</code></td>
+                  <td><a href="11-backup-archive/">پشتیبان‌گیری</a></td>
+                </tr>
+              </tbody>
+            </table>
+            <h2 id="اصول-ایمنی-قبل-از-هر-تغییر">اصول ایمنی قبل از هر تغییر<a class="headerlink"
+                href="#اصول-ایمنی-قبل-از-هر-تغییر" title="Permanent link">&para;</a></h2>
+            <div class="admonition danger">
+              <p class="admonition-title">قبل از اجرای فرمان‌های مخرب</p>
+              <p>ابتدا <strong>میزبان</strong>، <strong>محیط</strong> (prod / staging) و <strong>اثر دستور</strong> را
+                بررسی کنید.<br />
+                فرمان‌هایی مانند <code>rm -rf</code>، <code>mkfs</code>، <code>dd</code>، <code>lvremove</code>،
+                <code>iptables -F</code>، <code>nft flush ruleset</code> و <code>docker system prune --volumes</code>
+                می‌توانند داده را حذف یا سرویس را قطع کنند.</p>
+            </div>
+            <p>چک‌لیست حداقلی (به همین ترتیب):</p>
+            <ol>
+              <li><strong>هویت محیط</strong>: <code>hostnamectl</code> + <code>cat /etc/os-release</code> — روی کدام
+                سرور هستم؟ (اسم میزبان را در prompt ببینید.)</li>
+              <li><strong>وضعیت فعلی</strong>: خروجی فقط‌خواندنی را ذخیره کنید (<code>systemctl status</code>،
+                <code>df -h</code>، <code>ss -lntup</code>)</li>
+              <li><strong>پشتیبان / Snapshot</strong>: قبل از تغییر فایل‌سیستم یا تنظیمات حساس</li>
+              <li><strong>مسیر بازگشت</strong>: بدانید چگونه تنظیم را برمی‌گردانید — و <strong>تست‌شده</strong> باشد
+              </li>
+              <li><strong>پنجرهٔ تغییر</strong>: در production بدون هماهنگی تغییر ندهید</li>
+              <li><strong>دسترسی جایگزین</strong>: کنسول / IPMI / نشست دوم SSH باز باشد (به‌ویژه برای فایروال، SSH و
+                شبکه)</li>
+            </ol>
+            <h2 id="روش-استفاده-از-کتابچه">روش استفاده از کتابچه<a class="headerlink" href="#روش-استفاده-از-کتابچه"
+                title="Permanent link">&para;</a></h2>
+            <ol>
+              <li>موضوع را از منوی بالا، کارت‌های صفحهٔ اصلی یا جست‌وجو انتخاب کنید (جست‌وجو فارسی و انگلیسی را
+                می‌فهمد).</li>
+              <li>جدول «راهنمای سریع» اول هر فصل را بخوانید؛ ستون ریسک را جدی بگیرید.</li>
+              <li>فرمان را در محیط آزمایشی یا با دسترسی محدود اجرا کنید.</li>
+              <li>خروجی و وضعیت سرویس را بررسی کنید — «بدون خطا» همیشه به معنی «سرویس سالم» نیست.</li>
+              <li>در production قبل از تغییر، فایل پیکربندی و وضعیت فعلی را ثبت کنید.</li>
+            </ol>
+            <p>هر قطعه کد دکمهٔ <strong>کپی</strong> دارد. بلوک‌های کدی که فقط «نمونه» هستند با کامنت
+              <code># نمونه</code> مشخص شده‌اند.</p>
+            <h2 id="ساختار-موضوعی-کتابچه">ساختار موضوعی کتابچه<a class="headerlink" href="#ساختار-موضوعی-کتابچه"
+                title="Permanent link">&para;</a></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>بخش</th>
+                  <th>موضوعات</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>مبانی لینوکس</td>
+                  <td>ترمینال، فایل‌ها، کاربران، سرویس‌ها، بسته‌ها</td>
+                </tr>
+                <tr>
+                  <td>ذخیره‌سازی و منابع</td>
+                  <td>دیسک، کارایی، زمان‌بندی، پشتیبان</td>
+                </tr>
+                <tr>
+                  <td>شبکه و دسترسی</td>
+                  <td>شبکه، SSH، وب/DNS/TLS</td>
+                </tr>
+                <tr>
+                  <td>امنیت و عیب‌یابی</td>
+                  <td>فایروال، لاگ، رخداد، runbook زیرساخت، چک‌لیست NOC</td>
+                </tr>
+                <tr>
+                  <td>زیرساخت و ابزار</td>
+                  <td>Docker، مجازی‌سازی، Bash، cheat-sheet</td>
+                </tr>
+              </tbody>
+            </table>
+            <h2 id="درباره-این-پروژه">دربارهٔ این پروژه<a class="headerlink" href="#درباره-این-پروژه"
+                title="Permanent link">&para;</a></h2>
+            <p>این کتابچه بر این باور بنا شده که <strong>دانش وقتی ارزشمندتر می‌شود که به اشتراک گذاشته شود و تجربهٔ
+                امروز، راهنمای فردای دیگران باشد.</strong> <a href="22-community-culture/">با فلسفه و فرهنگ دانش مشترک
+                این مجموعه آشنا شوید</a>.</p>
+            <div class="admonition tip">
+              <p class="admonition-title">پیشنهاد مطالعهٔ اولیه</p>
+              <p>اگر تازه‌وارد هستید: <a href="01-basics/">مفاهیم پایه</a> → <a href="02-files-directories/">فایل‌ها و
+                  دایرکتوری‌ها</a> → <a href="03-users-permissions/">کاربران و مجوزها</a> → <a
+                  href="04-processes-services/">پردازش‌ها و سرویس‌ها</a>.</p>
+            </div>
 
-<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+
+
+
+
+
+
+
+
+
+
+
+
+          </article>
         </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  برگشت به بالا
-</button>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="پاورقی" >
-        
-        
-          
-          <a href="22-community-culture/" class="md-footer__link md-footer__link--next" aria-label="بعدی: فرهنگ دانش مشترک">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                بعدی
-              </span>
-              <div class="md-ellipsis">
-                فرهنگ دانش مشترک
-              </div>
+
+
+        <script>var tabs = __md_get("__tabs"); if (Array.isArray(tabs)) e: for (var set of document.querySelectorAll(".tabbed-set")) { var labels = set.querySelector(".tabbed-labels"); for (var tab of tabs) for (var label of labels.getElementsByTagName("label")) if (label.innerText.trim() === tab) { var input = document.getElementById(label.htmlFor); input.checked = !0; continue e } }</script>
+
+        <script>var target = document.getElementById(location.hash.slice(1)); target && target.name && (target.checked = target.name.startsWith("__tabbed_"))</script>
+      </div>
+
+      <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z" />
+        </svg>
+        برگشت به بالا
+      </button>
+
+    </main>
+
+    <footer class="md-footer">
+
+
+
+      <nav class="md-footer__inner md-grid" aria-label="پاورقی">
+
+
+
+        <a href="22-community-culture/" class="md-footer__link md-footer__link--next"
+          aria-label="بعدی: فرهنگ دانش مشترک">
+          <div class="md-footer__title">
+            <span class="md-footer__direction">
+              بعدی
+            </span>
+            <div class="md-ellipsis">
+              فرهنگ دانش مشترک
             </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
+          </div>
+          <div class="md-footer__button md-icon">
+
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z" />
+            </svg>
+          </div>
+        </a>
+
       </nav>
-    
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-    <div class="md-copyright__highlight">
-      نسخهٔ 5.4.0
-    </div>
-  
-  
-</div>
-      
-    </div>
+
+
+      <div class="md-footer-meta md-typeset">
+        <div class="md-footer-meta__inner md-grid">
+          <div class="md-copyright">
+
+            <div class="md-copyright__highlight">
+              نسخهٔ 5.4.0
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </footer>
+
   </div>
-</footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    
-    
-    
-      
-      
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.path", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\u06a9\u067e\u06cc \u0634\u062f", "clipboard.copy": "\u06a9\u067e\u06cc \u06a9\u0631\u062f\u0646", "search.result.more.one": "1 \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.more.other": "# \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.none": "\u0633\u0646\u062f\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f", "search.result.one": "1 \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.other": "# \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.placeholder": "\u0628\u0631\u0627\u06cc \u0634\u0631\u0648\u0639 \u062c\u0633\u062a\u062c\u0648 \u062a\u0627\u06cc\u067e \u06a9\u0646\u06cc\u062f", "search.result.term.missing": "\u0645\u0648\u062c\u0648\u062f \u0646\u06cc\u0633\u062a", "select.version": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0648\u06cc\u0631\u0627\u06cc\u0634"}, "version": null}</script>
-    
-    
-      <script src="assets/javascripts/bundle.c21346df.min.js"></script>
-      
-        <script src="assets/js/handbook.js"></script>
-      
-    
-  </body>
+  <div class="md-dialog" data-md-component="dialog">
+    <div class="md-dialog__inner md-typeset"></div>
+  </div>
+
+
+
+
+
+  <script id="__config"
+    type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.path", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\u06a9\u067e\u06cc \u0634\u062f", "clipboard.copy": "\u06a9\u067e\u06cc \u06a9\u0631\u062f\u0646", "search.result.more.one": "1 \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.more.other": "# \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.none": "\u0633\u0646\u062f\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f", "search.result.one": "1 \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.other": "# \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.placeholder": "\u0628\u0631\u0627\u06cc \u0634\u0631\u0648\u0639 \u062c\u0633\u062a\u062c\u0648 \u062a\u0627\u06cc\u067e \u06a9\u0646\u06cc\u062f", "search.result.term.missing": "\u0645\u0648\u062c\u0648\u062f \u0646\u06cc\u0633\u062a", "select.version": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0648\u06cc\u0631\u0627\u06cc\u0634"}, "version": null}</script>
+
+
+  <script src="assets/javascripts/bundle.c21346df.min.js"></script>
+
+  <script src="assets/js/handbook.js"></script>
+
+
+</body>
+
 </html>
