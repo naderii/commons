@@ -1,0 +1,2045 @@
+
+<!doctype html>
+<html lang="fa" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="راهنمای عملیاتی مدیریت، نگهداری، امنیت و عیب‌یابی سیستم‌های لینوکس به زبان فارسی.">
+      
+      
+        <meta name="author" content="Linux Sysadmin Handbook">
+      
+      
+      
+        <link rel="prev" href="../22-community-culture/">
+      
+      
+        <link rel="next" href="../02-files-directories/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>مفاهیم پایه - کتابچه راهنمای مدیر سیستم لینوکس</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="rtl" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#۱-مبانی-ترمینال-و-شناخت-سیستم" class="md-skip">
+          پرش به محتویات
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="سرتیتر">
+    <a href=".." title="کتابچه راهنمای مدیر سیستم لینوکس" class="md-header__button md-logo" aria-label="کتابچه راهنمای مدیر سیستم لینوکس" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19-.39.31-.75.29-1.14-.01-.2-.16-1.53-.92-1.95-1.19-.48-.31-.45-.7.08-.92 1.64-.69 3.28-.64 4.91.03.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.3 4.3 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01-.2-.88-.29-1.78-.7-2.61-.73-1.58-2-2.4-3.84-2.47-1.81.05-3.16.81-3.95 2.4-.21.43-.36.88-.46 1.34-.17.76-.32 1.55-.5 2.32-.15.65-.45 1.21-.96 1.71-1.61 1.57-2.9 3.37-3.88 5.35-.14.29-.28.58-.37.88-.19.66.29 1.12.99.96.44-.09.88-.18 1.3-.31.41-.15.57-.05.67.35.65 2.15 2.07 3.66 4.24 4.5 4.12 1.56 8.93-.66 9.97-4.58.07-.27.17-.37.47-.27.46.14.93.24 1.4.35.49.09.85-.16.92-.64.03-.26-.06-.49-.16-.73"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            کتابچه راهنمای مدیر سیستم لینوکس
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              مفاهیم پایه
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="فعال‌سازی حالت تاریک"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="فعال‌سازی حالت تاریک" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="فعال‌سازی حالت روشن"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="فعال‌سازی حالت روشن" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="جستجو" placeholder="جستجو" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="جستجو">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="هم‌رسانی" aria-label="هم‌رسانی" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="بازنشانی" aria-label="بازنشانی" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            راه‌اندازی جستجو
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="زبانه‌ها" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  خانه
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../22-community-culture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  فرهنگ دانش مشترک
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  مبانی لینوکس
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../06-storage-filesystems/" class="md-tabs__link">
+          
+  
+  
+  ذخیره‌سازی و منابع
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../07-networking/" class="md-tabs__link">
+          
+  
+  
+  شبکه و دسترسی راه دور
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../10-security-firewall/" class="md-tabs__link">
+          
+  
+  
+  امنیت و عیب‌یابی
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../15-docker/" class="md-tabs__link">
+          
+  
+  
+  زیرساخت و ابزارها
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="هدایت" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="کتابچه راهنمای مدیر سیستم لینوکس" class="md-nav__button md-logo" aria-label="کتابچه راهنمای مدیر سیستم لینوکس" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19-.39.31-.75.29-1.14-.01-.2-.16-1.53-.92-1.95-1.19-.48-.31-.45-.7.08-.92 1.64-.69 3.28-.64 4.91.03.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.3 4.3 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01-.2-.88-.29-1.78-.7-2.61-.73-1.58-2-2.4-3.84-2.47-1.81.05-3.16.81-3.95 2.4-.21.43-.36.88-.46 1.34-.17.76-.32 1.55-.5 2.32-.15.65-.45 1.21-.96 1.71-1.61 1.57-2.9 3.37-3.88 5.35-.14.29-.28.58-.37.88-.19.66.29 1.12.99.96.44-.09.88-.18 1.3-.31.41-.15.57-.05.67.35.65 2.15 2.07 3.66 4.24 4.5 4.12 1.56 8.93-.66 9.97-4.58.07-.27.17-.37.47-.27.46.14.93.24 1.4.35.49.09.85-.16.92-.64.03-.26-.06-.49-.16-.73"/></svg>
+
+    </a>
+    کتابچه راهنمای مدیر سیستم لینوکس
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    خانه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../22-community-culture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    فرهنگ دانش مشترک
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مبانی لینوکس
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    مبانی لینوکس
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مفاهیم پایه
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مفاهیم پایه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      فهرست موضوعات
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#چرا-این-بخش-مهم-است" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        چرا این بخش مهم است؟
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#راهنمای-سریع-فرمانها" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        راهنمای سریع فرمان‌ها
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#قبل-از-اولین-فرمان-روی-یک-سرور" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        قبل از اولین فرمان روی یک سرور
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#مثالهای-عملی-روزمره" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        مثال‌های عملی روزمره
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="مثال‌های عملی روزمره">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#نشست-پایدار-با-tmux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        نشست پایدار با tmux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#اجرای-امن-با-sudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        اجرای امن با sudo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#مسیرها-و-تکمیل-فرمان" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        مسیرها و تکمیل فرمان
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#تشخیص-دقیق-توزیع-و-معماری" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        تشخیص دقیق توزیع و معماری
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#متغیرهای-محیطی-مهم" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        متغیرهای محیطی مهم
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#بررسی-سریع-سلامت-سیستم-checklist-یکدقیقهای" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        بررسی سریع سلامت سیستم (Checklist یک‌دقیقه‌ای)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#خطاهای-رایج-و-عیبیابی" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        خطاهای رایج و عیب‌یابی
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#نکات-امنیتی-و-عملیاتی" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        نکات امنیتی و عملیاتی
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#خلاصه-اجرایی" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        خلاصهٔ اجرایی
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-files-directories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    فایل‌ها و دایرکتوری‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-users-permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    کاربران و مجوزها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-processes-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    پردازش‌ها و سرویس‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-packages-repositories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    بسته‌ها و مخازن
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ذخیره‌سازی و منابع
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ذخیره‌سازی و منابع
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-storage-filesystems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    دیسک و فایل‌سیستم
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    کارایی سیستم
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-scheduling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    زمان‌بندی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-backup-archive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    پشتیبان‌گیری و آرشیو
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شبکه و دسترسی راه دور
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    شبکه و دسترسی راه دور
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-networking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شبکه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-ssh-remote/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH و مدیریت راه دور
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-web-dns-tls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    وب، DNS و TLS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    امنیت و عیب‌یابی
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    امنیت و عیب‌یابی
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-security-firewall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    امنیت و فایروال
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-logs-troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    لاگ و عیب‌یابی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18-emergency-runbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    راهنمای رخداد
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20-infrastructure-runbooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    راهنماهای عملیاتی زیرساخت
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../21-services-for-noc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    چک‌لیست روزانه NOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    زیرساخت و ابزارها
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    زیرساخت و ابزارها
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-virtualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مجازی‌سازی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-bash-text/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    متون و Bash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19-cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    برگه تقلب دستورات
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="هدایت" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href=".." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    خانه
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    مبانی لینوکس
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="۱-مبانی-ترمینال-و-شناخت-سیستم">۱. مبانی ترمینال و شناخت سیستم<a class="headerlink" href="#۱-مبانی-ترمینال-و-شناخت-سیستم" title="Permanent link">&para;</a></h1>
+<p>این فصل پایهٔ کار روزانهٔ مدیر سیستم است. قبل از هر تغییر روی سرور، باید بتوانید <strong>محیط</strong>، <strong>کاربر جاری</strong>، <strong>نسخهٔ توزیع</strong> و <strong>وضعیت سلامت اولیه</strong> را در کمتر از یک دقیقه تشخیص دهید.</p>
+<h2 id="چرا-این-بخش-مهم-است">چرا این بخش مهم است؟<a class="headerlink" href="#چرا-این-بخش-مهم-است" title="Permanent link">&para;</a></h2>
+<ul>
+<li>بیشتر اشتباهات عملیاتی از «فرض اشتباه دربارهٔ محیط» شروع می‌شود (فکر کردن که روی Ubuntu هستید در حالی که Rocky است، یا روی staging هستید در حالی که production است).</li>
+<li>دستورهای یکسان در توزیع‌های مختلف مسیر، نام بسته یا رفتار متفاوت دارند.</li>
+<li>بدون شناخت <code>sudo</code>، history و متغیرهای محیطی، عیب‌یابی و مستندسازی ناقص می‌ماند.</li>
+</ul>
+<h2 id="راهنمای-سریع-فرمانها">راهنمای سریع فرمان‌ها<a class="headerlink" href="#راهنمای-سریع-فرمانها" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>فرمان</th>
+<th>کاربرد اصلی</th>
+<th>سطح ریسک</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>man</code> / <code>command --help</code></td>
+<td>راهنمای کامل / خلاصه</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>type</code> / <code>command -v</code></td>
+<td>تشخیص مسیر و نوع فرمان</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>history</code></td>
+<td>تاریخچهٔ پوسته</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>date</code> / <code>timedatectl</code></td>
+<td>ساعت و منطقهٔ زمانی</td>
+<td><em class="ro">بدون تغییر</em> (تنظیم ساعت: <em class="rw">تغییر</em>)</td>
+</tr>
+<tr>
+<td><code>hostnamectl</code></td>
+<td>نام میزبان و اطلاعات سیستم</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>uname</code></td>
+<td>اطلاعات هسته و معماری</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>uptime</code></td>
+<td>زمان روشن بودن و load average</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>whoami</code>, <code>id</code>, <code>who</code>, <code>w</code></td>
+<td>کاربر و نشست‌های فعال</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>env</code> / <code>printenv</code></td>
+<td>متغیرهای محیطی</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>tmux</code></td>
+<td>نشست پایدار (قطع اتصال، کار را نمی‌کشد)</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>sudo</code></td>
+<td>اجرای فرمان با مجوز بالاتر</td>
+<td><em class="rw">تغییر</em> تا <em class="rd">مخرب</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="قبل-از-اولین-فرمان-روی-یک-سرور">قبل از اولین فرمان روی یک سرور<a class="headerlink" href="#قبل-از-اولین-فرمان-روی-یک-سرور" title="Permanent link">&para;</a></h2>
+<p>یک ثانیه مکث کنید و سه سؤال را جواب دهید:</p>
+<ol>
+<li><strong>کدام سرور؟</strong> <code>hostname -f</code> — با آنچه می‌خواستید یکی است؟ (prompt را طوری تنظیم کنید که نام میزبان و محیط را <strong>همیشه</strong> نشان دهد؛ برای production رنگ قرمز.)</li>
+<li><strong>کدام کاربر؟</strong> <code>id</code> — root هستم؟ چرا؟</li>
+<li><strong>در چه نشستی؟</strong> اگر اتصال SSH قطع شود، کار نیمه‌کاره می‌ماند؟ → از <code>tmux</code> استفاده کنید.</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># prompt هشداردهنده برای production (در ~/.bashrc همان سرور)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># نمونه: نام میزبان قرمز + مسیر</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nv">PS1</span><span class="o">=</span><span class="s1">'\[\e[1;31m\]\u@\h\[\e[0m\]:\w\$ '</span>
+</span></code></pre></div>
+<h2 id="مثالهای-عملی-روزمره">مثال‌های عملی روزمره<a class="headerlink" href="#مثالهای-عملی-روزمره" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># راهنما</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>man<span class="w"> </span>systemctl
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>systemctl<span class="w"> </span>--help
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>man<span class="w"> </span><span class="m">5</span><span class="w"> </span>systemd.service<span class="w">          </span><span class="c1"># صفحهٔ man مربوط به فایل unit</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>man<span class="w"> </span>-k<span class="w"> </span><span class="s2">"disk usage"</span><span class="w">            </span><span class="c1"># جست‌وجو در راهنما بر اساس موضوع</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># تشخیص فرمان</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nb">type</span><span class="w"> </span>ls
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="nb">type</span><span class="w"> </span>-a<span class="w"> </span>python3<span class="w">                </span><span class="c1"># همهٔ نسخه‌ها و alias ها</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>docker<span class="w">              </span><span class="c1"># مسیر (یا خالی اگر نصب نیست)</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># تاریخچه و زمان</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="nb">history</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">30</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="nb">history</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"systemctl"</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>date<span class="w"> </span><span class="s1">'+%F %T %Z'</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>timedatectl<span class="w"> </span>status
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="c1"># هویت سیستم</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>hostnamectl
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>uname<span class="w"> </span>-a
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>cat<span class="w"> </span>/etc/os-release
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>cat<span class="w"> </span>/etc/redhat-release<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="c1"># سلامت سریع</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>uptime
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>cat<span class="w"> </span>/proc/loadavg
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>whoami
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>id
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>w
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">نکتهٔ عملیاتی</p>
+<p>خروجی <code>uptime</code> و <code>/proc/loadavg</code> را همیشه نسبت به تعداد هسته تفسیر کنید.<br />
+<code>nproc</code> تعداد هستهٔ منطقی را نشان می‌دهد. load متوسط ۱.۵ روی ماشین ۲ هسته‌ای معقول است؛ روی ماشین ۳۲ هسته‌ای نشانهٔ بیکاری است.</p>
+</div>
+<h3 id="نشست-پایدار-با-tmux">نشست پایدار با tmux<a class="headerlink" href="#نشست-پایدار-با-tmux" title="Permanent link">&para;</a></h3>
+<p>اگر SSH قطع شود، فرمان‌های در حال اجرا (مثل <code>apt upgrade</code>، <code>rsync</code> یا یک مهاجرت طولانی) با <code>SIGHUP</code> کشته می‌شوند و ممکن است سیستم در وضعیت نیمه‌کاره بماند. هر کار طولانی را داخل <code>tmux</code> اجرا کنید.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>tmux<span class="w"> </span>new<span class="w"> </span>-A<span class="w"> </span>-s<span class="w"> </span>ops<span class="w">             </span><span class="c1"># ساخت یا اتصال دوباره به نشست «ops»</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>tmux<span class="w"> </span>ls<span class="w">                        </span><span class="c1"># فهرست نشست‌ها</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>tmux<span class="w"> </span>attach<span class="w"> </span>-t<span class="w"> </span>ops<span class="w">             </span><span class="c1"># اتصال دوباره بعد از قطع شدن</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># داخل tmux:  Ctrl+b سپس d  = جدا شدن (detach) بدون کشتن کار</span>
+</span></code></pre></div>
+<p>برای ثبت کامل یک نشست (مستندسازی رخداد):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>script<span class="w"> </span>-a<span class="w"> </span>-q<span class="w"> </span>/var/tmp/session-<span class="k">$(</span>date<span class="w"> </span>+%F-%H%M<span class="k">)</span>.log<span class="w">   </span><span class="c1"># ثبت ورودی/خروجی؛ با exit تمام می‌شود</span>
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">فایل ثبت نشست حساس است</p>
+<p>خروجی <code>script</code> ممکن است رمز یا توکن را شامل شود (هر چه روی صفحه آمد). مجوز آن را <code>600</code> کنید و بعد از رخداد امن نگه دارید یا حذف کنید.</p>
+</div>
+<h3 id="اجرای-امن-با-sudo">اجرای امن با sudo<a class="headerlink" href="#اجرای-امن-با-sudo" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># فقط بررسی وضعیت — بدون تغییر</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>ssh
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sudo<span class="w"> </span>-l<span class="w">                    </span><span class="c1"># لیست مجوزهای sudo کاربر جاری</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>sudo<span class="w"> </span>-n<span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"sudo بدون رمز مجاز است"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"sudo رمز می‌خواهد"</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># اجرا به‌جای کاربر دیگر (بدون root شدن)</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>sudo<span class="w"> </span>-u<span class="w"> </span>appuser<span class="w"> </span>--<span class="w"> </span>id
+</span></code></pre></div>
+<ul>
+<li><code>sudo -l</code> نشان می‌دهد کاربر چه فرمان‌هایی را مجاز است با sudo اجرا کند.</li>
+<li><code>sudo -i</code> یک shell کامل root باز می‌کند — فقط وقتی واقعاً لازم است استفاده کنید و بعد از کار <code>exit</code> بزنید.</li>
+<li>در محیط‌های سازمانی، ترجیحاً از <code>sudo</code> برای یک فرمان مشخص استفاده کنید نه shell تعاملی root؛ هر فرمان در لاگ ثبت می‌شود (<code>journalctl _COMM=sudo</code> یا <code>/var/log/auth.log</code>).</li>
+<li>بعد از اشتباه رمز یا پایان کار حساس: <code>sudo -k</code> اعتبار کش‌شدهٔ sudo را پاک می‌کند.</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">هشدار</p>
+<p>هرگز پسورد root یا خروجی <code>sudo -l</code> حاوی اطلاعات حساس را در تیکت عمومی یا Git قرار ندهید.</p>
+</div>
+<h2 id="مسیرها-و-تکمیل-فرمان">مسیرها و تکمیل فرمان<a class="headerlink" href="#مسیرها-و-تکمیل-فرمان" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>کار</th>
+<th>فرمان / کلید</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>نمایش مسیر جاری</td>
+<td><code>pwd</code></td>
+</tr>
+<tr>
+<td>رفتن به مسیر مطلق</td>
+<td><code>cd /var/log</code></td>
+</tr>
+<tr>
+<td>رفتن به پوشهٔ والد</td>
+<td><code>cd ..</code></td>
+</tr>
+<tr>
+<td>بازگشت به مسیر قبلی</td>
+<td><code>cd -</code></td>
+</tr>
+<tr>
+<td>پوشهٔ خانگی</td>
+<td><code>cd ~</code> یا فقط <code>cd</code></td>
+</tr>
+<tr>
+<td>تکمیل خودکار</td>
+<td><span class="keys"><kbd class="key-tab">Tab</kbd></span> (دوبار برای لیست)</td>
+</tr>
+<tr>
+<td>قطع فرمان جاری</td>
+<td><span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-c">C</kbd></span></td>
+</tr>
+<tr>
+<td>جست‌وجو در تاریخچه</td>
+<td><span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-r">R</kbd></span> سپس تایپ بخشی از فرمان</td>
+</tr>
+<tr>
+<td>رفتن به ابتدای خط</td>
+<td><span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-a">A</kbd></span></td>
+</tr>
+<tr>
+<td>رفتن به انتهای خط</td>
+<td><span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-e">E</kbd></span></td>
+</tr>
+<tr>
+<td>پاک‌کردن خط</td>
+<td><span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-u">U</kbd></span></td>
+</tr>
+<tr>
+<td>اجرای مجدد آخرین فرمان با sudo</td>
+<td><code>sudo !!</code> (قبل از Enter مطمئن شوید فرمان درست است)</td>
+</tr>
+</tbody>
+</table>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># مثال ترکیبی</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">cd</span><span class="w"> </span>/var/log
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nb">pwd</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>ls<span class="w"> </span>-lt<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="nb">cd</span><span class="w"> </span>-
+</span></code></pre></div>
+<h2 id="تشخیص-دقیق-توزیع-و-معماری">تشخیص دقیق توزیع و معماری<a class="headerlink" href="#تشخیص-دقیق-توزیع-و-معماری" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># استاندارد مدرن</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>cat<span class="w"> </span>/etc/os-release
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># خروجی نمونه: ID=ubuntu / VERSION_ID=22.04 یا ID=rocky / VERSION_ID=9</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># هسته و معماری</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>uname<span class="w"> </span>-r
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>uname<span class="w"> </span>-m
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>dpkg<span class="w"> </span>--print-architecture<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span><span class="w">          </span><span class="c1"># Debian/Ubuntu</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>rpm<span class="w"> </span>--eval<span class="w"> </span><span class="s1">'%{_arch}'</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span><span class="w">               </span><span class="c1"># RHEL/Fedora/Rocky</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>getconf<span class="w"> </span>LONG_BIT<span class="w">                                        </span><span class="c1"># 32 یا 64</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="c1"># مجازی است یا فیزیکی؟</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>systemd-detect-virt<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="c1"># اطلاعات سخت‌افزاری خلاصه</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>lscpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>free<span class="w"> </span>-h
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">تفاوت توزیع‌ها</p>
+<p>قبل از کپی‌کردن دستور از اینترنت:</p>
+<ul>
+<li><strong>Debian/Ubuntu</strong> → <code>apt</code> / <code>dpkg</code> / <code>systemctl</code> + مسیرهای <code>/etc/apt</code></li>
+<li><strong>RHEL/Rocky/Alma</strong> → <code>dnf</code>/<code>yum</code> / <code>rpm</code> + SELinux اغلب فعال است</li>
+<li><strong>Alpine</strong> → <code>apk</code> و معمولاً OpenRC به‌جای systemd</li>
+<li><strong>SLES</strong> → <code>zypper</code></li>
+</ul>
+</div>
+<h2 id="متغیرهای-محیطی-مهم">متغیرهای محیطی مهم<a class="headerlink" href="#متغیرهای-محیطی-مهم" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PATH</span><span class="s2">"</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">"</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$USER</span><span class="s2">"</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$SHELL</span><span class="s2">"</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LANG</span><span class="s2">"</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>printenv<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-40
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1"># موقت برای یک نشست</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="nb">export</span><span class="w"> </span><span class="nv">EDITOR</span><span class="o">=</span>vim
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="nb">export</span><span class="w"> </span><span class="nv">HISTTIMEFORMAT</span><span class="o">=</span><span class="s2">"%F %T "</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="c1"># خروجی پایدار و قابل‌پردازش (زبان/محلی را خنثی می‌کند؛ برای اسکریپت‌ها)</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="nv">LC_ALL</span><span class="o">=</span>C<span class="w"> </span>df<span class="w"> </span>-h
+</span></code></pre></div>
+<ul>
+<li><code>PATH</code> تعیین می‌کند سیستم فرمان‌ها را از کجا پیدا کند.</li>
+<li>در اسکریپت‌های عملیاتی همیشه مسیر کامل فرمان‌های حساس را بنویسید (<code>/usr/bin/systemctl</code> به‌جای فقط <code>systemctl</code>) تا وابسته به PATH کاربر نباشد.</li>
+<li><code>printenv</code> ممکن است رمز و توکن را نشان دهد (متغیرهای محیطی). خروجی آن را بی‌فکر در تیکت نچسبانید.</li>
+</ul>
+<h2 id="بررسی-سریع-سلامت-سیستم-checklist-یکدقیقهای">بررسی سریع سلامت سیستم (Checklist یک‌دقیقه‌ای)<a class="headerlink" href="#بررسی-سریع-سلامت-سیستم-checklist-یکدقیقهای" title="Permanent link">&para;</a></h2>
+<p>قبل از هر تغییر مهم این دستورها را اجرا و خروجی را نگه دارید:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>date<span class="p">;</span><span class="w"> </span>hostnamectl<span class="w"> </span>--static<span class="p">;</span><span class="w"> </span>uptime
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'^(NAME|VERSION)='</span><span class="w"> </span>/etc/os-release
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>free<span class="w"> </span>-h
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>df<span class="w"> </span>-hT<span class="w"> </span>/
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>systemctl<span class="w"> </span>is-system-running<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>systemctl<span class="w"> </span>--failed<span class="w"> </span>--no-pager
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>who
+</span></code></pre></div>
+<p>خروجی این مجموعه را می‌توانید در ابتدای تیکت یا گزارش رخداد بچسبانید. نسخهٔ کامل‌تر آن <code>scripts/incident-snapshot.sh</code> است (<a href="../18-emergency-runbook/">راهنمای رخداد</a>).</p>
+<h2 id="خطاهای-رایج-و-عیبیابی">خطاهای رایج و عیب‌یابی<a class="headerlink" href="#خطاهای-رایج-و-عیبیابی" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>نشانه</th>
+<th>علت احتمالی</th>
+<th>روش بررسی</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>command not found</code></td>
+<td>بسته نصب نیست یا PATH اشتباه</td>
+<td><code>type cmd</code> ، <code>echo $PATH</code> ، نصب بسته</td>
+</tr>
+<tr>
+<td><code>Permission denied</code></td>
+<td>کمبود مجوز یا SELinux/AppArmor</td>
+<td><code>ls -l</code> ، <code>id</code> ، <code>sudo -l</code></td>
+</tr>
+<tr>
+<td>ساعت سیستم اشتباه</td>
+<td>NTP خراب یا timezone غلط</td>
+<td><code>timedatectl</code> ، <code>chronyc tracking</code></td>
+</tr>
+<tr>
+<td><code>sudo: a password is required</code></td>
+<td>کاربر در sudoers نیست یا NOPASSWD ندارد</td>
+<td><code>sudo -l</code> ، فایل‌های <code>/etc/sudoers.d/</code></td>
+</tr>
+<tr>
+<td><code>user is not in the sudoers file</code></td>
+<td>کاربر مجاز نیست (این رویداد لاگ می‌شود)</td>
+<td>با مدیر هماهنگ کنید؛ <a href="../03-users-permissions/">کاربران و مجوزها</a></td>
+</tr>
+<tr>
+<td>نشست SSH وسط کار قطع شد</td>
+<td>شبکه یا timeout</td>
+<td>از <code>tmux</code> استفاده کنید؛ <a href="../08-ssh-remote/">SSH</a></td>
+</tr>
+<tr>
+<td>متن فارسی در ترمینال به‌هم‌ریخته</td>
+<td>ترمینال RTL/شکل‌دهی ندارد</td>
+<td>خروجی را در فایل ذخیره و در ویرایشگر باز کنید؛ <code>LANG=en_US.UTF-8</code> برای پایداری فرمان‌ها</td>
+</tr>
+</tbody>
+</table>
+<h2 id="نکات-امنیتی-و-عملیاتی">نکات امنیتی و عملیاتی<a class="headerlink" href="#نکات-امنیتی-و-عملیاتی" title="Permanent link">&para;</a></h2>
+<ul>
+<li>همیشه قبل از <code>sudo</code> فرمان را بدون sudo تست کنید اگر ممکن است.</li>
+<li>از <code>history -c</code> یا پاک‌کردن دستی history برای مخفی‌کردن کار حساس استفاده نکنید؛ به‌جای آن از حساب جدا و لاگ مرکزی استفاده کنید.</li>
+<li>رمز را هرگز در خط فرمان ندهید (<code>mysql -pSECRET</code>)؛ در history و <code>ps</code> دیده می‌شود. از فایل با مجوز 600، متغیر محیطی موقت یا prompt استفاده کنید. برای ندیدن یک فرمان در history، قبل از آن یک فاصله بگذارید (اگر <code>HISTCONTROL=ignorespace</code> فعال باشد) — این جایگزین رعایت اصل بالا نیست.</li>
+<li>در سرورهای اشتراکی، <code>w</code> و <code>who</code> را چک کنید تا ببینید چه کسی همزمان لاگین است.</li>
+<li>برای مستندسازی، خروجی <code>uname -a</code> و <code>cat /etc/os-release</code> را در ابتدای هر runbook بنویسید.</li>
+</ul>
+<h2 id="خلاصه-اجرایی">خلاصهٔ اجرایی<a class="headerlink" href="#خلاصه-اجرایی" title="Permanent link">&para;</a></h2>
+<ol>
+<li>هویت سیستم و کاربر را با <code>hostnamectl</code> + <code>id</code> + <code>cat /etc/os-release</code> مشخص کنید.</li>
+<li>کار طولانی را در <code>tmux</code> اجرا کنید.</li>
+<li>سلامت اولیه را با <code>uptime</code> + <code>free -h</code> + <code>df -hT</code> بگیرید.</li>
+<li>فقط وقتی نیاز به مجوز بالاتر دارید از <code>sudo</code> استفاده کنید و ترجیحاً یک فرمان مشخص.</li>
+<li>تفاوت توزیع را قبل از کپی دستور از اینترنت بررسی کنید.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  برگشت به بالا
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="پاورقی" >
+        
+          
+          <a href="../22-community-culture/" class="md-footer__link md-footer__link--prev" aria-label="قبلی: فرهنگ دانش مشترک">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                قبلی
+              </span>
+              <div class="md-ellipsis">
+                فرهنگ دانش مشترک
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../02-files-directories/" class="md-footer__link md-footer__link--next" aria-label="بعدی: فایل‌ها و دایرکتوری‌ها">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                بعدی
+              </span>
+              <div class="md-ellipsis">
+                فایل‌ها و دایرکتوری‌ها
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      نسخهٔ 5.4.0
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.path", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\u06a9\u067e\u06cc \u0634\u062f", "clipboard.copy": "\u06a9\u067e\u06cc \u06a9\u0631\u062f\u0646", "search.result.more.one": "1 \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.more.other": "# \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.none": "\u0633\u0646\u062f\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f", "search.result.one": "1 \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.other": "# \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.placeholder": "\u0628\u0631\u0627\u06cc \u0634\u0631\u0648\u0639 \u062c\u0633\u062a\u062c\u0648 \u062a\u0627\u06cc\u067e \u06a9\u0646\u06cc\u062f", "search.result.term.missing": "\u0645\u0648\u062c\u0648\u062f \u0646\u06cc\u0633\u062a", "select.version": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0648\u06cc\u0631\u0627\u06cc\u0634"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../assets/js/handbook.js"></script>
+      
+    
+  </body>
+</html>

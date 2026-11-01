@@ -1,0 +1,2130 @@
+
+<!doctype html>
+<html lang="fa" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="راهنمای عملیاتی مدیریت، نگهداری، امنیت و عیب‌یابی سیستم‌های لینوکس به زبان فارسی.">
+      
+      
+        <meta name="author" content="Linux Sysadmin Handbook">
+      
+      
+      
+        <link rel="prev" href="../16-web-dns-tls/">
+      
+      
+        <link rel="next" href="../09-logs-troubleshooting/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>امنیت و فایروال - کتابچه راهنمای مدیر سیستم لینوکس</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="rtl" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#۱۰-امنیت-پایه-و-فایروال" class="md-skip">
+          پرش به محتویات
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="سرتیتر">
+    <a href=".." title="کتابچه راهنمای مدیر سیستم لینوکس" class="md-header__button md-logo" aria-label="کتابچه راهنمای مدیر سیستم لینوکس" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19-.39.31-.75.29-1.14-.01-.2-.16-1.53-.92-1.95-1.19-.48-.31-.45-.7.08-.92 1.64-.69 3.28-.64 4.91.03.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.3 4.3 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01-.2-.88-.29-1.78-.7-2.61-.73-1.58-2-2.4-3.84-2.47-1.81.05-3.16.81-3.95 2.4-.21.43-.36.88-.46 1.34-.17.76-.32 1.55-.5 2.32-.15.65-.45 1.21-.96 1.71-1.61 1.57-2.9 3.37-3.88 5.35-.14.29-.28.58-.37.88-.19.66.29 1.12.99.96.44-.09.88-.18 1.3-.31.41-.15.57-.05.67.35.65 2.15 2.07 3.66 4.24 4.5 4.12 1.56 8.93-.66 9.97-4.58.07-.27.17-.37.47-.27.46.14.93.24 1.4.35.49.09.85-.16.92-.64.03-.26-.06-.49-.16-.73"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            کتابچه راهنمای مدیر سیستم لینوکس
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              امنیت و فایروال
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="فعال‌سازی حالت تاریک"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="فعال‌سازی حالت تاریک" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="فعال‌سازی حالت روشن"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="فعال‌سازی حالت روشن" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="جستجو" placeholder="جستجو" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="جستجو">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="هم‌رسانی" aria-label="هم‌رسانی" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="بازنشانی" aria-label="بازنشانی" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            راه‌اندازی جستجو
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="زبانه‌ها" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  خانه
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../22-community-culture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  فرهنگ دانش مشترک
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../01-basics/" class="md-tabs__link">
+          
+  
+  
+  مبانی لینوکس
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../06-storage-filesystems/" class="md-tabs__link">
+          
+  
+  
+  ذخیره‌سازی و منابع
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../07-networking/" class="md-tabs__link">
+          
+  
+  
+  شبکه و دسترسی راه دور
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  امنیت و عیب‌یابی
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../15-docker/" class="md-tabs__link">
+          
+  
+  
+  زیرساخت و ابزارها
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="هدایت" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="کتابچه راهنمای مدیر سیستم لینوکس" class="md-nav__button md-logo" aria-label="کتابچه راهنمای مدیر سیستم لینوکس" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19-.39.31-.75.29-1.14-.01-.2-.16-1.53-.92-1.95-1.19-.48-.31-.45-.7.08-.92 1.64-.69 3.28-.64 4.91.03.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.3 4.3 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01-.2-.88-.29-1.78-.7-2.61-.73-1.58-2-2.4-3.84-2.47-1.81.05-3.16.81-3.95 2.4-.21.43-.36.88-.46 1.34-.17.76-.32 1.55-.5 2.32-.15.65-.45 1.21-.96 1.71-1.61 1.57-2.9 3.37-3.88 5.35-.14.29-.28.58-.37.88-.19.66.29 1.12.99.96.44-.09.88-.18 1.3-.31.41-.15.57-.05.67.35.65 2.15 2.07 3.66 4.24 4.5 4.12 1.56 8.93-.66 9.97-4.58.07-.27.17-.37.47-.27.46.14.93.24 1.4.35.49.09.85-.16.92-.64.03-.26-.06-.49-.16-.73"/></svg>
+
+    </a>
+    کتابچه راهنمای مدیر سیستم لینوکس
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    خانه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../22-community-culture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    فرهنگ دانش مشترک
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مبانی لینوکس
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    مبانی لینوکس
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مفاهیم پایه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-files-directories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    فایل‌ها و دایرکتوری‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-users-permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    کاربران و مجوزها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-processes-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    پردازش‌ها و سرویس‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-packages-repositories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    بسته‌ها و مخازن
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ذخیره‌سازی و منابع
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ذخیره‌سازی و منابع
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-storage-filesystems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    دیسک و فایل‌سیستم
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    کارایی سیستم
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-scheduling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    زمان‌بندی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-backup-archive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    پشتیبان‌گیری و آرشیو
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شبکه و دسترسی راه دور
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    شبکه و دسترسی راه دور
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-networking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شبکه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-ssh-remote/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH و مدیریت راه دور
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-web-dns-tls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    وب، DNS و TLS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    امنیت و عیب‌یابی
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    امنیت و عیب‌یابی
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    امنیت و فایروال
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    امنیت و فایروال
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      فهرست موضوعات
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#راهنمای-سریع" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        راهنمای سریع
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#۱-بهروزرسانی-و-کاهش-سطح-حمله" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱. به‌روزرسانی و کاهش سطح حمله
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#۲-ufw-ubuntu--debian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۲. UFW (Ubuntu / Debian)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#۳-nftables-iptables-و-firewalld" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۳. nftables، iptables و firewalld
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#۴-فایلهای-suid--sgid-و-مجوزهای-خطرناک" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۴. فایل‌های SUID / SGID و مجوزهای خطرناک
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#۵-بررسی-ورودها-و-تلاشهای-ناموفق" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵. بررسی ورودها و تلاش‌های ناموفق
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۵. بررسی ورودها و تلاش‌های ناموفق">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fail2ban-مسدودسازی-خودکار" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fail2ban (مسدودسازی خودکار)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#۶-سختگیری-پایه-ssh-خلاصه" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۶. سخت‌گیری پایه SSH (خلاصه)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#۷-گواهی-و-فایلهای-محرمانه" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷. گواهی و فایل‌های محرمانه
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#۸-selinux-و-apparmor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۸. SELinux و AppArmor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#۹-سناریوی-مشکوک-به-نفوذ-triage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۹. سناریوی مشکوک به نفوذ (Triage)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#۱۰-تنظیمات-هسته-و-ممیزی" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱۰. تنظیمات هسته و ممیزی
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#۱۱-چکلیست-امنیتی-اولیه-۱۵-دقیقه" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱۱. چک‌لیست امنیتی اولیه (۱۵ دقیقه)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#خطاهای-رایج" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        خطاهای رایج
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#نکات-عملیاتی" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        نکات عملیاتی
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#خلاصه-اجرایی" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        خلاصهٔ اجرایی
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-logs-troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    لاگ و عیب‌یابی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18-emergency-runbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    راهنمای رخداد
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20-infrastructure-runbooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    راهنماهای عملیاتی زیرساخت
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../21-services-for-noc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    چک‌لیست روزانه NOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    زیرساخت و ابزارها
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    زیرساخت و ابزارها
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-virtualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مجازی‌سازی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-bash-text/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    متون و Bash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19-cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    برگه تقلب دستورات
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="هدایت" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href=".." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    خانه
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    امنیت و عیب‌یابی
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="۱۰-امنیت-پایه-و-فایروال">۱۰. امنیت پایه و فایروال<a class="headerlink" href="#۱۰-امنیت-پایه-و-فایروال" title="Permanent link">&para;</a></h1>
+<p>امنیت در لینوکس لایه‌لایه است: به‌روزرسانی، سطح حمله (پورت و سرویس)، کنترل دسترسی، فایروال، لاگ و سخت‌گیری SSH. این فصل نقطهٔ شروع عملیاتی است — نه جایگزین سیاست امنیتی سازمانی.</p>
+<h2 id="راهنمای-سریع">راهنمای سریع<a class="headerlink" href="#راهنمای-سریع" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>کار</th>
+<th>فرمان</th>
+<th>ریسک</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>پورت‌ها و سرویس‌های باز</td>
+<td><code>ss -lntup</code> ، <code>systemctl list-unit-files --state=enabled</code></td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td>ورودها و تلاش‌های ناموفق</td>
+<td><code>last -a</code> ، <code>lastb</code> ، <code>journalctl -u ssh</code></td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td>فایل‌های SUID/SGID/world-writable</td>
+<td><code>find / -xdev -perm ...</code></td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td>وضعیت فایروال</td>
+<td><code>ufw status verbose</code> ، <code>nft list ruleset</code></td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td>افزودن قانون فایروال</td>
+<td><code>ufw allow ...</code> ، <code>firewall-cmd --add-...</code></td>
+<td><em class="rw">تغییر</em></td>
+</tr>
+<tr>
+<td><code>ufw enable</code> / <code>reload</code> روی سرور راه دور</td>
+<td>—</td>
+<td><em class="rd">مخرب</em> (قفل شدن)</td>
+</tr>
+<tr>
+<td><code>iptables -F</code> / <code>nft flush ruleset</code></td>
+<td>—</td>
+<td><em class="rd">مخرب</em></td>
+</tr>
+<tr>
+<td><code>setenforce 0</code> / غیرفعال‌کردن AppArmor</td>
+<td>—</td>
+<td><em class="rd">مخرب</em> (برداشتن لایهٔ دفاعی)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="۱-بهروزرسانی-و-کاهش-سطح-حمله">۱. به‌روزرسانی و کاهش سطح حمله<a class="headerlink" href="#۱-بهروزرسانی-و-کاهش-سطح-حمله" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Debian/Ubuntu</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>apt<span class="w"> </span>list<span class="w"> </span>--upgradable
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>sudo<span class="w"> </span>unattended-upgrade<span class="w"> </span>--dry-run
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># RHEL/Rocky/Alma</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>check-update
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>update<span class="w"> </span>--security<span class="w"> </span>--assumeno
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># پورت‌ها و سرویس‌های در حال اجرا</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>sudo<span class="w"> </span>ss<span class="w"> </span>-lntup
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>--type<span class="o">=</span>service<span class="w"> </span>--state<span class="o">=</span>running
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>systemctl<span class="w"> </span>list-unit-files<span class="w"> </span>--state<span class="o">=</span>enabled
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">اصل کاهش سطح حمله</p>
+<p>هر پورت باز و هر سرویس فعال باید <strong>دلیل کسب‌وکاری</strong> داشته باشد. سرویس غیرضروری را بعد از بررسی وابستگی‌ها با <code>systemctl disable --now SERVICE</code> غیرفعال کنید. پورتی که روی <code>127.0.0.1</code> گوش می‌دهد از بیرون در دسترس نیست؛ <code>0.0.0.0</code> یا <code>[::]</code> در دسترس است.</p>
+</div>
+<h2 id="۲-ufw-ubuntu--debian">۲. UFW (Ubuntu / Debian)<a class="headerlink" href="#۲-ufw-ubuntu--debian" title="Permanent link">&para;</a></h2>
+<p>UFW رابط ساده‌ای روی iptables/nftables است.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>status<span class="w"> </span>verbose
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>app<span class="w"> </span>list
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>default<span class="w"> </span>deny<span class="w"> </span>incoming
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>default<span class="w"> </span>allow<span class="w"> </span>outgoing
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span>OpenSSH
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">443</span>/tcp
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span>from<span class="w"> </span><span class="m">10</span>.0.0.0/8<span class="w"> </span>to<span class="w"> </span>any<span class="w"> </span>port<span class="w"> </span><span class="m">22</span><span class="w"> </span>proto<span class="w"> </span>tcp
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>limit<span class="w"> </span><span class="m">22</span>/tcp<span class="w">                 </span><span class="c1"># محدودیت نرخ اتصال (ضد brute-force ساده)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>deny<span class="w"> </span><span class="m">23</span>/tcp
+</span></code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">قبل از ufw enable روی سرور راه دور</p>
+<ol>
+<li>قانون اجازهٔ SSH (یا پورت مدیریت واقعی) را <strong>اول</strong> اضافه کنید.  </li>
+<li>مسیر کنسول ابری / IPMI / بازیابی را آماده داشته باشید.  </li>
+<li>در صورت امکان از یک نشست SSH دیگر تست کنید.  </li>
+<li>اگر SSH روی پورت غیراستاندارد است، همان پورت را اجازه دهید.</li>
+</ol>
+</div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>ufw<span class="w"> </span><span class="nb">enable</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>status<span class="w"> </span>numbered
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># حذف قانون با شماره (دقت کنید شماره بعد از حذف جابه‌جا می‌شود)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>delete<span class="w"> </span><span class="m">2</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>reload
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">ufw allow OpenSSH + allow from ... هر دو</p>
+<p>قانون عمومی <code>allow OpenSSH</code> قانون محدودتر <code>from 10.0.0.0/8</code> را بی‌اثر می‌کند (هر دو مجازند). اگر می‌خواهید فقط از یک شبکه باشد، قانون عمومی را حذف کنید.</p>
+</div>
+<h2 id="۳-nftables-iptables-و-firewalld">۳. nftables، iptables و firewalld<a class="headerlink" href="#۳-nftables-iptables-و-firewalld" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># مشاهده</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>nft<span class="w"> </span>list<span class="w"> </span>ruleset
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-S
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-L<span class="w"> </span>-n<span class="w"> </span>-v
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-L<span class="w"> </span>-n<span class="w"> </span>-v
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># در سیستم‌های جدید ترجیحاً از nft استفاده کنید</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>sudo<span class="w"> </span>nft<span class="w"> </span>list<span class="w"> </span>tables
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>از <code>iptables -F</code> یا <code>nft flush ruleset</code> در production بدون Snapshot و مسیر بازگشت استفاده نکنید. این کار می‌تواند دسترسی شبکه و قوانین Docker/Kubernetes را از بین ببرد. وقتی <code>iptables -P INPUT DROP</code> تنظیم است، <code>-F</code> همهٔ اتصال‌ها (از جمله SSH شما) را قطع می‌کند.</p>
+</div>
+<p><strong>firewalld (RHEL-family):</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--state
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--get-active-zones
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--list-all
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--add-service<span class="o">=</span>https<span class="w">                  </span><span class="c1"># موقت (تا reload)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--add-service<span class="o">=</span>https<span class="w"> </span>--permanent<span class="w">      </span><span class="c1"># دائمی (بعد از reload فعال)</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--reload
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--runtime-to-permanent<span class="w">               </span><span class="c1"># همهٔ تغییرات موقتِ تست‌شده را دائمی کن</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--add-rich-rule<span class="o">=</span><span class="s1">'rule family=ipv4 source address=192.0.2.0/24 port port=22 protocol=tcp accept'</span>
+</span></code></pre></div>
+<p>رویهٔ امن: اول <strong>بدون</strong> <code>--permanent</code> اضافه و تست کنید؛ اگر قفل شدید، <code>reload</code> یا ریبوت همه را برمی‌گرداند. بعد <code>--runtime-to-permanent</code>.</p>
+<p><strong>نمونهٔ حداقلی nftables (نمونه؛ قبل از اعمال پورت‌ها را با نیاز خود تطبیق دهید):</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># /etc/nftables.conf   (نمونه)</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>table<span class="w"> </span>inet<span class="w"> </span>filter<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span>chain<span class="w"> </span>input<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nb">type</span><span class="w"> </span>filter<span class="w"> </span>hook<span class="w"> </span>input<span class="w"> </span>priority<span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span>policy<span class="w"> </span>drop<span class="p">;</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span>iif<span class="w"> </span>lo<span class="w"> </span>accept
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span>ct<span class="w"> </span>state<span class="w"> </span>established,related<span class="w"> </span>accept
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span>ct<span class="w"> </span>state<span class="w"> </span>invalid<span class="w"> </span>drop
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span>ip<span class="w"> </span>protocol<span class="w"> </span>icmp<span class="w"> </span>accept
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span>ip6<span class="w"> </span>nexthdr<span class="w"> </span>icmpv6<span class="w"> </span>accept
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span>tcp<span class="w"> </span>dport<span class="w"> </span><span class="m">22</span><span class="w"> </span>ip<span class="w"> </span>saddr<span class="w"> </span><span class="m">192</span>.0.2.0/24<span class="w"> </span>accept
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span>tcp<span class="w"> </span>dport<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="m">80</span>,<span class="w"> </span><span class="m">443</span><span class="w"> </span><span class="o">}</span><span class="w"> </span>accept
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">  </span><span class="o">}</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="o">}</span>
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>nft<span class="w"> </span>-c<span class="w"> </span>-f<span class="w"> </span>/etc/nftables.conf<span class="w">                 </span><span class="c1"># فقط اعتبارسنجی؛ چیزی اعمال نمی‌شود</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># اعمال با «برگرداننده» زمان‌دار، بعد از تأیید atrm کنید:</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">'nft flush ruleset'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>at<span class="w"> </span>now<span class="w"> </span>+<span class="w"> </span><span class="m">5</span><span class="w"> </span>minutes
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>sudo<span class="w"> </span>nft<span class="w"> </span>-f<span class="w"> </span>/etc/nftables.conf
+</span></code></pre></div>
+<h2 id="۴-فایلهای-suid--sgid-و-مجوزهای-خطرناک">۴. فایل‌های SUID / SGID و مجوزهای خطرناک<a class="headerlink" href="#۴-فایلهای-suid--sgid-و-مجوزهای-خطرناک" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># فایل‌های با بیت SUID (اجرا با مالک)</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>find<span class="w"> </span>/<span class="w"> </span>-xdev<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-perm<span class="w"> </span>-4000<span class="w"> </span>-ls<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># SGID</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>find<span class="w"> </span>/<span class="w"> </span>-xdev<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-perm<span class="w"> </span>-2000<span class="w"> </span>-ls<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># فایل‌های world-writable و پوشه‌های world-writable بدون sticky</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>find<span class="w"> </span>/<span class="w"> </span>-xdev<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-perm<span class="w"> </span>-0002<span class="w"> </span>-ls<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-30
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>find<span class="w"> </span>/<span class="w"> </span>-xdev<span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span>-perm<span class="w"> </span>-0002<span class="w"> </span>!<span class="w"> </span>-perm<span class="w"> </span>-1000<span class="w"> </span>-ls<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="c1"># فایل‌های بدون مالک</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>find<span class="w"> </span>/<span class="w"> </span>-xdev<span class="w"> </span><span class="se">\(</span><span class="w"> </span>-nouser<span class="w"> </span>-o<span class="w"> </span>-nogroup<span class="w"> </span><span class="se">\)</span><span class="w"> </span>-ls<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+</span></code></pre></div>
+<p>وجود SUID لزوماً آسیب‌پذیری نیست (مثلاً <code>passwd</code>)، اما هر فایل غیرمنتظره را باید بررسی کنید. فهرست را یک‌بار ذخیره و دوره‌ای مقایسه کنید (<code>diff</code>) تا موارد <strong>جدید</strong> دیده شود.</p>
+<h2 id="۵-بررسی-ورودها-و-تلاشهای-ناموفق">۵. بررسی ورودها و تلاش‌های ناموفق<a class="headerlink" href="#۵-بررسی-ورودها-و-تلاشهای-ناموفق" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>last<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>lastb<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-10<span class="w">          </span><span class="c1"># تلاش‌های ناموفق</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>ssh<span class="w"> </span>--since<span class="w"> </span>today<span class="w"> </span>--no-pager
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>ssh<span class="w"> </span>-p<span class="w"> </span>err<span class="w"> </span>--since<span class="w"> </span><span class="s2">"2 days ago"</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="c1"># Debian/Ubuntu</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>sudo<span class="w"> </span>grep<span class="w"> </span>-Ei<span class="w"> </span><span class="s1">'Failed password|Invalid user|Accepted'</span><span class="w"> </span>/var/log/auth.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-30
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1"># RHEL-family</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>sudo<span class="w"> </span>grep<span class="w"> </span>-Ei<span class="w"> </span><span class="s1">'Failed password|Invalid user|Accepted'</span><span class="w"> </span>/var/log/secure<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-30
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="c1"># پرتکرارترین IP های ناموفق</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>sudo<span class="w"> </span>grep<span class="w"> </span><span class="s1">'Failed password'</span><span class="w"> </span>/var/log/auth.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'{print $(NF-3)}'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-nr<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+</span></code></pre></div>
+<p>برای رخداد امنیتی، لاگ‌ها را <strong>قبل از چرخش یا پاک‌سازی</strong> جمع‌آوری و آرشیو کنید.</p>
+<h3 id="fail2ban-مسدودسازی-خودکار">fail2ban (مسدودسازی خودکار)<a class="headerlink" href="#fail2ban-مسدودسازی-خودکار" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>fail2ban<span class="w">            </span><span class="c1"># RHEL: dnf install fail2ban (EPEL)</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>fail2ban
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>sudo<span class="w"> </span>fail2ban-client<span class="w"> </span>status
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>sudo<span class="w"> </span>fail2ban-client<span class="w"> </span>status<span class="w"> </span>sshd
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>sudo<span class="w"> </span>fail2ban-client<span class="w"> </span><span class="nb">set</span><span class="w"> </span>sshd<span class="w"> </span>unbanip<span class="w"> </span><span class="m">192</span>.0.2.50
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a># /etc/fail2ban/jail.local   (نمونه؛ فایل jail.conf را ویرایش نکنید)
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>[DEFAULT]
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>bantime  = 1h
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>findtime = 10m
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>maxretry = 5
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>ignoreip = 127.0.0.1/8 192.0.2.0/24     # شبکهٔ مدیریت خودتان را حتماً اضافه کنید
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>[sshd]
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>enabled = true
+</span></code></pre></div>
+<h2 id="۶-سختگیری-پایه-ssh-خلاصه">۶. سخت‌گیری پایه SSH (خلاصه)<a class="headerlink" href="#۶-سختگیری-پایه-ssh-خلاصه" title="Permanent link">&para;</a></h2>
+<p>جزئیات کامل در <a href="../08-ssh-remote/">SSH و مدیریت راه دور</a> است. حداقل‌های پیشنهادی:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a># در /etc/ssh/sshd_config.d/10-hardening.conf (بعد از ویرایش تست و reload)
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>PermitRootLogin no
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>PasswordAuthentication no          # فقط اگر کلید عمومی آماده است
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>PubkeyAuthentication yes
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>AllowUsers admin1 admin2
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>MaxAuthTries 3
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sudo<span class="w"> </span>sshd<span class="w"> </span>-t<span class="w">                    </span><span class="c1"># تست سینتکس قبل از reload</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>sudo<span class="w"> </span>sshd<span class="w"> </span>-T<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-Ei<span class="w"> </span><span class="s1">'permitroot|passwordauth|allowusers'</span><span class="w">   </span><span class="c1"># مقدار مؤثر</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>ssh<span class="w">       </span><span class="c1"># RHEL: sshd</span>
+</span></code></pre></div>
+<h2 id="۷-گواهی-و-فایلهای-محرمانه">۷. گواهی و فایل‌های محرمانه<a class="headerlink" href="#۷-گواهی-و-فایلهای-محرمانه" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>stat<span class="w"> </span>/etc/ssl/private
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>sudo<span class="w"> </span>find<span class="w"> </span>/etc<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="se">\(</span><span class="w"> </span>-name<span class="w"> </span><span class="s1">'*.key'</span><span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="s1">'*private*'</span><span class="w"> </span><span class="se">\)</span><span class="w"> </span>-ls<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>sudo<span class="w"> </span>ls<span class="w"> </span>-la<span class="w"> </span>/etc/ssl/private/
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1"># نشت احتمالی اسرار در فایل‌های متنی (فقط شناسایی؛ خروجی را در تیکت نچسبانید)</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>sudo<span class="w"> </span>grep<span class="w"> </span>-RIl<span class="w"> </span>-E<span class="w"> </span><span class="s1">'BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY'</span><span class="w"> </span>/home<span class="w"> </span>/opt<span class="w"> </span>/srv<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+</span></code></pre></div>
+<ul>
+<li>محتوای کلید خصوصی را هرگز در ترمینال ضبط‌شده، تیکت یا Git چاپ نکنید.</li>
+<li>مجوز معمول برای کلید خصوصی: <code>600</code> و مالک <code>root</code> (یا کاربر سرویس).</li>
+<li>فایل <code>.env</code>، <code>*.pem</code>، بکاپ دیتابیس: <code>600</code>. هرگز <code>644</code>.</li>
+</ul>
+<h2 id="۸-selinux-و-apparmor">۸. SELinux و AppArmor<a class="headerlink" href="#۸-selinux-و-apparmor" title="Permanent link">&para;</a></h2>
+<p>لایهٔ کنترل دسترسی اجباری (MAC) که حتی اگر سرویس هک شود، خسارت را محدود می‌کند. <strong>خاموش‌کردن آن راه‌حل مشکل نیست.</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># RHEL-family: SELinux</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>getenforce<span class="w">                        </span><span class="c1"># Enforcing / Permissive / Disabled</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>sestatus
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>sudo<span class="w"> </span>ausearch<span class="w"> </span>-m<span class="w"> </span>avc<span class="w"> </span>-ts<span class="w"> </span>recent<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w">     </span><span class="c1"># چه چیزی مسدود شد؟</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>ls<span class="w"> </span>-Z<span class="w"> </span>/var/www/html
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>sudo<span class="w"> </span>restorecon<span class="w"> </span>-Rv<span class="w"> </span>/var/www/html<span class="w">          </span><span class="c1"># برچسب‌های درست را بازگردان</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>sudo<span class="w"> </span>setsebool<span class="w"> </span>-P<span class="w"> </span>httpd_can_network_connect<span class="w"> </span>on<span class="w">   </span><span class="c1"># مثال: اجازهٔ اتصال شبکه‌ای nginx/httpd</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>sudo<span class="w"> </span>semanage<span class="w"> </span>port<span class="w"> </span>-a<span class="w"> </span>-t<span class="w"> </span>http_port_t<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span><span class="m">8080</span><span class="w">  </span><span class="c1"># مثال: پورت غیراستاندارد</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="c1"># Ubuntu/Debian: AppArmor</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>sudo<span class="w"> </span>aa-status
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-k<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s1">'apparmor="DENIED"'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tail
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">setenforce 0 فقط برای تشخیص</p>
+<p><code>sudo setenforce 0</code> (Permissive) را فقط برای تأیید اینکه «مشکل از SELinux است» و موقت استفاده کنید؛ سپس علت را با <code>ausearch</code>/<code>audit2why</code> پیدا و سیاست یا برچسب را اصلاح کنید و <code>setenforce 1</code>. <code>SELINUX=disabled</code> در <code>/etc/selinux/config</code> را در production نگذارید.</p>
+</div>
+<h2 id="۹-سناریوی-مشکوک-به-نفوذ-triage">۹. سناریوی مشکوک به نفوذ (Triage)<a class="headerlink" href="#۹-سناریوی-مشکوک-به-نفوذ-triage" title="Permanent link">&para;</a></h2>
+<p>اگر مشکوکید سرور هک شده: <strong>آرام</strong> باشید، <strong>ریبوت نکنید</strong> (شواهد حافظه از بین می‌رود)، تغییر بی‌هدف ندهید، و تیم امنیت/مدیر را مطلع کنید.</p>
+<ol>
+<li><strong>جداسازی، نه خاموشی:</strong> در صورت امکان دسترسی شبکه را در سطح فایروال/switch/SG محدود کنید (نه با پاک‌کردن چیزی روی سرور).</li>
+<li><strong>ثبت شواهد فرّار</strong> (به همین ترتیب؛ فقط خواندنی):</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/tmp/ir<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/var/tmp/ir
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="o">{</span><span class="w"> </span>date<span class="w"> </span>-Is<span class="p">;</span><span class="w"> </span>hostname<span class="w"> </span>-f<span class="p">;</span><span class="w"> </span>uname<span class="w"> </span>-a<span class="p">;</span><span class="w"> </span>uptime<span class="p">;</span><span class="w"> </span>w<span class="p">;</span><span class="w"> </span>last<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-30<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span>&gt;<span class="w"> </span>who.txt
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>ps<span class="w"> </span>auxwwf<span class="w"> </span>&gt;<span class="w"> </span>ps.txt
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>sudo<span class="w"> </span>ss<span class="w"> </span>-tupan<span class="w"> </span>&gt;<span class="w"> </span>sockets.txt
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>sudo<span class="w"> </span>lsof<span class="w"> </span>-nP<span class="w"> </span>-i<span class="w"> </span>&gt;<span class="w"> </span>lsof-net.txt<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>list-units<span class="w"> </span>--type<span class="o">=</span>service<span class="w"> </span>--state<span class="o">=</span>running<span class="w"> </span>&gt;<span class="w"> </span>services.txt
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>list-timers<span class="w"> </span>--all<span class="w"> </span>&gt;<span class="w"> </span>timers.txt
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="k">for</span><span class="w"> </span>u<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>cut<span class="w"> </span>-d:<span class="w"> </span>-f1<span class="w"> </span>/etc/passwd<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"== </span><span class="nv">$u</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>crontab<span class="w"> </span>-l<span class="w"> </span>-u<span class="w"> </span><span class="s2">"</span><span class="nv">$u</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w"> </span>&gt;<span class="w"> </span>crontabs.txt
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>ls<span class="w"> </span>-la<span class="w"> </span>/etc/cron.*<span class="w"> </span>/var/spool/cron*<span class="w"> </span>&gt;<span class="w"> </span>cron-files.txt<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>sudo<span class="w"> </span>find<span class="w"> </span>/home<span class="w"> </span>/root<span class="w"> </span>-name<span class="w"> </span>authorized_keys<span class="w"> </span>-exec<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">'echo "== $1"; cat "$1"'</span><span class="w"> </span>_<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span><span class="w"> </span>&gt;<span class="w"> </span>authkeys.txt
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>cat<span class="w"> </span>/etc/ld.so.preload<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span>&gt;<span class="w"> </span>ld-preload.txt
+</span></code></pre></div>
+<ol>
+<li><strong>نشانه‌های رایج:</strong> پردازش ناآشنا با مصرف CPU بالا (miner)، اتصال خروجی به IP ناشناس، فایل‌های اجرایی در <code>/tmp</code>، <code>/dev/shm</code>، <code>/var/tmp</code>، کلید SSH یا حساب جدید، cron/timer ناشناس، تغییر در <code>/etc/ld.so.preload</code>، باینری‌های سیستمی با هش متفاوت:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>find<span class="w"> </span>/tmp<span class="w"> </span>/var/tmp<span class="w"> </span>/dev/shm<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-perm<span class="w"> </span>/111<span class="w"> </span>-ls<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>sudo<span class="w"> </span>find<span class="w"> </span>/<span class="w"> </span>-xdev<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-mtime<span class="w"> </span>-2<span class="w"> </span>-not<span class="w"> </span>-path<span class="w"> </span><span class="s1">'/proc/*'</span><span class="w"> </span>-not<span class="w"> </span>-path<span class="w"> </span><span class="s1">'/var/log/*'</span><span class="w"> </span>-ls<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-50
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>sudo<span class="w"> </span>debsums<span class="w"> </span>-c<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w">          </span><span class="c1"># Debian: فایل‌های بسته‌ها که تغییر کرده‌اند</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>sudo<span class="w"> </span>rpm<span class="w"> </span>-Va<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'^..5'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w">   </span><span class="c1"># RHEL: هش تغییرکرده</span>
+</span></code></pre></div>
+<ol>
+<li><strong>بازسازی، نه پاک‌سازی:</strong> سروری که root آن لو رفته را «تمیز» نمی‌توان اعتماد کرد؛ از ایمیج سالم بازسازی، داده را از بکاپ <strong>قبل از نفوذ</strong> بازیابی و <strong>همهٔ</strong> رمزها/کلیدها/توکن‌های آن سرور را بچرخانید.</li>
+<li>گزارش بنویسید (<a href="../18-emergency-runbook/">قالب رخداد</a>): زمان، ورود اولیه، اقدام‌ها، درس‌ها.</li>
+</ol>
+<h2 id="۱۰-تنظیمات-هسته-و-ممیزی">۱۰. تنظیمات هسته و ممیزی<a class="headerlink" href="#۱۰-تنظیمات-هسته-و-ممیزی" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>sysctl<span class="w"> </span>net.ipv4.tcp_syncookies<span class="w"> </span>net.ipv4.conf.all.rp_filter<span class="w"> </span>kernel.randomize_va_space<span class="w"> </span>net.ipv4.ip_forward
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>پارامتر</th>
+<th>مقدار توصیه‌شده</th>
+<th>توضیح</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>net.ipv4.tcp_syncookies</code></td>
+<td><code>1</code></td>
+<td>مقاومت در برابر SYN flood</td>
+</tr>
+<tr>
+<td><code>net.ipv4.conf.all.rp_filter</code></td>
+<td><code>1</code> (یا 2 با routing نامتقارن)</td>
+<td>جلوگیری از IP spoofing</td>
+</tr>
+<tr>
+<td><code>net.ipv4.conf.all.accept_redirects</code></td>
+<td><code>0</code></td>
+<td>رد ICMP redirect</td>
+</tr>
+<tr>
+<td><code>net.ipv4.ip_forward</code></td>
+<td><code>0</code> مگر روتر/Docker/VPN</td>
+<td>فورواردینگ ناخواسته</td>
+</tr>
+<tr>
+<td><code>kernel.randomize_va_space</code></td>
+<td><code>2</code></td>
+<td>ASLR</td>
+</tr>
+<tr>
+<td><code>fs.protected_symlinks</code> / <code>fs.protected_hardlinks</code></td>
+<td><code>1</code></td>
+<td>کاهش حملات symlink در <code>/tmp</code></td>
+</tr>
+</tbody>
+</table>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># اعمال دائمی (نمونه): فایل جدا، سپس بارگذاری</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">'net.ipv4.tcp_syncookies = 1\nnet.ipv4.conf.all.accept_redirects = 0\n'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/sysctl.d/99-hardening.conf
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>--system
+</span></code></pre></div>
+<p><strong>ممیزی با auditd (اختیاری):</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>auditd<span class="w">         </span><span class="c1"># RHEL: dnf install audit</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>sudo<span class="w"> </span>auditctl<span class="w"> </span>-w<span class="w"> </span>/etc/ssh/sshd_config<span class="w"> </span>-p<span class="w"> </span>wa<span class="w"> </span>-k<span class="w"> </span>sshd_config<span class="w">      </span><span class="c1"># هر تغییر در این فایل ثبت شود</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>sudo<span class="w"> </span>ausearch<span class="w"> </span>-k<span class="w"> </span>sshd_config<span class="w"> </span>-ts<span class="w"> </span>today
+</span></code></pre></div>
+<p>برای ارزیابی کلی، <code>lynis audit system</code> گزارش پیشنهادی می‌دهد. اسکن بیرونی (<code>nmap</code>) فقط روی سیستم‌هایی که <strong>مجاز</strong> هستید.</p>
+<h2 id="۱۱-چکلیست-امنیتی-اولیه-۱۵-دقیقه">۱۱. چک‌لیست امنیتی اولیه (۱۵ دقیقه)<a class="headerlink" href="#۱۱-چکلیست-امنیتی-اولیه-۱۵-دقیقه" title="Permanent link">&para;</a></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> سیستم به‌روز است (<code>apt</code> / <code>dnf</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> فقط پورت‌های لازم باز هستند (<code>ss -lntup</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> فایروال فعال، پیش‌فرض ورودی <code>deny</code>، و قانون SSH درست است</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> ورود root با رمز غیرفعال یا محدود شده؛ <code>sshd -T</code> تأیید کرده</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> کاربران sudo مشخص و حداقل هستند؛ گروه <code>docker</code> بازبینی شده</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> لاگ auth/secure و journal پایدار و در حال ثبت است</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> فایل‌های SUID غیرمنتظره بررسی شده‌اند</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> SELinux/AppArmor در حالت Enforcing است</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> fail2ban یا مکانیزم معادل فعال است و شبکهٔ مدیریت در <code>ignoreip</code> است</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> بکاپ تست‌بازیابی شده است</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> هیچ رمز/کلید در Git یا فایل با مجوز باز نیست</li>
+</ul>
+<h2 id="خطاهای-رایج">خطاهای رایج<a class="headerlink" href="#خطاهای-رایج" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>نشانه</th>
+<th>علت احتمالی</th>
+<th>اقدام</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>قطع دسترسی بعد از <code>ufw enable</code></td>
+<td>قانون SSH اضافه نشده</td>
+<td>کنسول ابری / IPMI</td>
+</tr>
+<tr>
+<td><code>Connection refused</code> بعد از reload sshd</td>
+<td>سینتکس یا پورت اشتباه</td>
+<td><code>sshd -t</code> و کنسول</td>
+</tr>
+<tr>
+<td>پورت باز اما سرویس پاسخ نمی‌دهد</td>
+<td>bind روی localhost یا فایروال میزبان دیگر</td>
+<td><code>ss -lntp</code> + تست از خارج</td>
+</tr>
+<tr>
+<td>قانون UFW هست ولی پورت کانتینر هنوز باز است</td>
+<td>Docker قوانین iptables خودش را قبل از UFW اضافه می‌کند</td>
+<td><a href="../15-docker/#دام-امنیتی-docker-فایروال-ufw-را-دور-میزند">Docker</a></td>
+</tr>
+<tr>
+<td>سرویس بعد از فعال‌شدن SELinux خراب شد</td>
+<td>برچسب/boolean/پورت</td>
+<td><code>ausearch -m avc</code> ، <code>restorecon</code> ، <code>setsebool</code></td>
+</tr>
+<tr>
+<td>خودتان توسط fail2ban بن شدید</td>
+<td><code>ignoreip</code> تنظیم نیست</td>
+<td>از کنسول: <code>fail2ban-client set sshd unbanip IP</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="نکات-عملیاتی">نکات عملیاتی<a class="headerlink" href="#نکات-عملیاتی" title="Permanent link">&para;</a></h2>
+<ul>
+<li>تغییرات فایروال را در پنجرهٔ تغییر و با هماهنگی انجام دهید.</li>
+<li>قوانین موقت را با یادداشت و تاریخ انقضا مستند کنید.</li>
+<li>در محیط کانتینری، هم فایروال میزبان و هم NetworkPolicy / قواعد Docker را در نظر بگیرید.</li>
+<li>پیش‌فرض را «همه چیز بسته» بگذارید و فقط لازم‌ها را باز کنید (نه برعکس).</li>
+</ul>
+<h2 id="خلاصه-اجرایی">خلاصهٔ اجرایی<a class="headerlink" href="#خلاصه-اجرایی" title="Permanent link">&para;</a></h2>
+<ol>
+<li>سطح حمله: هر پورت/سرویس باید دلیل داشته باشد.</li>
+<li>فایروال: اول قانون SSH، کنسول آماده، تست با نشست دوم.</li>
+<li>SELinux/AppArmor را خاموش نکنید؛ برچسب/boolean را درست کنید.</li>
+<li>مشکوک به نفوذ: ریبوت نکنید، شواهد بگیرید، جدا کنید، <strong>بازسازی</strong> کنید و رمزها را بچرخانید.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  برگشت به بالا
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="پاورقی" >
+        
+          
+          <a href="../16-web-dns-tls/" class="md-footer__link md-footer__link--prev" aria-label="قبلی: وب، DNS و TLS">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                قبلی
+              </span>
+              <div class="md-ellipsis">
+                وب، DNS و TLS
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../09-logs-troubleshooting/" class="md-footer__link md-footer__link--next" aria-label="بعدی: لاگ و عیب‌یابی">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                بعدی
+              </span>
+              <div class="md-ellipsis">
+                لاگ و عیب‌یابی
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      نسخهٔ 5.4.0
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.path", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\u06a9\u067e\u06cc \u0634\u062f", "clipboard.copy": "\u06a9\u067e\u06cc \u06a9\u0631\u062f\u0646", "search.result.more.one": "1 \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.more.other": "# \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.none": "\u0633\u0646\u062f\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f", "search.result.one": "1 \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.other": "# \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.placeholder": "\u0628\u0631\u0627\u06cc \u0634\u0631\u0648\u0639 \u062c\u0633\u062a\u062c\u0648 \u062a\u0627\u06cc\u067e \u06a9\u0646\u06cc\u062f", "search.result.term.missing": "\u0645\u0648\u062c\u0648\u062f \u0646\u06cc\u0633\u062a", "select.version": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0648\u06cc\u0631\u0627\u06cc\u0634"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../assets/js/handbook.js"></script>
+      
+    
+  </body>
+</html>

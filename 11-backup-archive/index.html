@@ -1,0 +1,2132 @@
+
+<!doctype html>
+<html lang="fa" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="راهنمای عملیاتی مدیریت، نگهداری، امنیت و عیب‌یابی سیستم‌های لینوکس به زبان فارسی.">
+      
+      
+        <meta name="author" content="Linux Sysadmin Handbook">
+      
+      
+      
+        <link rel="prev" href="../13-scheduling/">
+      
+      
+        <link rel="next" href="../07-networking/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>پشتیبان‌گیری و آرشیو - کتابچه راهنمای مدیر سیستم لینوکس</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="rtl" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#۱۱-فشردهسازی-و-پشتیبانگیری" class="md-skip">
+          پرش به محتویات
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="سرتیتر">
+    <a href=".." title="کتابچه راهنمای مدیر سیستم لینوکس" class="md-header__button md-logo" aria-label="کتابچه راهنمای مدیر سیستم لینوکس" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19-.39.31-.75.29-1.14-.01-.2-.16-1.53-.92-1.95-1.19-.48-.31-.45-.7.08-.92 1.64-.69 3.28-.64 4.91.03.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.3 4.3 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01-.2-.88-.29-1.78-.7-2.61-.73-1.58-2-2.4-3.84-2.47-1.81.05-3.16.81-3.95 2.4-.21.43-.36.88-.46 1.34-.17.76-.32 1.55-.5 2.32-.15.65-.45 1.21-.96 1.71-1.61 1.57-2.9 3.37-3.88 5.35-.14.29-.28.58-.37.88-.19.66.29 1.12.99.96.44-.09.88-.18 1.3-.31.41-.15.57-.05.67.35.65 2.15 2.07 3.66 4.24 4.5 4.12 1.56 8.93-.66 9.97-4.58.07-.27.17-.37.47-.27.46.14.93.24 1.4.35.49.09.85-.16.92-.64.03-.26-.06-.49-.16-.73"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            کتابچه راهنمای مدیر سیستم لینوکس
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              پشتیبان‌گیری و آرشیو
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="فعال‌سازی حالت تاریک"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="فعال‌سازی حالت تاریک" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="فعال‌سازی حالت روشن"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="فعال‌سازی حالت روشن" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="جستجو" placeholder="جستجو" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="جستجو">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="هم‌رسانی" aria-label="هم‌رسانی" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="بازنشانی" aria-label="بازنشانی" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            راه‌اندازی جستجو
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="زبانه‌ها" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  خانه
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../22-community-culture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  فرهنگ دانش مشترک
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../01-basics/" class="md-tabs__link">
+          
+  
+  
+  مبانی لینوکس
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../06-storage-filesystems/" class="md-tabs__link">
+          
+  
+  
+  ذخیره‌سازی و منابع
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../07-networking/" class="md-tabs__link">
+          
+  
+  
+  شبکه و دسترسی راه دور
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../10-security-firewall/" class="md-tabs__link">
+          
+  
+  
+  امنیت و عیب‌یابی
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../15-docker/" class="md-tabs__link">
+          
+  
+  
+  زیرساخت و ابزارها
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="هدایت" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="کتابچه راهنمای مدیر سیستم لینوکس" class="md-nav__button md-logo" aria-label="کتابچه راهنمای مدیر سیستم لینوکس" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19-.39.31-.75.29-1.14-.01-.2-.16-1.53-.92-1.95-1.19-.48-.31-.45-.7.08-.92 1.64-.69 3.28-.64 4.91.03.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.3 4.3 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01-.2-.88-.29-1.78-.7-2.61-.73-1.58-2-2.4-3.84-2.47-1.81.05-3.16.81-3.95 2.4-.21.43-.36.88-.46 1.34-.17.76-.32 1.55-.5 2.32-.15.65-.45 1.21-.96 1.71-1.61 1.57-2.9 3.37-3.88 5.35-.14.29-.28.58-.37.88-.19.66.29 1.12.99.96.44-.09.88-.18 1.3-.31.41-.15.57-.05.67.35.65 2.15 2.07 3.66 4.24 4.5 4.12 1.56 8.93-.66 9.97-4.58.07-.27.17-.37.47-.27.46.14.93.24 1.4.35.49.09.85-.16.92-.64.03-.26-.06-.49-.16-.73"/></svg>
+
+    </a>
+    کتابچه راهنمای مدیر سیستم لینوکس
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    خانه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../22-community-culture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    فرهنگ دانش مشترک
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مبانی لینوکس
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    مبانی لینوکس
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مفاهیم پایه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-files-directories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    فایل‌ها و دایرکتوری‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-users-permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    کاربران و مجوزها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-processes-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    پردازش‌ها و سرویس‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-packages-repositories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    بسته‌ها و مخازن
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ذخیره‌سازی و منابع
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ذخیره‌سازی و منابع
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-storage-filesystems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    دیسک و فایل‌سیستم
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    کارایی سیستم
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-scheduling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    زمان‌بندی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    پشتیبان‌گیری و آرشیو
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    پشتیبان‌گیری و آرشیو
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      فهرست موضوعات
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#راهنمای-سریع" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        راهنمای سریع
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#قانون-۳-۲-۱" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        قانون ۳-۲-۱
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tar-و-gzip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tar و gzip
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zip-و-unzip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        zip و unzip
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rsync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rsync
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#کپی-از-راه-دور" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        کپی از راه دور
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ابزارهای-نسخهدار-و-رمزگذاریشده-restic-و-borg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ابزارهای نسخه‌دار و رمزگذاری‌شده: restic و borg
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#بکاپ-پایگاهداده" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        بکاپ پایگاه‌داده
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#رمزگذاری" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        رمزگذاری
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#بررسی-پشتیبان" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        بررسی پشتیبان
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#اسکریپت-نمونه-بکاپ-قابلاتکا" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        اسکریپت نمونهٔ بکاپ (قابل‌اتکا)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#تست-خودکار-بازیابی-و-تازگی-بکاپ-restic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        تست خودکار بازیابی و تازگی بکاپ (restic)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#بکاپ-فقطافزودنی-append-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        بکاپ فقط‌افزودنی (append-only)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#زمانبندی-با-systemd-و-هشدار-شکست" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        زمان‌بندی با systemd و هشدار شکست
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#دیتابیس-بازیابی-آزمایشی-و-بازیابی-نقطهای" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        دیتابیس: بازیابی آزمایشی و بازیابی نقطه‌ای
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#جدول-rporto-سرویسها" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        جدول RPO/RTO سرویس‌ها
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#خطاهای-رایج" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        خطاهای رایج
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#سیاست-پشتیبانگیری" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        سیاست پشتیبان‌گیری
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#خلاصه-اجرایی" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        خلاصهٔ اجرایی
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شبکه و دسترسی راه دور
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    شبکه و دسترسی راه دور
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-networking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شبکه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-ssh-remote/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH و مدیریت راه دور
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-web-dns-tls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    وب، DNS و TLS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    امنیت و عیب‌یابی
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    امنیت و عیب‌یابی
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-security-firewall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    امنیت و فایروال
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-logs-troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    لاگ و عیب‌یابی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18-emergency-runbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    راهنمای رخداد
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20-infrastructure-runbooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    راهنماهای عملیاتی زیرساخت
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../21-services-for-noc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    چک‌لیست روزانه NOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    زیرساخت و ابزارها
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    زیرساخت و ابزارها
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-virtualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مجازی‌سازی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-bash-text/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    متون و Bash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19-cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    برگه تقلب دستورات
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="هدایت" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href=".." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    خانه
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../06-storage-filesystems/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    ذخیره‌سازی و منابع
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="۱۱-فشردهسازی-و-پشتیبانگیری">۱۱. فشرده‌سازی و پشتیبان‌گیری<a class="headerlink" href="#۱۱-فشردهسازی-و-پشتیبانگیری" title="Permanent link">&para;</a></h1>
+<p>بکاپی که <strong>بازیابی‌اش را تست نکرده‌اید، بکاپ نیست؛ امید است.</strong> این فصل هم ابزارها و هم رویهٔ اعتمادپذیر کردن بکاپ را پوشش می‌دهد.</p>
+<h2 id="راهنمای-سریع">راهنمای سریع<a class="headerlink" href="#راهنمای-سریع" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>فرمان</th>
+<th>کاربرد</th>
+<th>ریسک</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tar -tzf</code> / <code>unzip -l</code> / <code>sha256sum -c</code></td>
+<td>بررسی آرشیو و صحت</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>tar -czf</code> / <code>zip</code> / <code>rsync -n</code></td>
+<td>ساخت آرشیو / تست همگام‌سازی</td>
+<td><em class="rw">تغییر</em></td>
+</tr>
+<tr>
+<td><code>rsync -a</code></td>
+<td>کپی و همگام‌سازی</td>
+<td><em class="rw">تغییر</em></td>
+</tr>
+<tr>
+<td><code>tar -x</code> / <code>unzip</code> / <code>rsync</code> به مسیر زنده</td>
+<td>بازیابی</td>
+<td><em class="rw">تغییر</em> (روی داده‌ٔ جاری: <em class="rd">مخرب</em>)</td>
+</tr>
+<tr>
+<td><code>rsync --delete</code></td>
+<td>همگام‌سازی با حذف</td>
+<td><em class="rd">مخرب</em></td>
+</tr>
+<tr>
+<td><code>restic forget --prune</code> / <code>borg prune</code></td>
+<td>حذف نسخه‌های قدیمی</td>
+<td><em class="rd">مخرب</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="قانون-۳-۲-۱">قانون ۳-۲-۱<a class="headerlink" href="#قانون-۳-۲-۱" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>۳</strong> نسخه از داده (اصلی + دو بکاپ)</li>
+<li>روی <strong>۲</strong> نوع رسانه/سامانهٔ متفاوت</li>
+<li><strong>۱</strong> نسخه <strong>بیرون از سایت</strong> (و ترجیحاً غیرقابل‌تغییر / append-only تا باج‌افزار نتواند پاکش کند)</li>
+</ul>
+<p>مفاهیم: <strong>RPO</strong> = حداکثر داده‌ای که می‌پذیرید از دست بدهید (فاصلهٔ بکاپ‌ها)؛ <strong>RTO</strong> = حداکثر زمانی که بازیابی طول می‌کشد. هر دو را بنویسید و <strong>اندازه بگیرید</strong>.</p>
+<h2 id="tar-و-gzip">tar و gzip<a class="headerlink" href="#tar-و-gzip" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">umask</span><span class="w"> </span><span class="m">077</span><span class="w">                                                  </span><span class="c1"># بکاپ فقط برای مالک</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>tar<span class="w"> </span>--xattrs<span class="w"> </span>--acls<span class="w"> </span>--numeric-owner<span class="w"> </span>-czpf<span class="w"> </span>backup-etc-<span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>.tar.gz<span class="w"> </span>/etc
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>tar<span class="w"> </span>-tzf<span class="w"> </span>backup-etc-2026-01-01.tar.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>tar<span class="w"> </span>-xzpf<span class="w"> </span>backup.tar.gz<span class="w"> </span>-C<span class="w"> </span>/restore/path
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>tar<span class="w"> </span>--exclude<span class="o">=</span><span class="s1">'*.tmp'</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s1">'cache'</span><span class="w"> </span>-czf<span class="w"> </span>app.tar.gz<span class="w"> </span>/opt/app
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>gzip<span class="w"> </span>-k<span class="w"> </span>file.log<span class="w">          </span><span class="c1"># -k: فایل اصلی را نگه دار</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>gunzip<span class="w"> </span>file.log.gz
+</span></code></pre></div>
+<ul>
+<li><code>--numeric-owner</code> مالکیت را به‌صورت UID عددی ذخیره می‌کند (در بازیابی روی سیستم دیگر، نام‌ها اشتباه نگاشت نمی‌شوند)؛ <code>-p</code> مجوزها را حفظ می‌کند؛ <code>--acls --xattrs</code> ACL و SELinux را هم.</li>
+<li>بکاپ <code>/etc</code> حاوی کلیدها و رمزهاست؛ مجوز آن را <code>600</code> و رمزگذاری‌شده نگه دارید.</li>
+</ul>
+<p>قبل از استخراج آرشیو ناشناس، محتویات آن را با <code>tar -tzf</code> بررسی کنید (مسیرهای <code>/</code> یا <code>../</code>) و از استخراج به مسیرهای حساس خودداری کنید.</p>
+<h2 id="zip-و-unzip">zip و unzip<a class="headerlink" href="#zip-و-unzip" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>zip<span class="w"> </span>-r<span class="w"> </span>project.zip<span class="w"> </span>project/
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>unzip<span class="w"> </span>-l<span class="w"> </span>project.zip
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>unzip<span class="w"> </span>project.zip<span class="w"> </span>-d<span class="w"> </span>/restore/path
+</span></code></pre></div>
+<p>رمز <code>zip -e</code> استاندارد ضعیف است؛ برای محرمانگی از <code>age</code>/<code>gpg</code> استفاده کنید.</p>
+<h2 id="rsync">rsync<a class="headerlink" href="#rsync" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>rsync<span class="w"> </span>-aHAXn<span class="w"> </span>--numeric-ids<span class="w"> </span>/srv/data/<span class="w"> </span>/backup/data/<span class="w">          </span><span class="c1"># -n: خشک (dry-run)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>rsync<span class="w"> </span>-aHAX<span class="w">  </span>--numeric-ids<span class="w"> </span>/srv/data/<span class="w"> </span>/backup/data/
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>rsync<span class="w"> </span>-avh<span class="w"> </span>--delete<span class="w"> </span>--dry-run<span class="w"> </span>/srv/data/<span class="w"> </span>/backup/data/
+</span></code></pre></div>
+<p><code>-aHAX</code> = آرشیو + hardlink + ACL + xattr. <code>--dry-run</code> تغییرات احتمالی را نشان می‌دهد. <code>--delete</code> فایل‌هایی را که در مبدأ نیستند از مقصد حذف می‌کند؛ ابتدا dry-run و بررسی مسیرها ضروری است.</p>
+<div class="admonition danger">
+<p class="admonition-title">مرگبارترین اشتباه rsync --delete</p>
+<p>اگر مبدأ mount نبود یا خالی بود (مثلاً NFS قطع شد)، <code>rsync --delete</code> <strong>بکاپ را هم خالی می‌کند</strong>. در اسکریپت قبل از اجرا حتماً بررسی کنید: <code>mountpoint -q /srv/data || exit 1</code> و <code>[ -n "$(ls -A /srv/data)" ] || exit 1</code>. ترجیحاً از ابزار نسخه‌دار (restic/borg) یا <code>--link-dest</code> استفاده کنید تا حذف، نسخهٔ قدیمی را نابود نکند.</p>
+</div>
+<p><strong>snapshot چرخشی با hardlink (فضا فقط برای تغییرات):</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">today</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>rsync<span class="w"> </span>-aHAX<span class="w"> </span>--numeric-ids<span class="w"> </span>--link-dest<span class="o">=</span>/backup/latest<span class="w"> </span>/srv/data/<span class="w"> </span>/backup/<span class="nv">$today</span>/<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>ln<span class="w"> </span>-sfn<span class="w"> </span>/backup/<span class="nv">$today</span><span class="w"> </span>/backup/latest
+</span></code></pre></div>
+<h2 id="کپی-از-راه-دور">کپی از راه دور<a class="headerlink" href="#کپی-از-راه-دور" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>rsync<span class="w"> </span>-avh<span class="w"> </span>-e<span class="w"> </span>ssh<span class="w"> </span>/srv/data/<span class="w"> </span>backupuser@BACKUP_HOST:/backup/server1/
+</span></code></pre></div>
+<p>حساب پشتیبان را با حداقل مجوز لازم تنظیم کنید و دسترسی حذف/بازنویسی را محدود سازید (<code>command=</code> در <code>authorized_keys</code> یا حالت append-only). مهاجمی که سرور اصلی را بگیرد نباید بتواند بکاپ را هم پاک کند: <strong>سرور بکاپ باید بکاپ را «بکشد» (pull)</strong> یا فقط اجازهٔ افزودن داشته باشد.</p>
+<h2 id="ابزارهای-نسخهدار-و-رمزگذاریشده-restic-و-borg">ابزارهای نسخه‌دار و رمزگذاری‌شده: restic و borg<a class="headerlink" href="#ابزارهای-نسخهدار-و-رمزگذاریشده-restic-و-borg" title="Permanent link">&para;</a></h2>
+<p>نسبت به tar/rsync: deduplication، رمزگذاری، نسخه‌های متعدد، بررسی صحت و حذف سیاست‌محور.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># restic</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">RESTIC_REPOSITORY</span><span class="o">=</span>/backup/restic-repo<span class="w">     </span><span class="c1"># یا sftp:user@host:/path ، s3:...</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">RESTIC_PASSWORD_FILE</span><span class="o">=</span>/root/.restic-pass<span class="w">   </span><span class="c1"># مجوز 600</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>restic<span class="w"> </span>init
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>restic<span class="w"> </span>backup<span class="w"> </span>/srv/data<span class="w"> </span>/etc<span class="w"> </span>--exclude-caches
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>restic<span class="w"> </span>snapshots
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>restic<span class="w"> </span>check<span class="w">                                      </span><span class="c1"># صحت ساختار</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>restic<span class="w"> </span>check<span class="w"> </span>--read-data-subset<span class="o">=</span><span class="m">5</span>%<span class="w">                </span><span class="c1"># بخشی از داده را هم بخوان</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>restic<span class="w"> </span>restore<span class="w"> </span>latest<span class="w"> </span>--target<span class="w"> </span>/restore/test
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>restic<span class="w"> </span>forget<span class="w"> </span>--keep-daily<span class="w"> </span><span class="m">7</span><span class="w"> </span>--keep-weekly<span class="w"> </span><span class="m">4</span><span class="w"> </span>--keep-monthly<span class="w"> </span><span class="m">6</span><span class="w"> </span>--prune
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="c1"># borg</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>borg<span class="w"> </span>init<span class="w"> </span>--encryption<span class="o">=</span>repokey-blake2<span class="w"> </span>/backup/borg-repo
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>borg<span class="w"> </span>create<span class="w"> </span>--stats<span class="w"> </span>/backup/borg-repo::<span class="s1">'{hostname}-{now:%Y-%m-%d}'</span><span class="w"> </span>/srv/data<span class="w"> </span>/etc
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>borg<span class="w"> </span>list<span class="w"> </span>/backup/borg-repo
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>borg<span class="w"> </span>check<span class="w"> </span>/backup/borg-repo
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>borg<span class="w"> </span>prune<span class="w"> </span>--keep-daily<span class="w"> </span><span class="m">7</span><span class="w"> </span>--keep-weekly<span class="w"> </span><span class="m">4</span><span class="w"> </span>--keep-monthly<span class="w"> </span><span class="m">6</span><span class="w"> </span>/backup/borg-repo
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">رمز/کلید مخزن را جدا از سرور نگه دارید</p>
+<p>بدون رمز restic یا کلید borg، بکاپ بی‌مصرف است. نسخهٔ رمز را در گاوصندوق رمز یا جایی <strong>خارج از سرور</strong> نگه دارید و بازیابی با آن را آزمایش کنید.</p>
+</div>
+<h2 id="بکاپ-پایگاهداده">بکاپ پایگاه‌داده<a class="headerlink" href="#بکاپ-پایگاهداده" title="Permanent link">&para;</a></h2>
+<p>کپی خام فایل‌های دیتابیس زنده معمولاً <strong>ناسازگار</strong> است. از ابزار خود دیتابیس استفاده کنید:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># PostgreSQL</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>pg_dump<span class="w"> </span>-Fc<span class="w"> </span>-f<span class="w"> </span>/backup/db-<span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>.dump<span class="w"> </span>DBNAME
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>pg_dumpall<span class="w"> </span>--globals-only<span class="w"> </span>&gt;<span class="w"> </span>/backup/globals-<span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>.sql<span class="w">   </span><span class="c1"># نقش‌ها</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>pg_restore<span class="w"> </span>--list<span class="w"> </span>/backup/db-2026-01-01.dump<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w">        </span><span class="c1"># بررسی خوانا بودن</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># MySQL / MariaDB</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>mysqldump<span class="w"> </span>--single-transaction<span class="w"> </span>--routines<span class="w"> </span>--triggers<span class="w"> </span>--events<span class="w"> </span>DBNAME<span class="w"> </span><span class="p">|</span><span class="w"> </span>gzip<span class="w"> </span>&gt;<span class="w"> </span>/backup/db-<span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>.sql.gz
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>gzip<span class="w"> </span>-t<span class="w"> </span>/backup/db-2026-01-01.sql.gz
+</span></code></pre></div>
+<p>رمز را در خط فرمان نگذارید؛ از <code>~/.my.cnf</code> (600) یا <code>~/.pgpass</code> (600) استفاده کنید. برای حجم بزرگ: snapshot LVM/ZFS یا replica + dump از replica.</p>
+<h2 id="رمزگذاری">رمزگذاری<a class="headerlink" href="#رمزگذاری" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>age<span class="w"> </span>-r<span class="w"> </span>AGE_PUBLIC_KEY<span class="w"> </span>-o<span class="w"> </span>backup.tar.gz.age<span class="w"> </span>backup.tar.gz<span class="w">        </span><span class="c1"># با کلید عمومی</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>age<span class="w"> </span>-d<span class="w"> </span>-i<span class="w"> </span>key.txt<span class="w"> </span>backup.tar.gz.age<span class="w"> </span>&gt;<span class="w"> </span>backup.tar.gz
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>gpg<span class="w"> </span>--symmetric<span class="w"> </span>--cipher-algo<span class="w"> </span>AES256<span class="w"> </span>backup.tar.gz<span class="w">               </span><span class="c1"># با رمز</span>
+</span></code></pre></div>
+<h2 id="بررسی-پشتیبان">بررسی پشتیبان<a class="headerlink" href="#بررسی-پشتیبان" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sha256sum<span class="w"> </span>backup.tar.gz<span class="w"> </span>&gt;<span class="w"> </span>SHA256SUMS
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sha256sum<span class="w"> </span>-c<span class="w"> </span>SHA256SUMS
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>tar<span class="w"> </span>-tzf<span class="w"> </span>backup.tar.gz<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"آرشیو سالم"</span>
+</span></code></pre></div>
+<p>وجود فایل پشتیبان به معنی قابل‌بازیابی بودن آن نیست. بازیابی آزمایشی، ثبت مدت بازیابی و بررسی سازگاری برنامه/دیتابیس ضروری است.</p>
+<p><strong>تمرین بازیابی (ماهانه، مستند):</strong></p>
+<ol>
+<li>یک بکاپ تصادفی را روی ماشین/پوشهٔ <strong>جدا</strong> بازیابی کنید.</li>
+<li>دیتابیس را بالا بیاورید؛ چند رکورد/فایل مشخص را بررسی کنید.</li>
+<li>زمان صرف‌شده را ثبت کنید (RTO واقعی).</li>
+<li>نتیجه را در گزارش بنویسید؛ اگر شکست خورد، تیکت فوری بزنید.</li>
+</ol>
+<h2 id="اسکریپت-نمونه-بکاپ-قابلاتکا">اسکریپت نمونهٔ بکاپ (قابل‌اتکا)<a class="headerlink" href="#اسکریپت-نمونه-بکاپ-قابلاتکا" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="ch">#!/usr/bin/env bash</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># /usr/local/sbin/backup-data.sh   (نمونه — مسیرها را تطبیق دهید)</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nb">set</span><span class="w"> </span>-Eeuo<span class="w"> </span>pipefail
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nb">umask</span><span class="w"> </span><span class="m">077</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="nv">SRC</span><span class="o">=</span>/srv/data
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="nv">DEST</span><span class="o">=</span>/backup/data
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="nv">LOCK</span><span class="o">=</span>/var/lock/backup-data.lock
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="nv">TAG</span><span class="o">=</span>backup-data
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>log<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>logger<span class="w"> </span>-t<span class="w"> </span><span class="s2">"</span><span class="nv">$TAG</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span>user.notice<span class="w"> </span>--<span class="w"> </span><span class="s2">"</span><span class="nv">$*</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>date<span class="w"> </span>-Is<span class="k">)</span><span class="s2"> </span><span class="nv">$*</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>fail<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>logger<span class="w"> </span>-t<span class="w"> </span><span class="s2">"</span><span class="nv">$TAG</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span>user.err<span class="w"> </span>--<span class="w"> </span><span class="s2">"FAILED: </span><span class="nv">$*</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>date<span class="w"> </span>-Is<span class="k">)</span><span class="s2"> FAILED: </span><span class="nv">$*</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="nb">trap</span><span class="w"> </span><span class="s1">'fail "خطا در خط $LINENO"'</span><span class="w"> </span>ERR
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="nb">exec</span><span class="w"> </span><span class="m">9</span>&gt;<span class="s2">"</span><span class="nv">$LOCK</span><span class="s2">"</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>flock<span class="w"> </span>-n<span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>fail<span class="w"> </span><span class="s2">"نمونهٔ دیگری در حال اجراست"</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>mountpoint<span class="w"> </span>-q<span class="w"> </span><span class="s2">"</span><span class="nv">$SRC</span><span class="s2">"</span><span class="w">  </span><span class="o">||</span><span class="w"> </span>fail<span class="w"> </span><span class="s2">"</span><span class="nv">$SRC</span><span class="s2"> mount نیست"</span><span class="w">          </span><span class="c1"># جلوگیری از بکاپ/--delete روی مبدأ خالی</span>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>ls<span class="w"> </span>-A<span class="w"> </span><span class="s2">"</span><span class="nv">$SRC</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>fail<span class="w"> </span><span class="s2">"</span><span class="nv">$SRC</span><span class="s2"> خالی است"</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>mountpoint<span class="w"> </span>-q<span class="w"> </span><span class="s2">"</span><span class="nv">$DEST</span><span class="s2">"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>fail<span class="w"> </span><span class="s2">"</span><span class="nv">$DEST</span><span class="s2"> mount نیست"</span>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>log<span class="w"> </span><span class="s2">"شروع"</span>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>rsync<span class="w"> </span>-aHAX<span class="w"> </span>--numeric-ids<span class="w"> </span>--link-dest<span class="o">=</span><span class="s2">"</span><span class="nv">$DEST</span><span class="s2">/latest"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$SRC</span><span class="s2">/"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$DEST</span><span class="s2">/</span><span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span><span class="s2">/"</span>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>ln<span class="w"> </span>-sfn<span class="w"> </span><span class="s2">"</span><span class="nv">$DEST</span><span class="s2">/</span><span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$DEST</span><span class="s2">/latest"</span>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="nv">KEEP</span><span class="o">=</span><span class="m">14</span><span class="w">   </span><span class="c1"># آخرین ۱۴ نسخه نگه داشته می‌شود، نه «نسخه‌های جدیدتر از ۱۴ روز»:</span>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="w">          </span><span class="c1"># اگر چند هفته بکاپ شکست بخورد، با حذف بر اساس سن همهٔ نسخه‌های سالم پاک می‌شدند</span>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>mapfile<span class="w"> </span>-t<span class="w"> </span>old<span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>find<span class="w"> </span><span class="s2">"</span><span class="nv">$DEST</span><span class="s2">"</span><span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span>-name<span class="w"> </span><span class="s1">'20*'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span>-<span class="s2">"</span><span class="nv">$KEEP</span><span class="s2">"</span><span class="o">)</span>
+</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="si">${#</span><span class="nv">old</span><span class="p">[@]</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>--<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">old</span><span class="p">[@]</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>log<span class="w"> </span><span class="s2">"پایان موفق"</span>
+</span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>
+</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="c1"># هشدار «مرگ‌ضربانی»: اگر این پیام نیاید، مانیتورینگ باید هشدار بدهد</span>
+</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a><span class="c1"># curl -fsS -m 10 https://monitoring.example.internal/ping/backup-data &gt;/dev/null || true</span>
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>install<span class="w"> </span>-m<span class="w"> </span><span class="m">750</span><span class="w"> </span>backup-data.sh<span class="w"> </span>/usr/local/sbin/
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>/usr/local/sbin/backup-data.sh<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"OK"</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># زمان‌بندی: cron یا systemd timer ([زمان‌بندی](13-scheduling.md))</span>
+</span></code></pre></div>
+<p><strong>نظارت:</strong> شکست بکاپ بی‌صدا رایج‌ترین خطاست. «نبود سیگنال موفقیت» را هشدار کنید (heartbeat)، نه فقط «وجود خطا».</p>
+<h2 id="تست-خودکار-بازیابی-و-تازگی-بکاپ-restic">تست خودکار بازیابی و تازگی بکاپ (restic)<a class="headerlink" href="#تست-خودکار-بازیابی-و-تازگی-بکاپ-restic" title="Permanent link">&para;</a></h2>
+<p>بکاپ بی‌صدا شکست می‌خورد؛ این اسکریپت <strong>قدیمی‌بودن</strong> بکاپ و <strong>قابل‌بازیابی بودن</strong> آن را هر شب می‌سنجد (آزموده‌شده با restic 0.16 در سه حالت: سالم، snapshot قدیمی، مخزن خالی). <code>jq</code> لازم است.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="ch">#!/usr/bin/env bash</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1"># /usr/local/sbin/restic-verify.sh   (نمونه — مسیرها و آستانه را تطبیق دهید)</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nb">set</span><span class="w"> </span>-Eeuo<span class="w"> </span>pipefail
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">RESTIC_REPOSITORY</span><span class="o">=</span>/backup/restic-repo
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">RESTIC_PASSWORD_FILE</span><span class="o">=</span>/root/.restic-pass
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="nv">MAX_AGE_H</span><span class="o">=</span><span class="m">26</span><span class="w">                       </span><span class="c1"># بکاپ شبانه + کمی تلورانس</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="nv">TARGET</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="w"> </span>-d<span class="w"> </span>/var/tmp/restic-verify.XXXXXX<span class="k">)</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="nb">trap</span><span class="w"> </span><span class="s1">'rm -rf "$TARGET"'</span><span class="w"> </span>EXIT
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>fail<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>logger<span class="w"> </span>-t<span class="w"> </span>restic-verify<span class="w"> </span>-p<span class="w"> </span>user.err<span class="w"> </span>--<span class="w"> </span><span class="s2">"FAILED: </span><span class="nv">$*</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"FAILED: </span><span class="nv">$*</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="nv">last</span><span class="o">=</span><span class="k">$(</span>restic<span class="w"> </span>snapshots<span class="w"> </span>--json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">'map(.time) | max // empty'</span><span class="k">)</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$last</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>fail<span class="w"> </span><span class="s2">"هیچ snapshot ای وجود ندارد"</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="nv">age_h</span><span class="o">=</span><span class="k">$((</span><span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="k">$(</span>date<span class="w"> </span>+%s<span class="k">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">$(</span>date<span class="w"> </span>-d<span class="w"> </span><span class="s2">"</span><span class="nv">$last</span><span class="s2">"</span><span class="w"> </span>+%s<span class="k">)</span><span class="w"> </span><span class="o">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">3600</span><span class="w"> </span><span class="k">))</span>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$age_h</span><span class="s2">"</span><span class="w"> </span>-le<span class="w"> </span><span class="s2">"</span><span class="nv">$MAX_AGE_H</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>fail<span class="w"> </span><span class="s2">"آخرین snapshot </span><span class="si">${</span><span class="nv">age_h</span><span class="si">}</span><span class="s2"> ساعت پیش است"</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>restic<span class="w"> </span>check<span class="w"> </span>--read-data-subset<span class="o">=</span><span class="m">5</span>%<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span>fail<span class="w"> </span><span class="s2">"restic check"</span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="nv">SECONDS</span><span class="o">=</span><span class="m">0</span>
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>restic<span class="w"> </span>restore<span class="w"> </span>latest<span class="w"> </span>--target<span class="w"> </span><span class="s2">"</span><span class="nv">$TARGET</span><span class="s2">"</span><span class="w"> </span>--include<span class="w"> </span>/etc/hostname<span class="w"> </span>--verify<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span>fail<span class="w"> </span><span class="s2">"restore --verify"</span>
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="o">[</span><span class="w"> </span>-s<span class="w"> </span><span class="s2">"</span><span class="nv">$TARGET</span><span class="s2">/etc/hostname"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>fail<span class="w"> </span><span class="s2">"فایل شاهد در بازیابی نیست"</span>
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>logger<span class="w"> </span>-t<span class="w"> </span>restic-verify<span class="w"> </span>-p<span class="w"> </span>user.notice<span class="w"> </span>--<span class="w"> </span><span class="s2">"OK age=</span><span class="si">${</span><span class="nv">age_h</span><span class="si">}</span><span class="s2">h sample_restore=</span><span class="si">${</span><span class="nv">SECONDS</span><span class="si">}</span><span class="s2">s"</span>
+</span></code></pre></div>
+<ul>
+<li>restic مسیر کامل را زیر <code>--target</code> بازسازی می‌کند (<code>$TARGET/etc/hostname</code>)؛ برای همین فایل شاهد با مسیر مطلق بررسی می‌شود.</li>
+<li>زمان نمونه‌بازیابی، <strong>RTO واقعی نیست</strong>؛ بازیابی کامل ماهانه را هم مطابق «تمرین بازیابی» انجام دهید.</li>
+<li><code>--read-data-subset=5%</code> فقط بخشی از داده را می‌خواند. برای پوشش کامل و قابل‌پیش‌بینی، از شکل <code>--read-data-subset=N/20</code> استفاده کنید و <code>N</code> را با روز ماه بچرخانید تا داده‌ها در یک چرخه کامل خوانده شوند.</li>
+</ul>
+<h2 id="بکاپ-فقطافزودنی-append-only">بکاپ فقط‌افزودنی (append-only)<a class="headerlink" href="#بکاپ-فقطافزودنی-append-only" title="Permanent link">&para;</a></h2>
+<p>هدف: مهاجمی که سرور اصلی را بگیرد نتواند بکاپ‌ها را پاک کند. روی <strong>سرور بکاپ</strong>، کلید SSH کلاینت را به یک فرمان ثابت محدود کنید:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a># ~backup/.ssh/authorized_keys (روی سرور بکاپ)
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>command="borg serve --append-only --restrict-to-path /backup/borg/server1",restrict ssh-ed25519 AAAA... backup@server1
+</span></code></pre></div>
+<p>در این حالت <code>borg prune</code> از سمت کلاینت هم <strong>چیزی را واقعاً پاک نمی‌کند</strong>؛ حذف نسخه‌های قدیمی (prune/compact) را از یک ماشین مدیریتی مورد اعتماد با دسترسی کامل انجام دهید. معادل restic: <code>rest-server --append-only --private-repos</code>. این بخش در sandbox آزموده نشده؛ بعد از راه‌اندازی، تلاش برای پاک کردن از سمت کلاینت را عمداً امتحان کنید و شکست‌خوردنش را ببینید.</p>
+<h2 id="زمانبندی-با-systemd-و-هشدار-شکست">زمان‌بندی با systemd و هشدار شکست<a class="headerlink" href="#زمانبندی-با-systemd-و-هشدار-شکست" title="Permanent link">&para;</a></h2>
+<p>نسخهٔ service/timer برای اسکریپت بالا (با <code>systemd-analyze verify</code> بررسی شد):</p>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># /etc/systemd/system/backup-data.service</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="k">[Unit]</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="na">Description</span><span class="o">=</span><span class="s">Data backup</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="na">OnFailure</span><span class="o">=</span><span class="s">backup-failed@%n.service</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="k">[Service]</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/sbin/backup-data.sh</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="na">Nice</span><span class="o">=</span><span class="s">10</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="na">IOSchedulingClass</span><span class="o">=</span><span class="s">idle</span>
+</span></code></pre></div>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># /etc/systemd/system/backup-failed@.service  — به‌جای logger، ایمیل/وب‌هوک واقعی بگذارید</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="k">[Unit]</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="na">Description</span><span class="o">=</span><span class="s">Alert: %i failed</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="k">[Service]</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/bin/logger -t backup-alert -p user.crit "unit %i failed"</span>
+</span></code></pre></div>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># /etc/systemd/system/backup-data.timer</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="k">[Unit]</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="na">Description</span><span class="o">=</span><span class="s">Daily data backup</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="k">[Timer]</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="na">OnCalendar</span><span class="o">=</span><span class="s">*-*-* 02:30:00</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="na">RandomizedDelaySec</span><span class="o">=</span><span class="s">10m</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="na">Persistent</span><span class="o">=</span><span class="s">true</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="k">[Install]</span>
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="na">WantedBy</span><span class="o">=</span><span class="s">timers.target</span>
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>backup-data.timer
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>systemctl<span class="w"> </span>list-timers<span class="w"> </span>backup-data.timer
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>backup-data.service<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>backup-data<span class="w"> </span>-n<span class="w"> </span><span class="m">20</span><span class="w">     </span><span class="c1"># یک بار دستی امتحان کنید</span>
+</span></code></pre></div>
+<p><code>OnFailure=</code> فقط وقتی اجرا شود که سرویس <strong>شکست بخورد</strong>؛ اگر timer اصلاً اجرا نشود (غیرفعال، ساعت اشتباه) هشداری نمی‌آید. به همین دلیل heartbeat یا بررسی «تازگی بکاپ» (اسکریپت بالا) هم لازم است.</p>
+<h2 id="دیتابیس-بازیابی-آزمایشی-و-بازیابی-نقطهای">دیتابیس: بازیابی آزمایشی و بازیابی نقطه‌ای<a class="headerlink" href="#دیتابیس-بازیابی-آزمایشی-و-بازیابی-نقطهای" title="Permanent link">&para;</a></h2>
+<p>این بخش در sandbox آزموده نشده؛ روی ماشین آزمایشی امتحان کنید.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># تست بازیابی dump روی دیتابیس موقت (نه روی production)</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>createdb<span class="w"> </span>restore_test
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>pg_restore<span class="w"> </span>-d<span class="w"> </span>restore_test<span class="w"> </span>--no-owner<span class="w"> </span>/backup/db-2026-01-01.dump
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>psql<span class="w"> </span>-d<span class="w"> </span>restore_test<span class="w"> </span>-c<span class="w"> </span><span class="s1">'SELECT count(*) FROM important_table;'</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>dropdb<span class="w"> </span>restore_test
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="c1"># بکاپ پایه برای بازیابی تا لحظهٔ دلخواه (PITR) — همراه با آرشیو WAL (archive_mode / archive_command)</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>pg_basebackup<span class="w"> </span>-D<span class="w"> </span>/backup/pgbase<span class="w"> </span>-Ft<span class="w"> </span>-z<span class="w"> </span>-X<span class="w"> </span>stream<span class="w"> </span>-P
+</span></code></pre></div>
+<p>dump منطقی فقط تا لحظهٔ خودش بازمی‌گردد. اگر RPO شما از «شبانه» کمتر است، آرشیو WAL (PostgreSQL) یا binlog (MySQL/MariaDB) لازم است و <strong>بازیابی تا یک لحظهٔ مشخص باید تمرین شود</strong>.</p>
+<h2 id="جدول-rporto-سرویسها">جدول RPO/RTO سرویس‌ها<a class="headerlink" href="#جدول-rporto-سرویسها" title="Permanent link">&para;</a></h2>
+<p>این جدول را برای هر سرویس مهم پر کنید و ماهانه بازبینی کنید؛ «آخرین تست» خالی یعنی آن سرویس بکاپ ندارد.</p>
+<table>
+<thead>
+<tr>
+<th>سرویس</th>
+<th>RPO</th>
+<th>RTO</th>
+<th>روش</th>
+<th>نسخهٔ بیرونی</th>
+<th>آخرین تست بازیابی</th>
+<th>مالک</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(نام سرویس)</td>
+<td>۱ ساعت</td>
+<td>۲ ساعت</td>
+<td>(مثلاً WAL + dump شبانه)</td>
+<td>(محل)</td>
+<td>(تاریخ)</td>
+<td>(نام)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="خطاهای-رایج">خطاهای رایج<a class="headerlink" href="#خطاهای-رایج" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>نشانه</th>
+<th>علت احتمالی</th>
+<th>روش بررسی</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بکاپ بی‌خطا ولی ناقص</td>
+<td>مبدأ mount نبود</td>
+<td><code>findmnt</code> ؛ شرط <code>mountpoint -q</code> در اسکریپت</td>
+</tr>
+<tr>
+<td>بازیابی دیتابیس خراب</td>
+<td>کپی خام فایل زنده</td>
+<td><code>pg_dump</code>/<code>mysqldump --single-transaction</code></td>
+</tr>
+<tr>
+<td><code>tar: Removing leading '/'</code></td>
+<td>عادی؛ مسیر مطلق نسبی ذخیره شد</td>
+<td>بازیابی با <code>-C</code></td>
+</tr>
+<tr>
+<td>مالکیت بعد از بازیابی اشتباه</td>
+<td>نام کاربر ≠ UID در سیستم جدید</td>
+<td><code>--numeric-owner</code></td>
+</tr>
+<tr>
+<td>فضای بکاپ پر شد</td>
+<td>نگهداری/prune نیست</td>
+<td>سیاست retention ؛ <code>restic forget --prune</code></td>
+</tr>
+<tr>
+<td>بکاپ هست ولی رمز گم شد</td>
+<td>کلید مخزن جدا نگه‌داری نشده</td>
+<td>گاوصندوق رمز؛ تست بازیابی</td>
+</tr>
+<tr>
+<td>cron بکاپ اجرا نمی‌شود</td>
+<td>PATH/مجوز/ساعت</td>
+<td><a href="../13-scheduling/">زمان‌بندی</a></td>
+</tr>
+<tr>
+<td>همهٔ نسخه‌های قدیمی پاک شده‌اند</td>
+<td>retention بر اساس سن + چند هفته شکست</td>
+<td>نگهداری بر اساس تعداد؛ هشدار تازگی</td>
+</tr>
+<tr>
+<td><code>prune</code> از کلاینت کار می‌کند</td>
+<td>بکاپ append-only نیست</td>
+<td><code>authorized_keys</code> با <code>--append-only</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="سیاست-پشتیبانگیری">سیاست پشتیبان‌گیری<a class="headerlink" href="#سیاست-پشتیبانگیری" title="Permanent link">&para;</a></h2>
+<ul>
+<li>حداقل یک نسخه جدا از سرور اصلی (و یک نسخه بیرون از سایت) نگهداری شود.</li>
+<li>نسخه‌ها رمزگذاری و دسترسی آن‌ها محدود شود.</li>
+<li>دوره نگهداری و RPO/RTO مشخص باشد.</li>
+<li>از دیتابیس زنده با روش سازگار با همان دیتابیس پشتیبان بگیرید.</li>
+<li>بازیابی را به‌صورت دوره‌ای تمرین و مستند کنید.</li>
+<li>بکاپ در برابر حذف تصادفی/باج‌افزار محافظت شود (append-only، immutable، حساب جدا).</li>
+<li><code>/etc</code>، فهرست بسته‌ها، کرون‌ها و پیکربندی سرویس‌ها هم بکاپ شوند، نه فقط «داده».</li>
+</ul>
+<h2 id="خلاصه-اجرایی">خلاصهٔ اجرایی<a class="headerlink" href="#خلاصه-اجرایی" title="Permanent link">&para;</a></h2>
+<ol>
+<li>۳-۲-۱ + RPO/RTO نوشته‌شده.</li>
+<li><code>--delete</code>/prune فقط با بررسی mount و dry-run.</li>
+<li>دیتابیس با ابزار خودش؛ رمز مخزن بیرون از سرور.</li>
+<li>ماهانه بازیابی را <strong>واقعاً</strong> تمرین و زمان بگیرید.</li>
+<li>عدم‌دریافت سیگنال موفقیت = هشدار.</li>
+<li>نگهداری بر اساس «تعداد نسخه» نه «سن»؛ تازگی و قابل‌بازیابی بودن بکاپ را هر شب خودکار بسنجید.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  برگشت به بالا
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="پاورقی" >
+        
+          
+          <a href="../13-scheduling/" class="md-footer__link md-footer__link--prev" aria-label="قبلی: زمان‌بندی">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                قبلی
+              </span>
+              <div class="md-ellipsis">
+                زمان‌بندی
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../07-networking/" class="md-footer__link md-footer__link--next" aria-label="بعدی: شبکه">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                بعدی
+              </span>
+              <div class="md-ellipsis">
+                شبکه
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      نسخهٔ 5.4.0
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.path", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\u06a9\u067e\u06cc \u0634\u062f", "clipboard.copy": "\u06a9\u067e\u06cc \u06a9\u0631\u062f\u0646", "search.result.more.one": "1 \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.more.other": "# \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.none": "\u0633\u0646\u062f\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f", "search.result.one": "1 \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.other": "# \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.placeholder": "\u0628\u0631\u0627\u06cc \u0634\u0631\u0648\u0639 \u062c\u0633\u062a\u062c\u0648 \u062a\u0627\u06cc\u067e \u06a9\u0646\u06cc\u062f", "search.result.term.missing": "\u0645\u0648\u062c\u0648\u062f \u0646\u06cc\u0633\u062a", "select.version": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0648\u06cc\u0631\u0627\u06cc\u0634"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../assets/js/handbook.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2084 @@
+
+<!doctype html>
+<html lang="fa" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="راهنمای عملیاتی مدیریت، نگهداری، امنیت و عیب‌یابی سیستم‌های لینوکس به زبان فارسی.">
+      
+      
+        <meta name="author" content="Linux Sysadmin Handbook">
+      
+      
+      
+        <link rel="prev" href="../06-storage-filesystems/">
+      
+      
+        <link rel="next" href="../13-scheduling/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>کارایی سیستم - کتابچه راهنمای مدیر سیستم لینوکس</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="rtl" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#۱۲-کارایی-و-منابع-سیستم" class="md-skip">
+          پرش به محتویات
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="سرتیتر">
+    <a href=".." title="کتابچه راهنمای مدیر سیستم لینوکس" class="md-header__button md-logo" aria-label="کتابچه راهنمای مدیر سیستم لینوکس" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19-.39.31-.75.29-1.14-.01-.2-.16-1.53-.92-1.95-1.19-.48-.31-.45-.7.08-.92 1.64-.69 3.28-.64 4.91.03.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.3 4.3 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01-.2-.88-.29-1.78-.7-2.61-.73-1.58-2-2.4-3.84-2.47-1.81.05-3.16.81-3.95 2.4-.21.43-.36.88-.46 1.34-.17.76-.32 1.55-.5 2.32-.15.65-.45 1.21-.96 1.71-1.61 1.57-2.9 3.37-3.88 5.35-.14.29-.28.58-.37.88-.19.66.29 1.12.99.96.44-.09.88-.18 1.3-.31.41-.15.57-.05.67.35.65 2.15 2.07 3.66 4.24 4.5 4.12 1.56 8.93-.66 9.97-4.58.07-.27.17-.37.47-.27.46.14.93.24 1.4.35.49.09.85-.16.92-.64.03-.26-.06-.49-.16-.73"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            کتابچه راهنمای مدیر سیستم لینوکس
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              کارایی سیستم
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="فعال‌سازی حالت تاریک"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="فعال‌سازی حالت تاریک" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="فعال‌سازی حالت روشن"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="فعال‌سازی حالت روشن" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="جستجو" placeholder="جستجو" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="جستجو">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="هم‌رسانی" aria-label="هم‌رسانی" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="بازنشانی" aria-label="بازنشانی" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            راه‌اندازی جستجو
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="زبانه‌ها" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  خانه
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../22-community-culture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  فرهنگ دانش مشترک
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../01-basics/" class="md-tabs__link">
+          
+  
+  
+  مبانی لینوکس
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../06-storage-filesystems/" class="md-tabs__link">
+          
+  
+  
+  ذخیره‌سازی و منابع
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../07-networking/" class="md-tabs__link">
+          
+  
+  
+  شبکه و دسترسی راه دور
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../10-security-firewall/" class="md-tabs__link">
+          
+  
+  
+  امنیت و عیب‌یابی
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../15-docker/" class="md-tabs__link">
+          
+  
+  
+  زیرساخت و ابزارها
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="هدایت" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="کتابچه راهنمای مدیر سیستم لینوکس" class="md-nav__button md-logo" aria-label="کتابچه راهنمای مدیر سیستم لینوکس" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19-.39.31-.75.29-1.14-.01-.2-.16-1.53-.92-1.95-1.19-.48-.31-.45-.7.08-.92 1.64-.69 3.28-.64 4.91.03.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.3 4.3 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01-.2-.88-.29-1.78-.7-2.61-.73-1.58-2-2.4-3.84-2.47-1.81.05-3.16.81-3.95 2.4-.21.43-.36.88-.46 1.34-.17.76-.32 1.55-.5 2.32-.15.65-.45 1.21-.96 1.71-1.61 1.57-2.9 3.37-3.88 5.35-.14.29-.28.58-.37.88-.19.66.29 1.12.99.96.44-.09.88-.18 1.3-.31.41-.15.57-.05.67.35.65 2.15 2.07 3.66 4.24 4.5 4.12 1.56 8.93-.66 9.97-4.58.07-.27.17-.37.47-.27.46.14.93.24 1.4.35.49.09.85-.16.92-.64.03-.26-.06-.49-.16-.73"/></svg>
+
+    </a>
+    کتابچه راهنمای مدیر سیستم لینوکس
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    خانه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../22-community-culture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    فرهنگ دانش مشترک
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مبانی لینوکس
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    مبانی لینوکس
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مفاهیم پایه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-files-directories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    فایل‌ها و دایرکتوری‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-users-permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    کاربران و مجوزها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-processes-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    پردازش‌ها و سرویس‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-packages-repositories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    بسته‌ها و مخازن
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ذخیره‌سازی و منابع
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ذخیره‌سازی و منابع
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-storage-filesystems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    دیسک و فایل‌سیستم
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    کارایی سیستم
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    کارایی سیستم
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      فهرست موضوعات
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#راهنمای-سریع" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        راهنمای سریع
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#تصویر-۶۰-ثانیهای" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        تصویر ۶۰ ثانیه‌ای
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-و-load" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU و Load
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#حافظه" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        حافظه
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#دیسک-و-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        دیسک و I/O
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#فشار-منابع-psi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        فشار منابع (PSI)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#سابقه-با-sar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        سابقه با sar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#محدودیت-و-oom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        محدودیت و OOM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#پردازشهای-گیرکرده-در-io-حالت-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        پردازش‌های گیرکرده در I/O (حالت D)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#حافظه-عمیقتر" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        حافظه (عمیق‌تر)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="حافظه (عمیق‌تر)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#oom-داخل-cgroup-سرویس-systemd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OOM داخل cgroup (سرویس systemd)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#تفسیر-iostat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        تفسیر iostat
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-وقفه-context-switch-و-throttle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU: وقفه، context switch و throttle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#مشکل-گذرا-ثبت-شواهد-با-زمانبندی-محدود" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        مشکل گذرا: ثبت شواهد با زمان‌بندی محدود
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#baseline-عادی-چه-عددی-است" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        baseline: «عادی» چه عددی است؟
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#جمعآوری-وضعیت-سریع" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        جمع‌آوری وضعیت سریع
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ردیابی-عمیق-با-احتیاط" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ردیابی عمیق (با احتیاط)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#نشانه--علت-محتمل" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        نشانه ← علت محتمل
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#خلاصه-اجرایی" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        خلاصهٔ اجرایی
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-scheduling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    زمان‌بندی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-backup-archive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    پشتیبان‌گیری و آرشیو
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شبکه و دسترسی راه دور
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    شبکه و دسترسی راه دور
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-networking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شبکه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-ssh-remote/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH و مدیریت راه دور
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-web-dns-tls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    وب، DNS و TLS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    امنیت و عیب‌یابی
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    امنیت و عیب‌یابی
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-security-firewall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    امنیت و فایروال
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-logs-troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    لاگ و عیب‌یابی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18-emergency-runbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    راهنمای رخداد
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20-infrastructure-runbooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    راهنماهای عملیاتی زیرساخت
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../21-services-for-noc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    چک‌لیست روزانه NOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    زیرساخت و ابزارها
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    زیرساخت و ابزارها
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-virtualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مجازی‌سازی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-bash-text/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    متون و Bash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19-cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    برگه تقلب دستورات
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="هدایت" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href=".." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    خانه
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../06-storage-filesystems/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    ذخیره‌سازی و منابع
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="۱۲-کارایی-و-منابع-سیستم">۱۲. کارایی و منابع سیستم<a class="headerlink" href="#۱۲-کارایی-و-منابع-سیستم" title="Permanent link">&para;</a></h1>
+<p>روش پایه: برای هر منبع (CPU، حافظه، دیسک، شبکه) سه چیز را بپرسید — <strong>Utilization</strong> (چقدر مشغول است)، <strong>Saturation</strong> (آیا صف دارد/کسی منتظر است)، <strong>Errors</strong> (خطا دارد؟). این روش (USE) از حدس‌زدن جلوگیری می‌کند. <strong>قبل از restart، شواهد را ذخیره کنید</strong>.</p>
+<h2 id="راهنمای-سریع">راهنمای سریع<a class="headerlink" href="#راهنمای-سریع" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>فرمان</th>
+<th>کاربرد</th>
+<th>ریسک</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uptime</code> / <code>top</code> / <code>vmstat 1 5</code></td>
+<td>بار و وضعیت کلی</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>mpstat -P ALL 1 5</code> / <code>pidstat 1 5</code></td>
+<td>CPU به تفکیک هسته/پردازش</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>free -h</code> / <code>/proc/meminfo</code> / <code>swapon --show</code></td>
+<td>حافظه</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>iostat -xz 1 5</code> / <code>iotop -oPa</code></td>
+<td>دیسک</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>sar -u/-r/-d/-n DEV</code></td>
+<td><strong>سابقهٔ</strong> منابع</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>cat /proc/pressure/*</code></td>
+<td>فشار منابع (PSI)</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>strace -c -p PID</code> / <code>perf top</code></td>
+<td>ردیابی عمیق</td>
+<td><em class="rw">تغییر</em> (پردازش را کند می‌کند)</td>
+</tr>
+<tr>
+<td><code>sysctl -w</code> / تغییر limit</td>
+<td>تنظیم هسته</td>
+<td><em class="rw">تغییر</em></td>
+</tr>
+<tr>
+<td><code>echo 3 &gt; /proc/sys/vm/drop_caches</code></td>
+<td>تخلیهٔ کش</td>
+<td><em class="rw">تغییر</em> (<strong>راه‌حل نیست</strong>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="تصویر-۶۰-ثانیهای">تصویر ۶۰ ثانیه‌ای<a class="headerlink" href="#تصویر-۶۰-ثانیهای" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>uptime
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>dmesg<span class="w"> </span>-T<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>vmstat<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>mpstat<span class="w"> </span>-P<span class="w"> </span>ALL<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>pidstat<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>iostat<span class="w"> </span>-xz<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>free<span class="w"> </span>-h
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>sar<span class="w"> </span>-n<span class="w"> </span>DEV<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>sar<span class="w"> </span>-n<span class="w"> </span>TCP,ETCP<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>top<span class="w"> </span>-bn1<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-15
+</span></code></pre></div>
+<h2 id="cpu-و-load">CPU و Load<a class="headerlink" href="#cpu-و-load" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>uptime
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>nproc
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>top
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>mpstat<span class="w"> </span>-P<span class="w"> </span>ALL<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>pidstat<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>ps<span class="w"> </span>-eo<span class="w"> </span>pid,comm,%cpu,%mem<span class="w"> </span>--sort<span class="o">=</span>-%cpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>top<span class="w"> </span>-H<span class="w"> </span>-p<span class="w"> </span>PID<span class="w">            </span><span class="c1"># نخ‌های یک پردازش</span>
+</span></code></pre></div>
+<p><code>mpstat</code> و <code>pidstat</code> معمولاً از بسته <code>sysstat</code> هستند. Load average تعداد کارهای در حال اجرا <strong>یا منتظر منابع (شامل I/O)</strong> را منعکس می‌کند؛ آن را نسبت به تعداد CPUها و روند زمانی (۱، ۵، ۱۵ دقیقه) تفسیر کنید.</p>
+<table>
+<thead>
+<tr>
+<th>الگو</th>
+<th>معنی</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>load بالا، CPU <code>us/sy</code> بالا</td>
+<td>CPU اشباع</td>
+</tr>
+<tr>
+<td>load بالا، CPU <strong>بیکار</strong>، <code>wa</code> بالا</td>
+<td>منتظر دیسک/NFS (پردازش‌های <code>D</code>)</td>
+</tr>
+<tr>
+<td><code>st</code> (steal) بالا در VM</td>
+<td>میزبان مجازی منابع را از ما می‌گیرد؛ به ارائه‌دهنده/host بگویید</td>
+</tr>
+<tr>
+<td>یک هسته ۱۰۰٪، بقیه بیکار</td>
+<td>برنامه تک‌نخی؛ افزودن هسته کمک نمی‌کند</td>
+</tr>
+<tr>
+<td><code>sy</code> (system) بالا</td>
+<td>تعداد زیاد syscall / interrupt / context switch</td>
+</tr>
+</tbody>
+</table>
+<h2 id="حافظه">حافظه<a class="headerlink" href="#حافظه" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>free<span class="w"> </span>-h
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>vmstat<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>ps<span class="w"> </span>-eo<span class="w"> </span>pid,comm,rss,%mem<span class="w"> </span>--sort<span class="o">=</span>-rss<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'MemTotal|MemAvailable|SwapTotal|SwapFree'</span><span class="w"> </span>/proc/meminfo
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>swapon<span class="w"> </span>--show
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>sudo<span class="w"> </span>slabtop<span class="w"> </span>-o<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-15<span class="w">         </span><span class="c1"># مصرف حافظهٔ کرنل</span>
+</span></code></pre></div>
+<p>در لینوکس حافظه آزاد کم به‌تنهایی نشانه مشکل نیست؛ cache/buffer قابل استفاده مجدد است. به <strong><code>available</code></strong>، swap، فشار حافظه و OOM توجه کنید. نشانهٔ مشکل واقعی: <code>available</code> نزدیک صفر + <code>si/so</code> (swap in/out) پیوسته غیرصفر در <code>vmstat</code> + پیام OOM.</p>
+<div class="admonition warning">
+<p class="admonition-title">drop_caches راه‌حل نیست</p>
+<p><code>echo 3 &gt; /proc/sys/vm/drop_caches</code> فقط کش را خالی و کارایی را موقتاً بدتر می‌کند؛ مشکل واقعی (نشت حافظه یا کمبود) را حل نمی‌کند.</p>
+</div>
+<h2 id="دیسک-و-io">دیسک و I/O<a class="headerlink" href="#دیسک-و-io" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>iostat<span class="w"> </span>-xz<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>iotop<span class="w"> </span>-oPa
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>df<span class="w"> </span>-hT
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>du<span class="w"> </span>-xhd1<span class="w"> </span>/var<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-h
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-k<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-Ei<span class="w"> </span><span class="s1">'oom|I/O error|reset|timeout'</span>
+</span></code></pre></div>
+<p><code>iostat</code> و <code>iotop</code> به بسته‌های مربوطه نیاز دارند. ستون‌های مهم <code>iostat -x</code>: <code>r_await/w_await</code> (تأخیر ms)، <code>aqu-sz</code> (طول صف)، <code>%util</code>. درصد utilization یا latency باید با نوع ذخیره‌ساز، workload و baseline مقایسه شود: <code>%util</code> نزدیک ۱۰۰ روی دیسک مکانیکی = اشباع؛ روی NVMe/SSD موازی، <code>%util</code> به‌تنهایی معیار خوبی نیست، به <code>await</code> و <code>aqu-sz</code> نگاه کنید.</p>
+<h2 id="فشار-منابع-psi">فشار منابع (PSI)<a class="headerlink" href="#فشار-منابع-psi" title="Permanent link">&para;</a></h2>
+<p>هسته‌های ۴.۲۰+ مستقیم می‌گویند «چه مدت کارها منتظر منبع بودند»:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cat<span class="w"> </span>/proc/pressure/cpu<span class="w"> </span>/proc/pressure/memory<span class="w"> </span>/proc/pressure/io
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># some avg10=0.00 avg60=0.00 ...   ← avg10 بالای چند درصد = تأخیر محسوس</span>
+</span></code></pre></div>
+<h2 id="سابقه-با-sar">سابقه با sar<a class="headerlink" href="#سابقه-با-sar" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>sysstat<span class="w">       </span><span class="c1"># Debian: در /etc/default/sysstat مقدار ENABLED="true"</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sar<span class="w"> </span>-u<span class="w">                      </span><span class="c1"># CPU امروز</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>sar<span class="w"> </span>-r<span class="w">                      </span><span class="c1"># حافظه</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>sar<span class="w"> </span>-d<span class="w"> </span>-p<span class="w">                   </span><span class="c1"># دیسک</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>sar<span class="w"> </span>-n<span class="w"> </span>DEV<span class="w">                  </span><span class="c1"># شبکه</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>sar<span class="w"> </span>-q<span class="w">                      </span><span class="c1"># load / صف اجرا</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>sar<span class="w"> </span>-u<span class="w"> </span>-f<span class="w"> </span>/var/log/sysstat/sa29<span class="w">        </span><span class="c1"># روز ۲۹ ماه (RHEL: /var/log/sa/sa29)</span>
+</span></code></pre></div>
+<p>بدون جمع‌آوری سابقه، به سؤال «ساعت ۳ شب چه شد؟» نمی‌توان جواب داد؛ <code>sysstat</code> را همه‌جا فعال کنید.</p>
+<h2 id="محدودیت-و-oom">محدودیت و OOM<a class="headerlink" href="#محدودیت-و-oom" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>systemctl<span class="w"> </span>show<span class="w"> </span>myservice<span class="w"> </span>-p<span class="w"> </span>MemoryMax<span class="w"> </span>-p<span class="w"> </span>CPUQuota<span class="w"> </span>-p<span class="w"> </span>LimitNOFILE<span class="w"> </span>-p<span class="w"> </span>TasksMax
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>journalctl<span class="w"> </span>-k<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iE<span class="w"> </span><span class="s1">'out of memory|killed process'</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>dmesg<span class="w"> </span>-T<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iE<span class="w"> </span><span class="s1">'out of memory|oom-kill'</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>systemd-cgtop
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nb">ulimit</span><span class="w"> </span>-n<span class="w">                       </span><span class="c1"># فایل باز مجاز برای این شِل</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>cat<span class="w"> </span>/proc/PID/limits<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s1">'open files'</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>ls<span class="w"> </span>/proc/PID/fd<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="w">         </span><span class="c1"># فایل باز فعلی</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>sysctl<span class="w"> </span>vm.swappiness<span class="w"> </span>fs.file-max
+</span></code></pre></div>
+<p>در محیط‌های cgroup/container، محدودیت سرویس ممکن است با ظرفیت کلی سرور متفاوت باشد (OOM در cgroup بدون پر شدن RAM کل). پیش از افزایش RAM یا restart، شواهد را جمع‌آوری کنید. خطای <code>Too many open files</code>: <code>LimitNOFILE</code> سرویس را در unit/drop-in افزایش دهید (<a href="../04-processes-services/">سرویس‌ها</a>)، نه فقط <code>ulimit</code> در شِل.</p>
+<h2 id="پردازشهای-گیرکرده-در-io-حالت-d">پردازش‌های گیرکرده در I/O (حالت D)<a class="headerlink" href="#پردازشهای-گیرکرده-در-io-حالت-d" title="Permanent link">&para;</a></h2>
+<p>وقتی load بالاست ولی CPU بیکار است، پردازش‌های <code>D</code> (انتظار غیرقابل‌قطع) را با محل انتظارشان ببینید:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>ps<span class="w"> </span>-eo<span class="w"> </span>state,pid,wchan:32,comm<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'$1=="D"'</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>cat<span class="w"> </span>/proc/PID/stack<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w">          </span><span class="c1"># نیاز به root؛ محل انتظار در هسته</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-k<span class="w"> </span>--since<span class="w"> </span><span class="s1">'-10min'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-Ei<span class="w"> </span><span class="s1">'hung task|blocked for more than'</span>
+</span></code></pre></div>
+<p>اگر چند پردازش مدت طولانی روی NFS، دیسک یا multipath در حالت <code>D</code> هستند، <code>kill -9</code> اثر ندارد؛ باید منبع ذخیره‌سازی را درست کنید.</p>
+<h2 id="حافظه-عمیقتر">حافظه (عمیق‌تر)<a class="headerlink" href="#حافظه-عمیقتر" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># چه پردازش‌هایی swap مصرف کرده‌اند؟</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>/proc/<span class="o">[</span><span class="m">0</span>-9<span class="o">]</span>*/status<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'/^Name:/{n=$2} /^VmSwap:/{s=$2} END{if(s&gt;0)print s" kB",n}'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-nr<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'Dirty|Writeback:'</span><span class="w"> </span>/proc/meminfo<span class="w">     </span><span class="c1"># داده‌ای که هنوز روی دیسک نوشته نشده</span>
+</span></code></pre></div>
+<ul>
+<li><code>Dirty</code> بزرگ و <code>wa</code> بالا ← نوشتن سنگین و دیسک کند؛ <a href="#دیسک-و-io">دیسک و I/O</a> را ببینید.</li>
+<li>swap پر ولی <code>si/so</code> در <code>vmstat</code> صفر: پردازش‌های بی‌کار به swap رفته‌اند و معمولاً مشکل نیست؛ تعیین‌کننده <strong>swap in/out پیوسته</strong> است.</li>
+</ul>
+<h3 id="oom-داخل-cgroup-سرویس-systemd">OOM داخل cgroup (سرویس systemd)<a class="headerlink" href="#oom-داخل-cgroup-سرویس-systemd" title="Permanent link">&para;</a></h3>
+<p>سرویس می‌تواند با <code>MemoryMax</code> کشته شود، در حالی که RAM کل سرور خالی است (فقط روی cgroup v2؛ مسیرها را روی سیستم خودتان بررسی کنید):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>systemctl<span class="w"> </span>show<span class="w"> </span>myapp.service<span class="w"> </span>-p<span class="w"> </span>MemoryCurrent<span class="w"> </span>-p<span class="w"> </span>MemoryMax
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>cat<span class="w"> </span>/sys/fs/cgroup/system.slice/myapp.service/memory.events<span class="w">   </span><span class="c1"># شمارندهٔ oom و oom_kill</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>cat<span class="w"> </span>/sys/fs/cgroup/system.slice/myapp.service/memory.pressure
+</span></code></pre></div>
+<p><code>oom_kill</code> غیرصفر در <code>memory.events</code> یعنی سقف حافظهٔ سرویس رد شده است؛ نشت حافظه را بررسی کنید و بعد سقف را تغییر دهید (<a href="../04-processes-services/">drop-in</a>).</p>
+<h2 id="تفسیر-iostat">تفسیر iostat<a class="headerlink" href="#تفسیر-iostat" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>الگو در <code>iostat -xz 1</code></th>
+<th>معنی</th>
+<th>اقدام</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>await</code> بالا، <code>aqu-sz</code> بزرگ، <code>%util</code> ~۱۰۰ روی HDD</td>
+<td>دیسک اشباع</td>
+<td>پردازش مسبب را با <code>pidstat -d 1</code> یا <code>iotop -oPa</code> پیدا کنید</td>
+</tr>
+<tr>
+<td><code>await</code> بالا ولی <code>aqu-sz</code> کوچک</td>
+<td>خود دستگاه کند است (خرابی، RAID rebuild، SAN)</td>
+<td><code>smartctl</code> ، <code>/proc/mdstat</code> ، لاگ کرنل</td>
+</tr>
+<tr>
+<td>فقط <code>w_await</code> بالا</td>
+<td>فشار نوشتن / sync / journal</td>
+<td>بررسی <code>fsync</code> برنامه، <code>Dirty</code></td>
+</tr>
+<tr>
+<td><code>r/s</code> بالا با <code>rareq-sz</code> کوچک</td>
+<td>خواندن تصادفی زیاد (مثلاً دیتابیس بدون index)</td>
+<td>بررسی کوئری/کش برنامه</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cpu-وقفه-context-switch-و-throttle">CPU: وقفه، context switch و throttle<a class="headerlink" href="#cpu-وقفه-context-switch-و-throttle" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>pidstat<span class="w"> </span>-w<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w">                        </span><span class="c1"># cswch/s و nvcswch/s هر پردازش</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>mpstat<span class="w"> </span>-I<span class="w"> </span>SUM<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w">                     </span><span class="c1"># نرخ وقفه</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>watch<span class="w"> </span>-d<span class="w"> </span>-n1<span class="w"> </span><span class="s1">'cat /proc/softirqs'</span><span class="w">     </span><span class="c1"># کدام softirq افزایش دارد (NET_RX = بار شبکه)</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>lscpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iE<span class="w"> </span><span class="s1">'model name|mhz'</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>grep<span class="w"> </span>-H<span class="w"> </span>.<span class="w"> </span>/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>sudo<span class="w"> </span>dmesg<span class="w"> </span>-T<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>throttl
+</span></code></pre></div>
+<p><code>NET_RX</code> بالا روی یک هسته ← ترافیک شبکه روی یک CPU جمع شده (RSS/IRQ affinity). governor روی <code>powersave</code> در سرور تحت بار، یا پیام throttle، یعنی CPU عمداً کند شده است.</p>
+<h2 id="مشکل-گذرا-ثبت-شواهد-با-زمانبندی-محدود">مشکل گذرا: ثبت شواهد با زمان‌بندی محدود<a class="headerlink" href="#مشکل-گذرا-ثبت-شواهد-با-زمانبندی-محدود" title="Permanent link">&para;</a></h2>
+<p>برای مشکلی که «گاهی» رخ می‌دهد، به‌جای نشستن پای ترمینال، ۵ دقیقه ثبت خودکار بگیرید و بعد بخوانید:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">d</span><span class="o">=</span>/var/tmp/perf-<span class="k">$(</span>date<span class="w"> </span>+%F-%H%M<span class="k">)</span><span class="p">;</span><span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">"</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="o">(</span><span class="w"> </span>timeout<span class="w"> </span><span class="m">300</span><span class="w"> </span>vmstat<span class="w"> </span>-t<span class="w"> </span><span class="m">5</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">/vmstat.txt"</span><span class="w"> </span><span class="p">&amp;</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>timeout<span class="w"> </span><span class="m">300</span><span class="w"> </span>iostat<span class="w"> </span>-xzt<span class="w"> </span><span class="m">5</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">/iostat.txt"</span><span class="w"> </span><span class="p">&amp;</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span>timeout<span class="w"> </span><span class="m">300</span><span class="w"> </span>pidstat<span class="w"> </span>-ruw<span class="w"> </span>-h<span class="w"> </span><span class="m">5</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">/pidstat.txt"</span><span class="w"> </span><span class="p">&amp;</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span><span class="nb">wait</span><span class="w"> </span><span class="o">)</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>ls<span class="w"> </span>-l<span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">"</span>
+</span></code></pre></div>
+<p>دستورها با <code>timeout</code> محدود شده‌اند تا فراموش‌شده نمانند. پس از تحلیل، پوشه را پاک کنید یا همراه تیکت آرشیو کنید.</p>
+<h2 id="baseline-عادی-چه-عددی-است">baseline: «عادی» چه عددی است؟<a class="headerlink" href="#baseline-عادی-چه-عددی-است" title="Permanent link">&para;</a></h2>
+<p>بدون عدد عادی، «load ۸ بد است؟» جواب ندارد. برای هر سرور مهم یک بار در ماه این‌ها را در ویکی ثبت کنید: load ساعات اوج و غیراوج (<code>sar -q</code>)، <code>available</code> حافظه، <code>await</code> دیسک اصلی، تعداد اتصال (<code>ss -s</code>)، و ساعت‌های پیک (<code>sar -u</code>). مقایسهٔ هر رخداد با همین عددهاست که «کند شده» را به «۳ برابر baseline» تبدیل می‌کند.</p>
+<h2 id="جمعآوری-وضعیت-سریع">جمع‌آوری وضعیت سریع<a class="headerlink" href="#جمعآوری-وضعیت-سریع" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>date
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>uptime
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>free<span class="w"> </span>-h
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>df<span class="w"> </span>-hT
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>df<span class="w"> </span>-ih
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>ip<span class="w"> </span>-br<span class="w"> </span>a
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>ss<span class="w"> </span>-s
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>systemctl<span class="w"> </span>--failed
+</span></code></pre></div>
+<p>این مجموعه برای snapshot اولیه مناسب است، اما خروجی آن به‌تنهایی علت ریشه‌ای را مشخص نمی‌کند. نسخهٔ کامل: <code>scripts/incident-snapshot.sh</code>.</p>
+<h2 id="ردیابی-عمیق-با-احتیاط">ردیابی عمیق (با احتیاط)<a class="headerlink" href="#ردیابی-عمیق-با-احتیاط" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sudo<span class="w"> </span>strace<span class="w"> </span>-c<span class="w"> </span>-f<span class="w"> </span>-p<span class="w"> </span>PID<span class="w"> </span>-o<span class="w"> </span>/var/tmp/strace.txt<span class="w">   </span><span class="c1"># با Ctrl+C تمام کنید؛ خلاصهٔ syscall ها</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>sudo<span class="w"> </span>strace<span class="w"> </span>-f<span class="w"> </span>-tt<span class="w"> </span>-e<span class="w"> </span><span class="nv">trace</span><span class="o">=</span>network<span class="w"> </span>-p<span class="w"> </span>PID<span class="w">         </span><span class="c1"># فقط تماس‌های شبکه</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>sudo<span class="w"> </span>perf<span class="w"> </span>top<span class="w">                                       </span><span class="c1"># توابع پرمصرف CPU (بسته linux-tools)</span>
+</span></code></pre></div>
+<p><code>strace</code> روی پردازش production می‌تواند آن را چندبرابر کند؛ کوتاه و با فیلتر.</p>
+<h2 id="نشانه--علت-محتمل">نشانه ← علت محتمل<a class="headerlink" href="#نشانه--علت-محتمل" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>نشانه</th>
+<th>علت محتمل</th>
+<th>بررسی</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>load بالا، CPU بیکار</td>
+<td>I/O یا NFS</td>
+<td><code>vmstat</code> (<code>wa</code>,<code>b</code>) ، <code>iostat -x</code> ، پردازش <code>D</code></td>
+</tr>
+<tr>
+<td>سرور بعد از ساعتی کند می‌شود</td>
+<td>نشت حافظه/فایل/اتصال</td>
+<td><code>ps --sort=-rss</code> ، <code>ls /proc/PID/fd \| wc -l</code> ، <code>ss -s</code></td>
+</tr>
+<tr>
+<td>پردازش ناگهان مرد</td>
+<td>OOM killer</td>
+<td><code>dmesg -T \| grep -i killed</code></td>
+</tr>
+<tr>
+<td><code>Too many open files</code></td>
+<td>limit کم</td>
+<td><code>LimitNOFILE</code> ، <code>/proc/PID/limits</code></td>
+</tr>
+<tr>
+<td>کند فقط ساعت‌های خاص</td>
+<td>cron/بکاپ/پیک ترافیک</td>
+<td><code>sar</code> ، <code>systemctl list-timers</code></td>
+</tr>
+<tr>
+<td>latency شبکه بالا</td>
+<td>drop/retransmit</td>
+<td><code>ip -s link</code> ، <code>ss -ti</code> ، <code>sar -n ETCP</code></td>
+</tr>
+<tr>
+<td>load بالا، چند پردازش در حالت <code>D</code></td>
+<td>ذخیره‌ساز یا NFS گیر کرده</td>
+<td><code>ps -eo state,pid,wchan:32,comm</code> ، <code>hung task</code> در لاگ کرنل</td>
+</tr>
+<tr>
+<td>سرویس بدون پر شدن RAM کل کشته می‌شود</td>
+<td>سقف <code>MemoryMax</code> (cgroup)</td>
+<td><code>memory.events</code> ، <code>systemctl show -p MemoryMax</code></td>
+</tr>
+<tr>
+<td>بار CPU ناشناخته بالا</td>
+<td>miner/نفوذ</td>
+<td><code>top</code> ، <code>ps auxf</code> ، <a href="../10-security-firewall/#۹-سناریوی-مشکوک-به-نفوذ-triage">امنیت</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="خلاصه-اجرایی">خلاصهٔ اجرایی<a class="headerlink" href="#خلاصه-اجرایی" title="Permanent link">&para;</a></h2>
+<ol>
+<li>USE: مصرف، صف، خطا برای هر منبع.</li>
+<li>load را با تعداد هسته و <code>wa</code> تفسیر کنید؛ <code>available</code> نه <code>free</code>.</li>
+<li><code>sysstat</code> را فعال کنید تا سابقه داشته باشید.</li>
+<li>قبل از restart شواهد بگیرید؛ drop_caches راه‌حل نیست.</li>
+<li>مشکل گذرا را با ثبت ۵ دقیقه‌ای <code>timeout</code> شده بگیرید؛ baseline هر سرور مهم را ثبت کنید.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  برگشت به بالا
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="پاورقی" >
+        
+          
+          <a href="../06-storage-filesystems/" class="md-footer__link md-footer__link--prev" aria-label="قبلی: دیسک و فایل‌سیستم">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                قبلی
+              </span>
+              <div class="md-ellipsis">
+                دیسک و فایل‌سیستم
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../13-scheduling/" class="md-footer__link md-footer__link--next" aria-label="بعدی: زمان‌بندی">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                بعدی
+              </span>
+              <div class="md-ellipsis">
+                زمان‌بندی
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      نسخهٔ 5.4.0
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.path", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\u06a9\u067e\u06cc \u0634\u062f", "clipboard.copy": "\u06a9\u067e\u06cc \u06a9\u0631\u062f\u0646", "search.result.more.one": "1 \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.more.other": "# \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.none": "\u0633\u0646\u062f\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f", "search.result.one": "1 \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.other": "# \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.placeholder": "\u0628\u0631\u0627\u06cc \u0634\u0631\u0648\u0639 \u062c\u0633\u062a\u062c\u0648 \u062a\u0627\u06cc\u067e \u06a9\u0646\u06cc\u062f", "search.result.term.missing": "\u0645\u0648\u062c\u0648\u062f \u0646\u06cc\u0633\u062a", "select.version": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0648\u06cc\u0631\u0627\u06cc\u0634"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../assets/js/handbook.js"></script>
+      
+    
+  </body>
+</html>

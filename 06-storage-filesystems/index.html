@@ -1,0 +1,2136 @@
+
+<!doctype html>
+<html lang="fa" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="راهنمای عملیاتی مدیریت، نگهداری، امنیت و عیب‌یابی سیستم‌های لینوکس به زبان فارسی.">
+      
+      
+        <meta name="author" content="Linux Sysadmin Handbook">
+      
+      
+      
+        <link rel="prev" href="../05-packages-repositories/">
+      
+      
+        <link rel="next" href="../12-performance/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>دیسک و فایل‌سیستم - کتابچه راهنمای مدیر سیستم لینوکس</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="rtl" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#۶-دیسک-پارتیشن-و-فایلسیستم" class="md-skip">
+          پرش به محتویات
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="سرتیتر">
+    <a href=".." title="کتابچه راهنمای مدیر سیستم لینوکس" class="md-header__button md-logo" aria-label="کتابچه راهنمای مدیر سیستم لینوکس" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19-.39.31-.75.29-1.14-.01-.2-.16-1.53-.92-1.95-1.19-.48-.31-.45-.7.08-.92 1.64-.69 3.28-.64 4.91.03.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.3 4.3 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01-.2-.88-.29-1.78-.7-2.61-.73-1.58-2-2.4-3.84-2.47-1.81.05-3.16.81-3.95 2.4-.21.43-.36.88-.46 1.34-.17.76-.32 1.55-.5 2.32-.15.65-.45 1.21-.96 1.71-1.61 1.57-2.9 3.37-3.88 5.35-.14.29-.28.58-.37.88-.19.66.29 1.12.99.96.44-.09.88-.18 1.3-.31.41-.15.57-.05.67.35.65 2.15 2.07 3.66 4.24 4.5 4.12 1.56 8.93-.66 9.97-4.58.07-.27.17-.37.47-.27.46.14.93.24 1.4.35.49.09.85-.16.92-.64.03-.26-.06-.49-.16-.73"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            کتابچه راهنمای مدیر سیستم لینوکس
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              دیسک و فایل‌سیستم
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="فعال‌سازی حالت تاریک"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="فعال‌سازی حالت تاریک" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="فعال‌سازی حالت روشن"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="فعال‌سازی حالت روشن" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="جستجو" placeholder="جستجو" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="جستجو">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="هم‌رسانی" aria-label="هم‌رسانی" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="بازنشانی" aria-label="بازنشانی" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            راه‌اندازی جستجو
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="زبانه‌ها" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  خانه
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../22-community-culture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  فرهنگ دانش مشترک
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../01-basics/" class="md-tabs__link">
+          
+  
+  
+  مبانی لینوکس
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  ذخیره‌سازی و منابع
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../07-networking/" class="md-tabs__link">
+          
+  
+  
+  شبکه و دسترسی راه دور
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../10-security-firewall/" class="md-tabs__link">
+          
+  
+  
+  امنیت و عیب‌یابی
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../15-docker/" class="md-tabs__link">
+          
+  
+  
+  زیرساخت و ابزارها
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="هدایت" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="کتابچه راهنمای مدیر سیستم لینوکس" class="md-nav__button md-logo" aria-label="کتابچه راهنمای مدیر سیستم لینوکس" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19-.39.31-.75.29-1.14-.01-.2-.16-1.53-.92-1.95-1.19-.48-.31-.45-.7.08-.92 1.64-.69 3.28-.64 4.91.03.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.3 4.3 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01-.2-.88-.29-1.78-.7-2.61-.73-1.58-2-2.4-3.84-2.47-1.81.05-3.16.81-3.95 2.4-.21.43-.36.88-.46 1.34-.17.76-.32 1.55-.5 2.32-.15.65-.45 1.21-.96 1.71-1.61 1.57-2.9 3.37-3.88 5.35-.14.29-.28.58-.37.88-.19.66.29 1.12.99.96.44-.09.88-.18 1.3-.31.41-.15.57-.05.67.35.65 2.15 2.07 3.66 4.24 4.5 4.12 1.56 8.93-.66 9.97-4.58.07-.27.17-.37.47-.27.46.14.93.24 1.4.35.49.09.85-.16.92-.64.03-.26-.06-.49-.16-.73"/></svg>
+
+    </a>
+    کتابچه راهنمای مدیر سیستم لینوکس
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    خانه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../22-community-culture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    فرهنگ دانش مشترک
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مبانی لینوکس
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    مبانی لینوکس
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مفاهیم پایه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-files-directories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    فایل‌ها و دایرکتوری‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-users-permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    کاربران و مجوزها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-processes-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    پردازش‌ها و سرویس‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-packages-repositories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    بسته‌ها و مخازن
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ذخیره‌سازی و منابع
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ذخیره‌سازی و منابع
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    دیسک و فایل‌سیستم
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    دیسک و فایل‌سیستم
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      فهرست موضوعات
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#راهنمای-سریع" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        راهنمای سریع
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ظرفیت-و-نقاط-اتصال" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ظرفیت و نقاط اتصال
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ظرفیت و نقاط اتصال">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#پیدا-کردن-مصرفکننده-inode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        پیدا کردن مصرف‌کنندهٔ inode
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#بررسی-دیسک-و-سلامت" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        بررسی دیسک و سلامت
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#smart-خودکار-با-smartd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SMART خودکار با smartd
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#اتصال-موقت" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        اتصال موقت
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcfstab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /etc/fstab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#افزایش-فضا-lvm--فایلسیستم" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        افزایش فضا (LVM + فایل‌سیستم)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="افزایش فضا (LVM + فایل‌سیستم)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#افزودن-دیسک-جدید-به-vg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        افزودن دیسک جدید به VG
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snapshot-در-lvm-برای-بکاپ-سازگار" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        snapshot در LVM (برای بکاپ سازگار)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ترمیم-فایلسیستم" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ترمیم فایل‌سیستم
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#raid-نرمافزاری-mdadm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RAID نرم‌افزاری (mdadm)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        swap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#luks-رمزگذاری-دیسک" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LUKS (رمزگذاری دیسک)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trim-و-فضای-رزرو" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TRIM و فضای رزرو
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#خطاهای-رایج" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        خطاهای رایج
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#نکات-امنیتی-و-عملیاتی" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        نکات امنیتی و عملیاتی
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#خلاصه-اجرایی" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        خلاصهٔ اجرایی
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    کارایی سیستم
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-scheduling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    زمان‌بندی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-backup-archive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    پشتیبان‌گیری و آرشیو
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شبکه و دسترسی راه دور
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    شبکه و دسترسی راه دور
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-networking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شبکه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-ssh-remote/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH و مدیریت راه دور
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-web-dns-tls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    وب، DNS و TLS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    امنیت و عیب‌یابی
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    امنیت و عیب‌یابی
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-security-firewall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    امنیت و فایروال
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-logs-troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    لاگ و عیب‌یابی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18-emergency-runbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    راهنمای رخداد
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20-infrastructure-runbooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    راهنماهای عملیاتی زیرساخت
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../21-services-for-noc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    چک‌لیست روزانه NOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    زیرساخت و ابزارها
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    زیرساخت و ابزارها
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-virtualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مجازی‌سازی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-bash-text/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    متون و Bash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19-cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    برگه تقلب دستورات
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="هدایت" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href=".." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    خانه
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    ذخیره‌سازی و منابع
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="۶-دیسک-پارتیشن-و-فایلسیستم">۶. دیسک، پارتیشن و فایل‌سیستم<a class="headerlink" href="#۶-دیسک-پارتیشن-و-فایلسیستم" title="Permanent link">&para;</a></h1>
+<p>خطا در این فصل معمولاً <strong>از دست‌رفتن داده</strong> است. قبل از هر فرمان نوشتنی، دستگاه را با <strong>UUID/سریال</strong> مطمئن شوید، نه فقط نام <code>/dev/sdX</code> (که ممکن است بعد از ریبوت یا اتصال دیسک جدید جابه‌جا شود).</p>
+<h2 id="راهنمای-سریع">راهنمای سریع<a class="headerlink" href="#راهنمای-سریع" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>فرمان</th>
+<th>کاربرد</th>
+<th>ریسک</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>df -hT</code> / <code>df -ih</code> / <code>du -xhd1</code></td>
+<td>ظرفیت، inode، مصرف پوشه‌ها</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>lsblk -f</code> / <code>blkid</code> / <code>findmnt</code></td>
+<td>دیسک‌ها، UUID، mount ها</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>smartctl -H/-a</code> / <code>nvme smart-log</code></td>
+<td>سلامت دیسک</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>pvs</code> / <code>vgs</code> / <code>lvs</code></td>
+<td>وضعیت LVM</td>
+<td><em class="ro">بدون تغییر</em></td>
+</tr>
+<tr>
+<td><code>mount</code> / <code>umount</code> / <code>mount -a</code></td>
+<td>اتصال</td>
+<td><em class="rw">تغییر</em></td>
+</tr>
+<tr>
+<td><code>lvextend -r</code> / <code>resize2fs</code> / <code>xfs_growfs</code></td>
+<td>افزایش فضا</td>
+<td><em class="rw">تغییر</em></td>
+</tr>
+<tr>
+<td><code>fsck</code> / <code>xfs_repair</code></td>
+<td>ترمیم</td>
+<td><em class="rd">مخرب</em> (فقط روی unmount)</td>
+</tr>
+<tr>
+<td><code>mkfs</code> / <code>wipefs</code> / <code>dd</code> / <code>pvcreate</code> / <code>vgremove</code> / <code>lvremove</code></td>
+<td>ساخت/پاک‌سازی</td>
+<td><em class="rd">مخرب</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="ظرفیت-و-نقاط-اتصال">ظرفیت و نقاط اتصال<a class="headerlink" href="#ظرفیت-و-نقاط-اتصال" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>df<span class="w"> </span>-hT
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>df<span class="w"> </span>-ih
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>df<span class="w"> </span>-h<span class="w"> </span>--output<span class="o">=</span>source,fstype,size,used,avail,pcent,target
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>du<span class="w"> </span>-sh<span class="w"> </span>/var/log
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>du<span class="w"> </span>-xhd1<span class="w"> </span>/var<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-h
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>sudo<span class="w"> </span>ncdu<span class="w"> </span>-x<span class="w"> </span>/var<span class="w">                 </span><span class="c1"># پیمایش تعاملی مصرف (بسته ncdu)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>lsblk<span class="w"> </span>-f
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>lsblk<span class="w"> </span>-o<span class="w"> </span>NAME,SIZE,TYPE,FSTYPE,MOUNTPOINTS,UUID,MODEL,SERIAL
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>findmnt
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>findmnt<span class="w"> </span>-O<span class="w"> </span>ro<span class="w">                     </span><span class="c1"># mount های فقط‌خواندنی (نشانهٔ مشکل!)</span>
+</span></code></pre></div>
+<ul>
+<li><code>df -hT</code>: فضای آزاد فایل‌سیستم و نوع آن.</li>
+<li><code>df -ih</code>: مصرف inode؛ ممکن است فضای دیسک آزاد باشد اما inode تمام شده باشد.</li>
+<li><code>du</code>: اندازه فایل‌ها/دایرکتوری‌ها؛ با <code>-x</code> از عبور به فایل‌سیستم‌های دیگر جلوگیری می‌کند.</li>
+<li><code>lsblk -f</code>: دیسک‌ها، پارتیشن‌ها، UUID و نوع فایل‌سیستم. به‌جای <code>mount | column -t</code> از <code>findmnt</code> استفاده کنید (خوانا و فیلترپذیر).</li>
+<li><strong>آستانه‌ها:</strong> هشدار در ۸۰٪ و بحرانی در ۹۰٪ فضا <strong>و</strong> inode؛ بعضی فایل‌سیستم‌ها بالای ۹۵٪ کند می‌شوند.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">du و df با هم نمی‌خوانند؟</p>
+<p><code>df</code> فضای اشغال‌شدهٔ فایل‌سیستم را می‌گوید، <code>du</code> مجموع فایل‌های قابل‌مشاهده را. اختلاف معمولاً <strong>فایل حذف‌شدهٔ هنوز باز</strong> (<code>sudo lsof +L1</code>)، فایل‌هایی زیر یک mountpoint (زیر نقطهٔ اتصال پنهان شده‌اند)، snapshot یا فضای رزرو است.</p>
+</div>
+<h3 id="پیدا-کردن-مصرفکننده-inode">پیدا کردن مصرف‌کنندهٔ inode<a class="headerlink" href="#پیدا-کردن-مصرفکننده-inode" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># کدام پوشه بیشترین تعداد فایل را دارد؟</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">'for d in /*; do [ -d "$d" ] &amp;&amp; printf "%s %s\n" "$(find "$d" -xdev 2&gt;/dev/null | wc -l)" "$d"; done | sort -n | tail'</span>
+</span></code></pre></div>
+<h2 id="بررسی-دیسک-و-سلامت">بررسی دیسک و سلامت<a class="headerlink" href="#بررسی-دیسک-و-سلامت" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>fdisk<span class="w"> </span>-l
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>blkid
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>sudo<span class="w"> </span>smartctl<span class="w"> </span>-H<span class="w"> </span>/dev/sda<span class="w">            </span><span class="c1"># خلاصهٔ سلامت (PASSED/FAILED)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>sudo<span class="w"> </span>smartctl<span class="w"> </span>-a<span class="w"> </span>/dev/sda<span class="w">            </span><span class="c1"># جزئیات: Reallocated, Pending, CRC</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>sudo<span class="w"> </span>smartctl<span class="w"> </span>-t<span class="w"> </span>short<span class="w"> </span>/dev/sda<span class="w">      </span><span class="c1"># آزمون کوتاه (پس‌زمینه) ؛ نتیجه با -a</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>sudo<span class="w"> </span>nvme<span class="w"> </span>smart-log<span class="w"> </span>/dev/nvme0<span class="w">       </span><span class="c1"># NVMe (بسته nvme-cli)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>sudo<span class="w"> </span>dmesg<span class="w"> </span>-T<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-Ei<span class="w"> </span><span class="s1">'I/O error|nvme|scsi|ext4|xfs|ata[0-9]'</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>cat<span class="w"> </span>/proc/mdstat<span class="w">                     </span><span class="c1"># RAID نرم‌افزاری</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>sudo<span class="w"> </span>mdadm<span class="w"> </span>--detail<span class="w"> </span>/dev/md0
+</span></code></pre></div>
+<p><code>smartctl</code> به بسته smartmontools نیاز دارد و همه کنترلرهای RAID اطلاعات SMART را مستقیم ارائه نمی‌کنند (برای RAID سخت‌افزاری ابزار سازنده یا <code>-d megaraid,N</code>).</p>
+<p><strong>نشانه‌های خطر SMART:</strong> افزایش <code>Reallocated_Sector_Ct</code>، <code>Current_Pending_Sector</code>، <code>Offline_Uncorrectable</code>، <code>UDMA_CRC_Error_Count</code> (معمولاً کابل)، <code>Media_Wearout</code>/<code>Percentage Used</code> نزدیک ۱۰۰٪ در SSD. با اولین نشانه، <strong>بکاپ را تأیید</strong> و دیسک را برنامهٔ جایگزینی کنید؛ تعمیر نکنید.</p>
+<h2 id="smart-خودکار-با-smartd">SMART خودکار با smartd<a class="headerlink" href="#smart-خودکار-با-smartd" title="Permanent link">&para;</a></h2>
+<p>بررسی دستی SMART کافی نیست؛ <code>smartd</code> آزمون‌ها را زمان‌بندی می‌کند و خرابی را گزارش می‌دهد:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>smartd<span class="w">        </span><span class="c1"># نام سرویس در برخی توزیع‌ها smartmontools است</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># /etc/smartd.conf — خط DEVICESCAN نمونهٔ پیش‌فرض را با این جایگزین کنید:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>DEVICESCAN<span class="w"> </span>-a<span class="w"> </span>-o<span class="w"> </span>on<span class="w"> </span>-S<span class="w"> </span>on<span class="w"> </span>-s<span class="w"> </span><span class="o">(</span>S/../.././02<span class="p">|</span>L/../01/./03<span class="o">)</span><span class="w"> </span>-m<span class="w"> </span>storage@example.internal<span class="w"> </span>-M<span class="w"> </span><span class="nb">test</span>
+</span></code></pre></div>
+<p>معنی: <code>S/../.././02</code> آزمون کوتاه هر شب ساعت ۰۲، <code>L/../01/./03</code> آزمون بلند روز اول هر ماه ساعت ۰۳. <code>-M test</code> هنگام شروع سرویس یک پیام آزمایشی می‌فرستد تا <strong>مسیر هشدار را واقعاً امتحان کنید</strong>؛ بعد از اطمینان آن را بردارید. روی RAID سخت‌افزاری، شکل دستگاه (<code>-d megaraid,N</code> و مانند آن) فرق می‌کند.</p>
+<h2 id="اتصال-موقت">اتصال موقت<a class="headerlink" href="#اتصال-موقت" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/mnt/data
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>mount<span class="w"> </span>/dev/sdb1<span class="w"> </span>/mnt/data
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>findmnt<span class="w"> </span>/mnt/data
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>sudo<span class="w"> </span>mount<span class="w"> </span>-o<span class="w"> </span>ro,noexec,nosuid,nodev<span class="w"> </span>/dev/sdb1<span class="w"> </span>/mnt/data<span class="w">   </span><span class="c1"># برای بررسی دیسک ناشناخته</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/data
+</span></code></pre></div>
+<p>پیش از <code>mount</code> مطمئن شوید دستگاه درست است (<code>lsblk -o NAME,SIZE,MODEL,SERIAL</code>). هنگام unmount، فرایندهای فعال ممکن است مانع شوند (<code>target is busy</code>):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>lsof<span class="w"> </span>+f<span class="w"> </span>--<span class="w"> </span>/mnt/data
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>fuser<span class="w"> </span>-vm<span class="w"> </span>/mnt/data
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>sudo<span class="w"> </span>umount<span class="w"> </span>-l<span class="w"> </span>/mnt/data<span class="w">    </span><span class="c1"># lazy: فقط آخرین چاره (NFS گیرکرده)؛ مشکل را پنهان می‌کند</span>
+</span></code></pre></div>
+<h2 id="etcfstab">/etc/fstab<a class="headerlink" href="#etcfstab" title="Permanent link">&para;</a></h2>
+<p>برای اتصال پایدار معمولاً از UUID استفاده می‌شود، نه نام متغیر <code>/dev/sdX</code>.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>blkid
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>cp<span class="w"> </span>-a<span class="w"> </span>/etc/fstab<span class="w"> </span>/etc/fstab.bak.<span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>sudoedit<span class="w"> </span>/etc/fstab
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>sudo<span class="w"> </span>findmnt<span class="w"> </span>--verify
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>sudo<span class="w"> </span>mount<span class="w"> </span>-a<span class="w">                </span><span class="c1"># تست اتصال بدون ریبوت؛ خطا را همین‌جا ببینید</span>
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># نمونه خط fstab — فیلدها: دستگاه  مقصد  نوع  گزینه‌ها  dump  fsck-order</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">UUID</span><span class="o">=</span><span class="m">1111</span>-2222-3333<span class="w">  </span>/data<span class="w">  </span>ext4<span class="w">  </span>defaults,noatime,nofail<span class="w">  </span><span class="m">0</span><span class="w">  </span><span class="m">2</span>
+</span></code></pre></div>
+<ul>
+<li><code>nofail</code>: اگر دیسک نبود، بوت در حالت emergency نمی‌ماند (برای دیسک‌های داده، نه <code>/</code>).</li>
+<li><code>noexec,nosuid,nodev</code> برای <code>/tmp</code> و پارتیشن‌های داده، سطح حمله را کم می‌کند.</li>
+<li>ستون آخر <code>2</code> برای غیر-ریشه، <code>1</code> فقط برای <code>/</code>، <code>0</code> برای بدون fsck (XFS/NFS).</li>
+<li>پس از تغییر <code>fstab</code>، آن را اعتبارسنجی کنید و پیش از reboot، اتصال‌ها را در پنجره نگهداری آزمایش کنید. خطای <code>fstab</code> ممکن است بوت یا اتصال فایل‌سیستم را مختل کند (کنسول لازم می‌شود).</li>
+</ul>
+<h2 id="افزایش-فضا-lvm--فایلسیستم">افزایش فضا (LVM + فایل‌سیستم)<a class="headerlink" href="#افزایش-فضا-lvm--فایلسیستم" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>pvs
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>vgs
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>sudo<span class="w"> </span>lvs<span class="w"> </span>-a<span class="w"> </span>-o<span class="w"> </span>+devices
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>sudo<span class="w"> </span>pvdisplay
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>sudo<span class="w"> </span>vgdisplay
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>sudo<span class="w"> </span>lvdisplay
+</span></code></pre></div>
+<p>مسیر رایج وقتی فضای VG آزاد است:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># نمونه است؛ نام VG/LV و اندازه را با محیط خود تطبیق دهید</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>lvextend<span class="w"> </span>-r<span class="w"> </span>-L<span class="w"> </span>+20G<span class="w"> </span>/dev/vgdata/lvapp<span class="w">      </span><span class="c1"># -r: فایل‌سیستم را هم بزرگ می‌کند</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="c1"># یا همهٔ فضای آزاد:</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>sudo<span class="w"> </span>lvextend<span class="w"> </span>-r<span class="w"> </span>-l<span class="w"> </span>+100%FREE<span class="w"> </span>/dev/vgdata/lvapp
+</span></code></pre></div>
+<p>اگر <code>-r</code> نمی‌خواهید، دستی: ext4 → <code>sudo resize2fs /dev/vgdata/lvapp</code>؛ XFS → <code>sudo xfs_growfs /mountpoint</code>. هر دو <strong>آنلاین</strong> قابل افزایش‌اند.</p>
+<p>وقتی دیسک مجازی در hypervisor/ابر بزرگ شده (VM):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>lsblk
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>growpart<span class="w"> </span>/dev/sda<span class="w"> </span><span class="m">1</span><span class="w">          </span><span class="c1"># بسته cloud-guest-utils / cloud-utils-growpart</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>sudo<span class="w"> </span>pvresize<span class="w"> </span>/dev/sda1<span class="w">           </span><span class="c1"># اگر LVM است</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>sudo<span class="w"> </span>lvextend<span class="w"> </span>-r<span class="w"> </span>-l<span class="w"> </span>+100%FREE<span class="w"> </span>/dev/mapper/vg-root
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c1"># بدون LVM: sudo resize2fs /dev/sda1  یا  sudo xfs_growfs /</span>
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">کاهش اندازه</p>
+<p>XFS را <strong>نمی‌توان</strong> کوچک کرد. ext4 فقط unmount‌شده و با بکاپ. کاهش LV بدون کوچک‌کردن فایل‌سیستم قبلش = از بین رفتن داده. اگر مجبورید، بازسازی با انتقال داده امن‌تر است.</p>
+</div>
+<p>پیش از تغییرات LVM، نسخه پشتیبان و وضعیت RAID/storage را بررسی کنید. فرمان‌های <code>mkfs</code>, <code>pvcreate</code>, <code>vgremove</code>, <code>lvremove</code>, <code>wipefs</code> مخرب‌اند.</p>
+<h3 id="افزودن-دیسک-جدید-به-vg">افزودن دیسک جدید به VG<a class="headerlink" href="#افزودن-دیسک-جدید-به-vg" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>lsblk<span class="w"> </span>-o<span class="w"> </span>NAME,SIZE,MODEL,SERIAL,FSTYPE,MOUNTPOINTS<span class="w">     </span><span class="c1"># دیسک جدید: FSTYPE و MOUNTPOINT خالی</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>sudo<span class="w"> </span>wipefs<span class="w"> </span>/dev/sdc<span class="w">                                   </span><span class="c1"># بدون -a فقط امضاهای موجود را نشان می‌دهد</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>sudo<span class="w"> </span>pvcreate<span class="w"> </span>/dev/sdc
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>sudo<span class="w"> </span>vgextend<span class="w"> </span>vgdata<span class="w"> </span>/dev/sdc
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>sudo<span class="w"> </span>lvextend<span class="w"> </span>-r<span class="w"> </span>-l<span class="w"> </span>+100%FREE<span class="w"> </span>/dev/vgdata/lvapp
+</span></code></pre></div>
+<p>اگر <code>pvcreate</code> دربارهٔ امضای قبلی (مثلاً <code>crypto_LUKS</code> یا فایل‌سیستم) می‌پرسد، <strong>متوقف شوید</strong>؛ یعنی دیسک قبلاً داده داشته و ممکن است دستگاه اشتباه باشد. در اسکریپت، <code>-y</code> را فقط بعد از تطبیق سریال بگذارید؛ بدون آن، فرمان منتظر پاسخ می‌ماند و اسکریپت گیر می‌کند.</p>
+<p>خالی کردن یک دیسک از VG (جایگزینی دیسک قدیمی؛ به فضای آزاد معادل در VG نیاز دارد):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sudo<span class="w"> </span>pvmove<span class="w"> </span>/dev/sdb<span class="w">                  </span><span class="c1"># می‌تواند ساعت‌ها طول بکشد؛ قابل‌ازسرگیری است (دوباره همان فرمان)</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>sudo<span class="w"> </span>vgreduce<span class="w"> </span>vgdata<span class="w"> </span>/dev/sdb
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>sudo<span class="w"> </span>pvremove<span class="w"> </span>/dev/sdb
+</span></code></pre></div>
+<h3 id="snapshot-در-lvm-برای-بکاپ-سازگار">snapshot در LVM (برای بکاپ سازگار)<a class="headerlink" href="#snapshot-در-lvm-برای-بکاپ-سازگار" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sudo<span class="w"> </span>lvs<span class="w"> </span>-o<span class="w"> </span>lv_name,lv_size,origin,snap_percent,data_percent
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>sudo<span class="w"> </span>lvcreate<span class="w"> </span>-s<span class="w"> </span>-n<span class="w"> </span>lvapp_snap<span class="w"> </span>-L<span class="w"> </span>5G<span class="w"> </span>/dev/vgdata/lvapp<span class="w">     </span><span class="c1"># فقط تغییرات بعد از این لحظه فضا می‌گیرد</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/mnt/snap
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>sudo<span class="w"> </span>mount<span class="w"> </span>-o<span class="w"> </span>ro<span class="w"> </span>/dev/vgdata/lvapp_snap<span class="w"> </span>/mnt/snap<span class="w">          </span><span class="c1"># XFS: -o ro,nouuid</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="c1"># ... بکاپ از /mnt/snap ...</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/snap
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>sudo<span class="w"> </span>lvremove<span class="w"> </span>/dev/vgdata/lvapp_snap
+</span></code></pre></div>
+<ul>
+<li>اندازهٔ snapshot باید <strong>تغییرات حین بکاپ</strong> را در خود جا بدهد؛ اگر <code>snap_percent</code> به ۱۰۰ برسد، snapshot نامعتبر می‌شود و بکاپ خراب یا ناقص است. در اسکریپت بعد از بکاپ، <code>snap_percent</code> را بررسی کنید.</li>
+<li>snapshot را کوتاه‌مدت نگه دارید (کارایی نوشتن origin کم می‌شود) و <strong>آن را بکاپ نشمارید</strong>: روی همان دیسک‌هاست.</li>
+<li>برای دیتابیس، snapshot بدون هماهنگی فقط «سازگار در برابر کرش» است؛ PostgreSQL و InnoDB معمولاً از آن بازیابی می‌شوند، اما بازیابی را آزمایش کنید.</li>
+<li>برگرداندن origin به حالت snapshot: <code>sudo lvconvert --merge /dev/vgdata/lvapp_snap</code>؛ <strong>همهٔ تغییرات بعد از snapshot از بین می‌رود</strong>. اگر origin در حال استفاده است، ادغام تا فعال‌سازی بعدی (برای <code>/</code> تا ریبوت) به تعویق می‌افتد.</li>
+</ul>
+<h2 id="ترمیم-فایلسیستم">ترمیم فایل‌سیستم<a class="headerlink" href="#ترمیم-فایلسیستم" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sudo<span class="w"> </span>e2fsck<span class="w"> </span>-fn<span class="w"> </span>/dev/vgdata/lvapp<span class="w">       </span><span class="c1"># -n: فقط بخوان، چیزی را تغییر نده (ext4)</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>sudo<span class="w"> </span>xfs_repair<span class="w"> </span>-n<span class="w"> </span>/dev/vgdata/lvapp<span class="w">    </span><span class="c1"># فقط گزارش (XFS)</span>
+</span></code></pre></div>
+<ul>
+<li><code>fsck</code>/<code>xfs_repair</code> را <strong>هرگز</strong> روی فایل‌سیستم mount‌شده اجرا نکنید.</li>
+<li>اگر فایل‌سیستم خود به خود <code>ro</code> شد: <code>dmesg -T | tail -50</code> را بخوانید (خطای دیسک/کابل/ابر)؛ دلیل را بفهمید و بکاپ بگیرید، <strong>بعد</strong> ترمیم. <code>mount -o remount,rw /</code> فقط علامت را پنهان می‌کند.</li>
+</ul>
+<h2 id="raid-نرمافزاری-mdadm">RAID نرم‌افزاری (mdadm)<a class="headerlink" href="#raid-نرمافزاری-mdadm" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>cat<span class="w"> </span>/proc/mdstat<span class="w">                                   </span><span class="c1"># [UU] سالم ؛ [U_] degraded ؛ recovery = درصد بازسازی</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>sudo<span class="w"> </span>mdadm<span class="w"> </span>--detail<span class="w"> </span>/dev/md0<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'State|Active|Working|Failed|Spare|Rebuild'</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>sudo<span class="w"> </span>mdadm<span class="w"> </span>--examine<span class="w"> </span>/dev/sdb1<span class="w">                     </span><span class="c1"># متادیتای یک عضو</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>cat<span class="w"> </span>/sys/block/md0/md/mismatch_cnt<span class="w">                 </span><span class="c1"># بعد از scrub</span>
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th><code>State</code></th>
+<th>معنی</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clean</code> / <code>active</code></td>
+<td>سالم</td>
+</tr>
+<tr>
+<td><code>clean, degraded</code></td>
+<td>یک عضو افتاده؛ داده هنوز در دسترس است ولی <strong>بدون افزونگی</strong></td>
+</tr>
+<tr>
+<td><code>recovering</code> / <code>resyncing</code></td>
+<td>در حال بازسازی؛ عملکرد افت می‌کند</td>
+</tr>
+<tr>
+<td><code>FAILED</code></td>
+<td>افزونگی تمام شده؛ فوراً به <a href="../20-infrastructure-runbooks/">رخداد دیسک/RAID</a> بروید</td>
+</tr>
+</tbody>
+</table>
+<p><strong>تعویض دیسک خراب:</strong></p>
+<ol>
+<li><strong>دیسک درست را پیدا کنید:</strong> <code>sudo mdadm --detail /dev/md0</code> ، سپس <code>lsblk -o NAME,SERIAL</code> یا <code>sudo smartctl -i /dev/sdb | grep -i serial</code> و با برچسب فیزیکی دیسک تطبیق دهید. کشیدن دیسک سالم در حالت degraded یعنی از دست رفتن آرایه.</li>
+<li><strong>بکاپ را تأیید کنید.</strong> در RAID5/6 با دیسک‌های بزرگ، خرابی دیسک دوم حین بازسازی واقعی و رایج است.</li>
+<li>عضو خراب را خارج کنید:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>mdadm<span class="w"> </span>/dev/md0<span class="w"> </span>--fail<span class="w"> </span>/dev/sdb1<span class="w">       </span><span class="c1"># اگر خودش failed نشده</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>sudo<span class="w"> </span>mdadm<span class="w"> </span>/dev/md0<span class="w"> </span>--remove<span class="w"> </span>/dev/sdb1
+</span></code></pre></div>
+<ol>
+<li>دیسک جدید را بگذارید و جدول پارتیشن را از دیسک <strong>سالم</strong> روی دیسک <strong>جدید</strong> کپی کنید. جهت مهم است: مقصد همیشه اولین آرگومان <code>--replicate</code> است.</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>sudo<span class="w"> </span>sgdisk<span class="w"> </span>--replicate<span class="o">=</span>/dev/sdb<span class="w"> </span>/dev/sda<span class="w">     </span><span class="c1"># GPT: کپی جدول sda ← sdb (sdb دیسک جدید است)</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>sudo<span class="w"> </span>sgdisk<span class="w"> </span>-G<span class="w"> </span>/dev/sdb<span class="w">                       </span><span class="c1"># GUIDهای جدید، تا با دیسک سالم یکی نباشند</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="c1"># MBR: sudo sfdisk -d /dev/sda | sudo sfdisk /dev/sdb</span>
+</span></code></pre></div>
+<ol>
+<li>عضو جدید را اضافه و پیشرفت را دنبال کنید:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sudo<span class="w"> </span>mdadm<span class="w"> </span>/dev/md0<span class="w"> </span>--add<span class="w"> </span>/dev/sdb1
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>watch<span class="w"> </span>-n5<span class="w"> </span>cat<span class="w"> </span>/proc/mdstat
+</span></code></pre></div>
+<ol>
+<li>بوت‌لودر را روی دیسک جدید هم نصب کنید (<code>sudo grub-install /dev/sdb</code>)، وگرنه با خرابی دیسک اول سرور بوت نمی‌شود. در UEFI، پارتیشن ESP به‌صورت پیش‌فرض آینه نمی‌شود؛ محتوایش را دستی روی دیسک دوم کپی کنید.</li>
+</ol>
+<p><strong>سرعت بازسازی:</strong> <code>sysctl dev.raid.speed_limit_min dev.raid.speed_limit_max</code>. بالا بردن موقت <code>speed_limit_min</code> بازسازی را سریع‌تر می‌کند، به قیمت کندی سرویس؛ بعد از اتمام به مقدار قبلی برگردانید.</p>
+<p><strong>نگهداری:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>sudo<span class="w"> </span>mdadm<span class="w"> </span>--detail<span class="w"> </span>--scan<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/mdadm/mdadm.conf<span class="w">    </span><span class="c1"># RHEL: /etc/mdadm.conf</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>sudo<span class="w"> </span>update-initramfs<span class="w"> </span>-u<span class="w">                                           </span><span class="c1"># RHEL: sudo dracut -f</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="nb">echo</span><span class="w"> </span>check<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/sys/block/md0/md/sync_action<span class="w">                </span><span class="c1"># scrub دستی (Debian ماهانه خودش انجام می‌دهد)</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>sudo<span class="w"> </span>mdadm<span class="w"> </span>--monitor<span class="w"> </span>--scan<span class="w"> </span>--oneshot<span class="w"> </span>--test<span class="w">                       </span><span class="c1"># آزمایش مسیر هشدار (MAILADDR در mdadm.conf)</span>
+</span></code></pre></div>
+<p><code>mismatch_cnt</code> غیرصفر روی RAID1 گاهی بی‌ضرر است (مثلاً swap)، اما روی داده‌های واقعی باید بررسی شود. RAID <strong>بکاپ نیست</strong>: حذف تصادفی و باج‌افزار را روی هر دو نسخه اعمال می‌کند.</p>
+<h2 id="swap">swap<a class="headerlink" href="#swap" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>swapon<span class="w"> </span>--show
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>free<span class="w"> </span>-h
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="c1"># ساخت swap file (نمونه 2GB)</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>sudo<span class="w"> </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/zero<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/swapfile<span class="w"> </span><span class="nv">bs</span><span class="o">=</span>1M<span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">2048</span><span class="w"> </span><span class="nv">status</span><span class="o">=</span>progress
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/swapfile
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>sudo<span class="w"> </span>mkswap<span class="w"> </span>/swapfile
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>sudo<span class="w"> </span>swapon<span class="w"> </span>/swapfile
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">'/swapfile none swap sw 0 0'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/fstab
+</span></code></pre></div>
+<p>swap مصرفی بالا و <strong>فعالیت</strong> مداوم swap (<code>vmstat</code> ستون <code>si/so</code> غیرصفر) مشکل است؛ وجود مقداری swap اشغال‌شده الزاماً نه (<a href="../12-performance/">کارایی</a>).</p>
+<h2 id="luks-رمزگذاری-دیسک">LUKS (رمزگذاری دیسک)<a class="headerlink" href="#luks-رمزگذاری-دیسک" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>lsblk<span class="w"> </span>-f<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>crypto
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>sudo<span class="w"> </span>cryptsetup<span class="w"> </span>status<span class="w"> </span>data<span class="w">                       </span><span class="c1"># وضعیت یک volume بازشده</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>sudo<span class="w"> </span>cryptsetup<span class="w"> </span>luksDump<span class="w"> </span>/dev/sdX<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-30<span class="w">      </span><span class="c1"># کلید-اسلات‌ها</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>sudo<span class="w"> </span>cryptsetup<span class="w"> </span>luksHeaderBackup<span class="w"> </span>/dev/sdX<span class="w"> </span>--header-backup-file<span class="w"> </span>/root/luks-sdX-header.img
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>sudo<span class="w"> </span>cryptsetup<span class="w"> </span>luksAddKey<span class="w"> </span>/dev/sdX<span class="w">               </span><span class="c1"># رمز/کلید دوم؛ قبل از حذف رمز قدیمی</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>sudo<span class="w"> </span>cryptsetup<span class="w"> </span>open<span class="w"> </span>/dev/sdX<span class="w"> </span>data<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>mount<span class="w"> </span>/dev/mapper/data<span class="w"> </span>/mnt/data
+</span></code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">هدر LUKS را بکاپ بگیرید</p>
+<p>اگر هدر خراب شود، <strong>همهٔ داده برای همیشه از دست می‌رود</strong>، حتی با رمز درست. فایل هدر را رمزگذاری کنید و <strong>خارج از همان سرور</strong> نگه دارید. فایل هدر خودش به‌اندازهٔ رمز حساس است.</p>
+</div>
+<p>برای باز شدن خودکار در بوت، <code>/etc/crypttab</code> را با دقت تنظیم کنید (با <code>nofail</code> برای دیسک‌های داده)؛ ذخیرهٔ keyfile روی همان سرور فقط در برابر برداشتن فیزیکی دیسک محافظت می‌کند، نه نفوذ به سیستم.</p>
+<h2 id="trim-و-فضای-رزرو">TRIM و فضای رزرو<a class="headerlink" href="#trim-و-فضای-رزرو" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>sudo<span class="w"> </span>fstrim<span class="w"> </span>-av<span class="w">                        </span><span class="c1"># SSD/ابر thin (معمولاً timer هفتگی fstrim.timer)</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>systemctl<span class="w"> </span>status<span class="w"> </span>fstrim.timer<span class="w"> </span>--no-pager
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>sudo<span class="w"> </span>tune2fs<span class="w"> </span>-l<span class="w"> </span>/dev/sdb1<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s1">'reserved block'</span><span class="w">   </span><span class="c1"># ext4: پیش‌فرض ۵٪ برای root</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="c1"># برای دیسک داده بزرگ، ۱٪ کافی است (با احتیاط):</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="c1"># sudo tune2fs -m 1 /dev/sdb1</span>
+</span></code></pre></div>
+<h2 id="خطاهای-رایج">خطاهای رایج<a class="headerlink" href="#خطاهای-رایج" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>نشانه</th>
+<th>علت احتمالی</th>
+<th>روش بررسی</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>No space left on device</code> ولی <code>df</code> آزاد</td>
+<td>inode تمام شده</td>
+<td><code>df -ih</code></td>
+</tr>
+<tr>
+<td><code>df</code> پر، <code>du</code> کم</td>
+<td>فایل حذف‌شده و باز / mount روی داده</td>
+<td><code>sudo lsof +L1</code> ، <code>findmnt</code></td>
+</tr>
+<tr>
+<td><code>target is busy</code></td>
+<td>پردازش یا shell داخل mount</td>
+<td><code>lsof +f -- PATH</code> ، <code>fuser -vm</code></td>
+</tr>
+<tr>
+<td>بوت در emergency mode بعد از ویرایش fstab</td>
+<td>خط نامعتبر / دیسک نیست</td>
+<td>کنسول؛ <code>nofail</code> ؛ ویرایش fstab</td>
+</tr>
+<tr>
+<td>فایل‌سیستم ناگهان <code>read-only</code></td>
+<td>خطای I/O (ext4 errors=remount-ro)</td>
+<td><code>dmesg -T</code> ، SMART ، کابل/SAN</td>
+</tr>
+<tr>
+<td><code>wrong fs type, bad option, bad superblock</code></td>
+<td>نوع/گزینه اشتباه یا فایل‌سیستم خراب</td>
+<td><code>blkid</code> ، <code>dmesg</code></td>
+</tr>
+<tr>
+<td><code>lvextend</code> موفق ولی <code>df</code> تغییر نکرد</td>
+<td>فایل‌سیستم resize نشده</td>
+<td><code>resize2fs</code> / <code>xfs_growfs</code> یا <code>-r</code></td>
+</tr>
+<tr>
+<td><code>Device or resource busy</code> هنگام <code>wipefs</code>/<code>mkfs</code></td>
+<td>هنوز mount/عضو LVM/RAID</td>
+<td><code>lsblk</code> ، <code>pvs</code> ، <code>/proc/mdstat</code></td>
+</tr>
+<tr>
+<td><code>pvcreate</code> سؤال می‌پرسد/اسکریپت گیر کرده</td>
+<td>دیسک امضای قبلی دارد (دستگاه اشتباه؟)</td>
+<td><code>wipefs /dev/XXX</code> ، سریال را تطبیق دهید</td>
+</tr>
+<tr>
+<td>RAID <code>[U_]</code> / <code>degraded</code></td>
+<td>عضوی افتاده</td>
+<td><code>mdadm --detail</code> ، بخش «تعویض دیسک خراب»</td>
+</tr>
+<tr>
+<td>snapshot ناگهان نامعتبر شد</td>
+<td>پر شدن فضای CoW</td>
+<td><code>lvs -o +snap_percent</code> ؛ اندازهٔ بزرگ‌تر</td>
+</tr>
+</tbody>
+</table>
+<h2 id="نکات-امنیتی-و-عملیاتی">نکات امنیتی و عملیاتی<a class="headerlink" href="#نکات-امنیتی-و-عملیاتی" title="Permanent link">&para;</a></h2>
+<ul>
+<li>قبل از هر <code>mkfs</code>/<code>dd</code>/<code>wipefs</code>: <code>lsblk -o NAME,SIZE,MODEL,SERIAL,MOUNTPOINTS</code> و نام دستگاه را <strong>با صدای بلند</strong> با سریال تطبیق دهید. جایگزین بی‌خطر: <code>dd ... of=/dev/XXX</code> را هرگز از history اجرا نکنید.</li>
+<li>قبل از تغییر ساختار دیسک: بکاپ <strong>تأییدشده</strong> یا snapshot (<a href="../11-backup-archive/">پشتیبان‌گیری</a>).</li>
+<li>هشدار ظرفیت (فضا + inode) و SMART را در مانیتورینگ تعریف کنید؛ دیسک پر شدن یک رخداد قابل‌پیش‌بینی است.</li>
+<li>برای داده‌های حساس: رمزگذاری (LUKS) و مدیریت کلید.</li>
+</ul>
+<h2 id="خلاصه-اجرایی">خلاصهٔ اجرایی<a class="headerlink" href="#خلاصه-اجرایی" title="Permanent link">&para;</a></h2>
+<ol>
+<li>همیشه <code>df -hT</code> <strong>و</strong> <code>df -ih</code>.</li>
+<li>UUID/سریال، نه <code>/dev/sdX</code>؛ <code>nofail</code> برای دیسک‌های داده.</li>
+<li><code>lvextend -r</code> برای افزایش؛ کاهش را اجتناب کنید.</li>
+<li>fsck فقط روی unmount؛ اول <code>-n</code>.</li>
+<li>SMART/mdstat را مانیتور کنید؛ با اولین نشانه بکاپ را تأیید کنید.</li>
+<li>قبل از کشیدن دیسک، سریال را تطبیق دهید؛ هدر LUKS را بکاپ بگیرید؛ snapshot و RAID بکاپ نیستند.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  برگشت به بالا
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="پاورقی" >
+        
+          
+          <a href="../05-packages-repositories/" class="md-footer__link md-footer__link--prev" aria-label="قبلی: بسته‌ها و مخازن">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                قبلی
+              </span>
+              <div class="md-ellipsis">
+                بسته‌ها و مخازن
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../12-performance/" class="md-footer__link md-footer__link--next" aria-label="بعدی: کارایی سیستم">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                بعدی
+              </span>
+              <div class="md-ellipsis">
+                کارایی سیستم
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      نسخهٔ 5.4.0
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.path", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\u06a9\u067e\u06cc \u0634\u062f", "clipboard.copy": "\u06a9\u067e\u06cc \u06a9\u0631\u062f\u0646", "search.result.more.one": "1 \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.more.other": "# \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.none": "\u0633\u0646\u062f\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f", "search.result.one": "1 \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.other": "# \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.placeholder": "\u0628\u0631\u0627\u06cc \u0634\u0631\u0648\u0639 \u062c\u0633\u062a\u062c\u0648 \u062a\u0627\u06cc\u067e \u06a9\u0646\u06cc\u062f", "search.result.term.missing": "\u0645\u0648\u062c\u0648\u062f \u0646\u06cc\u0633\u062a", "select.version": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0648\u06cc\u0631\u0627\u06cc\u0634"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../assets/js/handbook.js"></script>
+      
+    
+  </body>
+</html>
